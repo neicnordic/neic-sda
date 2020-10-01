@@ -101,7 +101,6 @@ local_ega tables
 ^^^^^^^^^^^^^^^^
 
 .. image:: /static/localega-schema.svg
-   :target: ./_static/localega-schema.svg
    :alt: localega database schema
 
 main
@@ -291,7 +290,6 @@ local_ega_download tables
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. image:: /static/localega-download-schema.svg
-   :target: ./_static/localega-download-schema.svg
    :alt: localega download database schema
 
 requests
@@ -382,7 +380,6 @@ local_ega_ebi tables
 ^^^^^^^^^^^^^^^^^^^^
 
 .. image:: /static/localega-ebi-schema.svg
-   :target: ./_static/localega-ebi-schema.svg
    :alt: localega EBI database schema
 
 filedataset

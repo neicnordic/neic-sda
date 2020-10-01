@@ -95,6 +95,7 @@ Miscellaneous
    :maxdepth: 1
    :name: extra
 
+   Tests                     <tests>
    Contributing              <https://github.com/neicnordic/neic-sda/blob/master/CONTRIBUTING.md>
 
 | Version |version| | Generated |today|

@@ -121,7 +121,6 @@ message, nor the errors, as we forward them to Central EGA.
 
 
 .. image:: /static/CEGA-LEGA.png
-   :target: ./_static/CEGA-LEGA.png
    :alt: RabbitMQ setup
 
 .. _supported checksum algorithm: md5
