@@ -3,7 +3,7 @@
 Data Retrieval API
 ==================
 
-.. note:: Source code repository for Data Out API is available at: https://github.com/neicnordic/LocalEGA-DOA
+.. note:: Source code repository for Data Out API is available at: https://github.com/neicnordic/sda-doa
 
 Configuration
 -------------

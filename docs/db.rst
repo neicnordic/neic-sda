@@ -7,7 +7,7 @@ We use a Postgres database (version 11.6+ ) to store intermediate data,
 in order to track progress in file ingestion. The ``lega`` database
 schema is documented below.
 
-.. note:: Source code repository for DB component is available at: https://github.com/neicnordic/LocalEGA-db
+.. note:: Source code repository for DB component is available at: https://github.com/neicnordic/sda-db
 
 The database container will initialize and create the necessary
 database structure and functions if started with an empty area.
@@ -15,7 +15,7 @@ Procedures for *backing up the database* are important but considered
 out of scope for the secure data archive project.
 	  
 Look at `the SQL definitions
-<https://github.com/neicnordic/LocalEGA-db/tree/master/initdb.d>`_ if
+<https://github.com/neicnordic/sda-db/tree/master/initdb.d>`_ if
 you are also interested in the database triggers.
 
 Configuration
@@ -92,7 +92,7 @@ bootstrapped schema version) as well as creating the corresponding
 migration script to perform the changes on a database in use.
 
 Migration scripts should be placed in `/migratedb.d/` in the
-LocalEGA-db repo (https://github.com/neicnordic/LocalEGA-db). We
+sda-db repo (https://github.com/neicnordic/sda-db). We
 recommend naming them corresponding to the schema version they provide
 migration to. There is an "eqmpty" migration script (`01.sql`) that can
 be used as a template.
