@@ -19,7 +19,7 @@ and ``SDA``/``LocalEGA``.
 Local Message Broker
 --------------------
 
-.. note:: Source code repository for MQ component is available at: https://github.com/neicnordic/LocalEGA-mq
+.. note:: Source code repository for MQ component is available at: https://github.com/neicnordic/sda-mq
 
 
 Configuration

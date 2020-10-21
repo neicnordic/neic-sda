@@ -95,6 +95,7 @@ Miscellaneous
    :maxdepth: 1
    :name: extra
 
+   SDA-Pipeline              <https://neicnordic.github.io/sda-pipeline/pkg/sda-pipeline/>
    Tests                     <tests>
    Contributing              <https://github.com/neicnordic/neic-sda/blob/master/CONTRIBUTING.md>
 

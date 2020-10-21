@@ -150,7 +150,7 @@ Environment variables used:
 
 As mentioned above, the implementation is based on Java library Apache Mina SSHD.
 
-.. note:: Sources are located at the separate repository: https://github.com/neicnordic/LocalEGA-inbox
+.. note:: Sources are located at the separate repository: https://github.com/neicnordic/sda-inbox-sftp
           Essentially, it's a Spring-based Maven project, integrated with the :ref:`mq`.
 
 
@@ -159,7 +159,7 @@ As mentioned above, the implementation is based on Java library Apache Mina SSHD
 S3 Proxy Inbox
 ^^^^^^^^^^^^^^
 
-.. note:: Sources are located at the separate repository: https://github.com/neicnordic/S3-Upload-Proxy
+.. note:: Sources are located at the separate repository: https://github.com/neicnordic/sda-s3proxy
 
 The S3 Proxy uses access tokens as the main authentication mechanism.
 
