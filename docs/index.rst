@@ -11,7 +11,7 @@ NeIC Sensitive Data Archive
 NeIC Sensitive Data Archive is divided into several microservices as illustrated
 in the figure below.
 
-.. figure:: https://docs.google.com/drawings/d/e/2PACX-1vQ5EMrwMb8X7efk_luHlkB1l1TEpTwuh-B2_c0SAoqPb5nSulKmt2cJj6ptt8oFFBHs2LLt8FHMl5VP/pub?w=960&h=540
+.. figure:: https://docs.google.com/drawings/d/e/2PACX-1vSCqC49WJkBduQ5AJ1VdwFq-FJDDcMRVLaWQmvRBLy7YihKQImTi41WyeNruMyH1DdFqevQ9cgKtXEg/pub?w=1440&amp;h=810
    :width: 750
    :align: center
    :alt: General Architecture and Connected Components
