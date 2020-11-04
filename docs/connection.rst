@@ -64,7 +64,7 @@ creates the credentials to connect to that ``vhost`` in the form of a
 
    amqp[s]://<user>:<password>@<cega-host>:<port>/<vhost>
 
-.. note:: All the messages recived from CEGA are intercepted by ``Intercept`` service
+.. note:: All the messages received from CEGA are intercepted by ``Intercept`` service
           and forwarded to the right queue in the ``LocalMQ``
 
 
