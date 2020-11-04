@@ -64,6 +64,9 @@ creates the credentials to connect to that ``vhost`` in the form of a
 
    amqp[s]://<user>:<password>@<cega-host>:<port>/<vhost>
 
+.. note:: All the messages recived from CEGA are intercepted by ``Intercept`` service
+          and forwarded to the right queue in the ``LocalMQ``
+
 
 ``CEGAMQ`` contains an exchange named ``localega.v1``. ``v1`` is used for
 versioning and is internal to CentralEGA. The queues connected to that
