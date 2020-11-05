@@ -124,6 +124,12 @@ This is the core table of the schema, which holds file identifiers, status, meta
 +------------------------------------------+--------------------+
 | created_by                               | name               |
 +------------------------------------------+--------------------+
+| decrypted_file_size                      | varchar            |
++------------------------------------------+--------------------+
+| decrypted_file_checksum_type             | checksum_algorithm |
++------------------------------------------+--------------------+
+| decrypted_file_size                      | int8               |
++------------------------------------------+--------------------+
 | encryption_method                        | varchar            |
 +------------------------------------------+--------------------+
 | header                                   | text               |
@@ -193,7 +199,7 @@ Checksums are recorded in order to keep track of already used session keys,
 
 status
 """"""
-This table holds file statuses, which can range from INIT, IN_INGESTION, ARCHIVED, COMPLETED, READY, ERROR and DISABLED.
+This table holds file statuses, which can range from ``INIT``, ``IN_INGESTION``, ``ARCHIVED``, ``COMPLETED``, ``READY``, ``ERROR`` and ``DISABLED``.
 
 +-------------+-----------+
 | Column Name | Data type |
@@ -243,53 +249,54 @@ check_session_keys_checksums_sha256
 """""""""""""""""""""""""""""""""""
 It returns if the session key checksums are already found in the database.
 
-* Inputs: checksums
+* Inputs: ``checksums``
 
 finalize_file
 """""""""""""
 It flags files as READY, by setting their stable id and marking older ingestions as deprecated.
 
-* Inputs: inbox_path, elixir_id, archive_file_checksum, archive_file_checksum_type, stable_id
-* Target: local_ega.files
+* Inputs: ``inbox_path``, ``elixir_id``, ``archive_file_checksum``, ``archive_file_checksum_type``, ``stable_id``
+* Target: ``local_ega.files``
 
 insert_error
 """"""""""""
 It adds an error entry of a file submission.
 
-* Inputs: file_id, hostname, error_type, msg, from_user
-* Target: local_ega.errors
+* Inputs: ``file_id``, ``hostname``, ``error_type``, ``msg``, ``from_user``
+* Target: ``local_ega.errors``
 
 insert_file
 """""""""""
 It adds a new file entry and deprecates old faulty submissions of the same file if present.
 
-* Inputs: submission_file_path, submission_user
-* Target: local_ega.main
+* Inputs: ``submission_file_path``, ``submission_user``
+* Target: ``local_ega.main``
 
 is_disabled
 """""""""""
 It returns whether a given entry is disabled or not.
 
-* Input: file id:
+* Input: ``file id``
 
 main_updated
 """"""""""""
 It synchronises the timestamp for each row after update on main.
 
 * Input: None
-* Target: local_ega.main
+* Target: ``local_ega.main``
 
 mark_ready
 """"""""""
 When triggered after a file is marked as READY, it deactivates all errors of the given entry.
 
 * Inputs: None
-* Target: mark_ready
+* Target: ``mark_ready``
 
 local_ega_download tables
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. image:: /static/localega-download-schema.svg
+   :width: 300
    :alt: localega download database schema
 
 requests
@@ -358,7 +365,7 @@ download_complete
 """""""""""""""""
 It marks a file download as complete, and calculates the download speed.
 Inputs: requested file id, download size, speed
-Target: local_ega_download.success
+Target: ``local_ega_download.success``
 
 insert_error
 """"""""""""
@@ -366,7 +373,7 @@ insert_error
 It adds an error entry of a file download.
 
 * Inputs: requested file id, hostname, error code, error description
-* Target: local_ega_download.errors
+* Target: ``local_ega_download.errors``
 
 make_request
 """"""""""""
@@ -374,7 +381,7 @@ make_request
 It inserts a new request or reuses and old request entry of a given file.
 
 * Inputs: stable id, user information, client ip, start coordinate and end coordinate
-* Target: local_ega_download.requests
+* Target: ``local_ega_download.requests``
 
 local_ega_ebi tables
 ^^^^^^^^^^^^^^^^^^^^
@@ -419,12 +426,12 @@ local_ega_ebi views
 
 file
 """"
-View for EBI Data-Out which contains all local_ega.main entries marked as ready.
+View for EBI Data-Out which contains all ``local_ega.main`` entries marked as ready.
 
 file_dataset
 """"""""""""
-Used to synchronise with the entity eu.elixir.ega.ebi.downloader.domain.entity.FileDataset.
+Used to synchronise with the entity ``eu.elixir.ega.ebi.downloader.domain.entity.FileDataset``.
 
 file_index_file
 """""""""""""""
-Used to synchronise with the entity eu.elixir.ega.ebi.downloader.domain.entity.FileIndexFile.
+Used to synchronise with the entity ``eu.elixir.ega.ebi.downloader.domain.entity.FileIndexFile``.
