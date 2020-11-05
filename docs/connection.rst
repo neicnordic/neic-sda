@@ -100,7 +100,8 @@ and the following queues, in the default ``vhost``:
 +-----------------+---------------------------------------+
 | error           | User-related errors                   |
 +-----------------+---------------------------------------+
-| files           | Receive notification for ingestion from ``CEGAMQ`` |
+| files           | Receive notification for ingestion    |
+|                 | from  ``CEGAMQ``                      |
 +-----------------+---------------------------------------+
 | inbox           | Notifications of uploaded files       |
 +-----------------+---------------------------------------+
@@ -175,6 +176,8 @@ Message Format
 It is necessary to agree on the format of the messages exchanged
 between Central EGA and any Local EGAs. Central EGA's messages are
 JSON-formatted.
+
+The JSON schemas can be found in: https://github.com/neicnordic/sda-pipeline/tree/master/schemas 
 
 When a ``Submission Inbox`` sends a message to CentralEGA it contains the
 following:
@@ -253,7 +256,7 @@ is no backup service to the ``completed`` queue.
    {
       "user":"john",
       "filepath":"somedir/encrypted.file.c4gh",
-      "accession_id": "EGAF001",
+      "accession_id": "EGAF12345678901",
       "decrypted_checksums": [
          { "type": "md5", "value": "abcdefghijklmnopqrstuvwxyz"},
          { "type": "sha256", "value": "12345678901234567890"}
@@ -269,8 +272,8 @@ containing accession IDs mapping between files and datasets
    {
       "user":"john",
       "filepath":"somedir/encrypted.file.c4gh",
-      "dataset_id": "EGAD001",
-      "accession_ids": ["EGAF0001", "EGAF0002"]
+      "dataset_id": "EGAD12345678901",
+      "accession_ids": ["EGAF12345678901", "EGAF12345678902"]
    }
 
 
