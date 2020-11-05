@@ -101,7 +101,7 @@ and the following queues, in the default ``vhost``:
 | error           | User-related errors                   |
 +-----------------+---------------------------------------+
 | files           | Receive notification for ingestion    |
-|                 | from  ``CEGAMQ``                      |
+|                 | from  ``CEGAMQ`` or Orchestrator      |
 +-----------------+---------------------------------------+
 | inbox           | Notifications of uploaded files       |
 +-----------------+---------------------------------------+
@@ -110,6 +110,7 @@ and the following queues, in the default ``vhost``:
 | mappings        | Received Dataset to file mapping      |
 +-----------------+---------------------------------------+
 | accessionIDs    | Receive Accession IDs from ``CEGAMQ`` |
+|                 | or Orchestrator                       |
 +-----------------+---------------------------------------+
 | verified        | Files ingested and verified           |
 +-----------------+---------------------------------------+
