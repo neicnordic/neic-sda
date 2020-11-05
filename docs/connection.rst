@@ -100,7 +100,7 @@ and the following queues, in the default ``vhost``:
 +-----------------+---------------------------------------+
 | error           | User-related errors                   |
 +-----------------+---------------------------------------+
-| files           | Trigger for file ingestion            |
+| files           | Receive notification for ingestion from ``CEGAMQ`` |
 +-----------------+---------------------------------------+
 | inbox           | Notifications of uploaded files       |
 +-----------------+---------------------------------------+
