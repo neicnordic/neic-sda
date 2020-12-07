@@ -1,6 +1,6 @@
 # Contributing guidelines
 
-We thank you in advance :thumbsup: :tada: for taking the time to contribute, whether with *code* or with *ideas*, to the Local EGA project.
+We thank you in advance :thumbsup: :tada: for taking the time to contribute, whether with *code* or with *ideas*, to the NeIC SDA project.
 
 
 ## Did you find a bug?
@@ -78,7 +78,7 @@ A code review is initiated when someone has made a Pull Request in the appropria
 
 Work should not continue on the branch _unless_ it is a [Draft Pull Request](https://github.blog/2019-02-14-introducing-draft-pull-requests/). Once the PR is marked ready the review can start.
 
-The initiator of the PR should recruit 2 reviewers that get assigned reviewer duty on the branch. It's not a bad idea to announce this on the #localega slack channel.
+The initiator of the PR should recruit 2 reviewers that get assigned reviewer duty on the branch. It's not a bad idea to announce this on slack channel.
 
 Other people may also look at and review the code.
 
