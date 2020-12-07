@@ -21,7 +21,7 @@ Source code for core components (unless specified otherwise) is available at: ht
 | verify        | Decrypt the stored files and checksum them against their embedded checksum. |
 | archive       | Storage backend: as a regular file system or as a S3 object store. |
 | finalize      | Handle the so-called _Accession ID_ to filename mappings from CentralEGA. |
-| mapper        | The mapper service register mapping of accessionIDs (stable ids for files) to datasetIDs. |
+| mapper        | The mapper service register mapping of accessionIDs (IDs for files) to datasetIDs. |
 | data out API  | Provides a download/data access API for streaming archived data either in encrypted or decrypted format - source at: https://github.com/neicnordic/sda-doa |
 
 ### Associated components
