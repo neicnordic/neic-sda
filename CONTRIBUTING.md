@@ -18,7 +18,7 @@ We thank you in advance :thumbsup: :tada: for taking the time to contribute, whe
 
 ## How to work on a new feature/bug
 
-Create an issue on Github, and talk to the team members on the NBIS local-ega Slack channel. You can alternatively pick one already created.
+Create an issue on Github or you can alternatively pick one already created.
 
 Assign yourself to that issue.
 
@@ -78,7 +78,7 @@ A code review is initiated when someone has made a Pull Request in the appropria
 
 Work should not continue on the branch _unless_ it is a [Draft Pull Request](https://github.blog/2019-02-14-introducing-draft-pull-requests/). Once the PR is marked ready the review can start.
 
-The initiator of the PR should recruit 2 reviewers that get assigned reviewer duty on the branch. It's not a bad idea to announce this on slack channel.
+The initiator of the PR should recruit 2 reviewers that get assigned reviewer duty on the branch.
 
 Other people may also look at and review the code.
 
