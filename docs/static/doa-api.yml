@@ -48,7 +48,7 @@ paths:
             type: integer
             format: int64
             default: 0
-        - name: PubKey
+        - name: Public-Key
           in: header
           description: Public Encryption key
           required: false
