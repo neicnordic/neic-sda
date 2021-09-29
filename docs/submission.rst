@@ -163,7 +163,7 @@ S3 Proxy Inbox
 
 The S3 Proxy uses access tokens as the main authentication mechanism.
 
-The sda authentication service (https://github.com/NBISweden/sda-auth) is designed to convert
+The sda authentication service (https://github.com/neicnordic/sda-auth) is designed to convert
 CEGA REST endpoint authentication to a JWT that can be used when uploading to the S3 proxy.
 
 The proxy requires the user to set the bucket name the same as the username when uploading data,

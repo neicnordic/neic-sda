@@ -15,7 +15,7 @@ Source code for core components (unless specified otherwise) is available at: ht
 
 | Component     | Role |
 |---------------|------|
-| inbox         | SFTP, S3 or HTTPS server, acting as a dropbox, where user credentials are fetched from CentralEGA or via ELIXIR AAI. https://github.com/NBISweden/sda-s3proxy/ or https://github.com/neicnordic/sda-inbox-sftp |
+| inbox         | SFTP, S3 or HTTPS server, acting as a dropbox, where user credentials are fetched from CentralEGA or via ELIXIR AAI. https://github.com/neicnordic/sda-s3proxy/ or https://github.com/neicnordic/sda-inbox-sftp |
 | intercept     | The intercept service relays message between the queue provided from the federated service and local queues. **(Required for Federated EGA use case)** |
 | ingest        | Split the Crypt4GH header and move the remainder to the storage backend. No cryptographic task, nor access to the decryption keys. |
 | verify        | Decrypt the stored files and checksum them against their embedded checksum. |
