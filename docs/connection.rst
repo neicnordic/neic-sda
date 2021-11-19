@@ -272,7 +272,6 @@ containing accession IDs mapping between files and datasets
 
    {
       "user":"john",
-      "filepath":"somedir/encrypted.file.c4gh",
       "dataset_id": "EGAD12345678901",
       "accession_ids": ["EGAF12345678901", "EGAF12345678902"]
    }
