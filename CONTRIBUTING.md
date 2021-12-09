@@ -78,7 +78,7 @@ A code review is initiated when someone has made a Pull Request in the appropria
 
 Work should not continue on the branch _unless_ it is a [Draft Pull Request](https://github.blog/2019-02-14-introducing-draft-pull-requests/). Once the PR is marked ready the review can start.
 
-The initiator of the PR should recruit 2 reviewers that get assigned reviewer duty on the branch.
+The initiator of the PR should recruit [@sensitive-data-development-collaboration](https://github.com/orgs/neicnordic/teams/sensitive-data-development-collaboration) team that get assigned reviewer duty on the branch.
 
 Other people may also look at and review the code.
 
@@ -91,8 +91,9 @@ A reviewers job is to:
 
 It is _not_ the reviewers job to checkout and run the code - that is what the test-suite is for.
 
-Once all the reviews are positive the Pull Request can be _merged_ into `master` and the feature branch deleted.
+Once at least 3 reviews from 3 different partners are positive the Pull Request can be _merged_ into `master` and the feature branch deleted.
 
+If it takes long for some partner to review code we try to contact them on slack to see what the problem is and if it can be resolved quickly or whether it's ok to merge.
 
 ----
 
