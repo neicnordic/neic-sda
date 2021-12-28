@@ -248,7 +248,7 @@ which will respond with the same content, but adding the `Accession ID`.
       ]
    }
 
-``Finalize`` service should receive the message below and assign the `Accession ID` to the
+``Finalize`` service should receive the message below and assign the ``Accession ID`` to the
 corresponding file and send a message to ``backup`` queue for the backup services or in case there 
 is no backup service to the ``completed`` queue.
 
