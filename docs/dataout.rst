@@ -3,7 +3,12 @@
 Data Retrieval API
 ==================
 
-.. note:: Source code repository for Data Out API is available at: https://github.com/neicnordic/sda-doa
+.. note:: We maintain two Data Out API solutions, for which REST APIs are the same.
+
+SDA-DOA
+-------
+
+.. note:: Source code repository is available at: https://github.com/neicnordic/sda-doa
 
 Configuration
 -------------
@@ -82,18 +87,8 @@ Configuration
 | ``LOGSTASH_PORT``                      |                                                                      | Port of the Logstash instance (if any)             |
 +----------------------------------------+----------------------------------------------------------------------+----------------------------------------------------+
 
-REST API Endpoints
-------------------
-
-.. note:: REST API can be disabled using ``REST_ENABLED`` environment variable.
-
-API endpoints listed as OpenAPI specification is available:
-
-.. literalinclude::  ./static/doa-api.yml
-    :language: yaml
-
 Outbox functionality
---------------------
+~~~~~~~~~~~~~~~~~~~~
 
 .. note:: Outbox can be disabled using ``OUTBOX_ENABLED`` environment variable.
 
@@ -171,4 +166,33 @@ Dataset permissions are read from GA4GH RI claims of the type "ControlledAccessG
             "expires": 1577836800
         }
     }
+
+
+SDA-download
+------------
+
+.. note:: Source code repository is available at: https://github.com/neicnordic/sda-download
+
+
+Recommended provisioning method for production is:
+
+* on a ``kubernetes cluster`` using the `helm chart <https://github.com/neicnordic/sda-helm/>`_.
+
+
+``sda-download`` focuses on enabling deployment of a stand-alone version of SDA, with features such as:
+* truested ``JKU`` and ``ISS`` pairs;
+* custom dataset names including DOI URLs;
+* etc.
+
+
+REST API Endpoints
+------------------
+
+.. note:: REST API can be disabled using ``REST_ENABLED`` environment variable.
+
+API endpoints listed as OpenAPI specification is available:
+
+.. literalinclude::  ./static/doa-api.yml
+    :language: yaml
+
 
