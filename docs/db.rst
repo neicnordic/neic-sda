@@ -3,7 +3,7 @@
 Database Setup
 ==============
 
-We use a Postgres database (version 11.6+ ) to store intermediate data,
+We use a Postgres database (version 13+ ) to store intermediate data,
 in order to track progress in file ingestion. The ``lega`` database
 schema is documented below.
 
