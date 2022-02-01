@@ -180,7 +180,7 @@ Recommended provisioning method for production is:
 
 
 ``sda-download`` focuses on enabling deployment of a stand-alone version of SDA, with features such as:
-* truested ``JKU`` and ``ISS`` pairs;
+* trusted ``JKU`` and ``ISS`` pairs;
 * custom dataset names including DOI URLs;
 * etc.
 
