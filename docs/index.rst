@@ -60,8 +60,8 @@ whether the ingestion was successful, or whether there was an error.
 More details about the :ref:`ingestion process`.
 
 Once a file has been successfully submitted and the ingestion process has been finalised,
-including receiving an `Accession ID` from Central EGA. The Data Out API can be
-utilised to retrieve set file by utilising the `Accession ID`. More details in :ref:`data out`.
+including receiving an ``Accession ID`` from Central EGA. The Data Out API can be
+utilised to retrieve set file by utilising the ``Accession ID``. More details in :ref:`data out`.
 
 ----
 
@@ -70,7 +70,6 @@ Getting started
 
 .. toctree::
    :maxdepth: 2
-   :name: setup
 
    Getting started                   <setup>
    Database Setup                    <db>
@@ -81,7 +80,6 @@ Information about the Architecture
 
 .. toctree::
    :maxdepth: 2
-   :name: architecture
 
    Encryption                <encryption>
    Data Submission           <submission>
@@ -93,7 +91,6 @@ Miscellaneous
 
 .. toctree::
    :maxdepth: 1
-   :name: extra
 
    SDA-Pipeline              <https://neicnordic.github.io/sda-pipeline/pkg/sda-pipeline/>
    Tests                     <tests>

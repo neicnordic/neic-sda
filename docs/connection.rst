@@ -27,7 +27,7 @@ Configuration
 
 The following environment variables can be used to configure the broker:
 
-.. note:: We use `RabbitMQ 3.7.8`_ including the management plugins.
+.. note:: We use `RabbitMQ 3.8.16`_ including the management plugins.
 
 +----------------------+----------------------------------------------+
 | Variable             | Description                                  |
@@ -248,7 +248,7 @@ which will respond with the same content, but adding the `Accession ID`.
       ]
    }
 
-``Finalize`` service should receive the message below and assign the `Accession ID` to the
+``Finalize`` service should receive the message below and assign the ``Accession ID`` to the
 corresponding file and send a message to ``backup`` queue for the backup services or in case there 
 is no backup service to the ``completed`` queue.
 
@@ -279,4 +279,4 @@ containing accession IDs mapping between files and datasets
 
 .. |connect| unicode:: U+21cc .. <->
 .. _RabbitMQ: http://www.rabbitmq.com
-.. _RabbitMQ 3.7.8: https://hub.docker.com/_/rabbitmq
+.. _RabbitMQ 3.8.16: https://hub.docker.com/_/rabbitmq

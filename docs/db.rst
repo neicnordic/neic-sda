@@ -3,7 +3,7 @@
 Database Setup
 ==============
 
-We use a Postgres database (version 11.6+ ) to store intermediate data,
+We use a Postgres database (version 13+ ) to store intermediate data,
 in order to track progress in file ingestion. The ``lega`` database
 schema is documented below.
 
@@ -82,7 +82,7 @@ releases of the secure data archive and database schema versions. A
 new secure data archive release may increase several schema
 versions/migrations or none.
 
-.. IMPORTANT::
+.. important::
    Any changes done to database schema initialization should be
    reflected in a schema migration script.
 
@@ -91,10 +91,10 @@ changing both the database initialization scripts (and bumping the
 bootstrapped schema version) as well as creating the corresponding
 migration script to perform the changes on a database in use.
 
-Migration scripts should be placed in `/migratedb.d/` in the
+Migration scripts should be placed in ``/migratedb.d/`` in the
 sda-db repo (https://github.com/neicnordic/sda-db). We
 recommend naming them corresponding to the schema version they provide
-migration to. There is an "eqmpty" migration script (`01.sql`) that can
+migration to. There is an "eqmpty" migration script (``01.sql``) that can
 be used as a template.
 
 local_ega tables

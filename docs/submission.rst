@@ -20,7 +20,7 @@ Ingestion Workflow
 .. image:: /static/ingestion-sequence.svg
    :alt: Ingestion sequence diagram
 
-.. admonition:: Ingestion Workflow Legend
+.. note:: Ingestion Workflow Legend
 
    The sequence diagram describes the different phases during the ingestion process. 
    The elements at the top represent each of the services or actuators involved in the workflow. 
@@ -39,7 +39,7 @@ The ``Ingest`` service (can be replicated) reads file from the ``Submission Inbo
 and splits Crypt4GH header from the beginning of the file, puts it in
 a database and sends the remainder to the ``Archive``, leveraging the Crypt4GH format.
 
-.. hint:: There is no decryption key retrieved during that step. The ``Archive`` can be
+.. note:: There is no decryption key retrieved during that step. The ``Archive`` can be
           either a regular file system on disk, or an S3 object storage.
           ``Submission Inbox`` can also have as a backend a regular file system
           or S3 object storage.
@@ -96,8 +96,8 @@ checksum. This information is provided to CentralEGA via a
 :doc:`shovel mechanism on the local message broker <connection>`.
 We can configure default cache TTL via ``CACHE_TTL`` environment variable.
 
-Configuration
-"""""""""""""
+Apache Mina Configuration
+"""""""""""""""""""""""""
 
 Environment variables used:
 
@@ -112,9 +112,9 @@ Environment variables used:
 +-------------------------+--------------------+------------------------------------------------------------+
 | ``BROKER_PORT``         | 5672               | RabbitMQ broker port                                       |
 +-------------------------+--------------------+------------------------------------------------------------+
-| ``BROKER_VHOST``        | /                  | RabbitMQ broker vhost                                      |
+| ``BROKER_VHOST``        | ``/``              | RabbitMQ broker vhost                                      |
 +-------------------------+--------------------+------------------------------------------------------------+
-| ``INBOX_PORT``          | 2222               | Inbox port                                                 |
+| ``INBOX_PORT``          | ``2222``           | Inbox port                                                 |
 +-------------------------+--------------------+------------------------------------------------------------+
 | ``INBOX_LOCATION``      | /ega/inbox/        | Path to POSIX Inbox backend                                |
 +-------------------------+--------------------+------------------------------------------------------------+
@@ -169,8 +169,8 @@ CEGA REST endpoint authentication to a JWT that can be used when uploading to th
 The proxy requires the user to set the bucket name the same as the username when uploading data,
 ``s3cmd put FILE s3://USER_NAME/path/to/file``
 
-Configuration
-"""""""""""""
+S3 proxy Configuration
+""""""""""""""""""""""
 
 The S3 proxy server can be configured via a yaml formatted file with the
 top level blocks, ``aws:``, ``broker:`` and ``server:``.
