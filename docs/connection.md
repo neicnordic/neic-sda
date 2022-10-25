@@ -17,7 +17,7 @@ and `SDA`/`LocalEGA`.
 Local Message Broker
 --------------------
 
-> Note:
+> NOTE:
 > Source code repository for MQ component is available at:
 > [https://github.com/neicnordic/sda-mq](https://github.com/neicnordic/sda-mq)
 
@@ -26,7 +26,7 @@ Local Message Broker
 
 The following environment variables can be used to configure the broker:
 
-> Note:
+> NOTE:
 > We use [RabbitMQ 3.8.16](https://hub.docker.com/_/rabbitmq) including
 > the management plugins.
 
@@ -38,7 +38,7 @@ Variable             | Description
 `MQ_PASSWORD_HASH`   | Password hash for the above user
 `CEGA_CONNECTION`    | DSN URL for the shovels and federated queues with CentralEGA
 
-> Note:
+> NOTE:
 > For SDA stand-alone do not use `CEGA_CONNECTION` and do not set up
 > `Intercept` service. This will cause no messages to be shoveled to a
 > CentralEGA, whilst the queues stay the same. `Orchestrator` service
@@ -58,7 +58,7 @@ credentials to connect to that `vhost` in the form of a
 amqp[s]://<user>:<password>@<cega-host>:<port>/<vhost>
 ```
 
-> Note:
+> NOTE:
 > All the messages received from CEGA are intercepted by `Intercept`
 > service and forwarded to the right queue in the `LocalMQ`
 
@@ -97,7 +97,7 @@ messages to work on, `LocalMQ` will ask its upstream queue if it has
 messages. If so, messages are moved downstream. If not the Ingest
 Service will wait for messages to arrive.
 
-> Note:
+> NOTE:
 > More information can be found also at
 > [localEGA](https://localega.readthedocs.io/en/latest/amqp.html#message-interface-api-cega-connect-lega).
 
@@ -178,7 +178,7 @@ of messages:
 -   `type=heartbeat`: A mean to check if the Local EGA instance is
     "alive"
 
-> Important:
+> IMPORTANT:
 > The `encrypted_checksums` key is optional. If the key is not present the
 > sha256 checksum will be calculated by `Ingest` service.
 

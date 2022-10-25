@@ -10,7 +10,7 @@ drops, in the `files` queue, one message per file to ingest.
 Structure of the message and its contents are described in
 [Message Format](connection.md#message-format).
 
-> Note:
+> NOTE:
 > Source code repository for Submission components is available at:
 > <https://github.com/neicnordic/sda-pipeline>
 
@@ -18,7 +18,7 @@ Structure of the message and its contents are described in
 
 ![Ingestion sequence diagram](/static/ingestion-sequence.svg)
 
-> Note:
+> NOTE:
 > Ingestion Workflow Legend
 >
 > The sequence diagram describes the different phases during the ingestion
@@ -41,7 +41,7 @@ The `Ingest` service (can be replicated) reads file from the
 file, puts it in a database and sends the remainder to the `Archive`,
 leveraging the Crypt4GH format.
 
-> Note:
+> NOTE:
 > There is no decryption key retrieved during that step. The `Archive` can
 > be either a regular file system on disk, or an S3 object storage.
 > `Submission Inbox` can also have as a backend a regular file system or
@@ -131,7 +131,7 @@ Variable name         | Default value      | Description
 As mentioned above, the implementation is based on Java library Apache
 Mina SSHD.
 
-> Note:
+> NOTE:
 > Sources are located at the separate repository:
 > <https://github.com/neicnordic/sda-inbox-sftp> Essentially, it's a
 > Spring-based Maven project, integrated with the
@@ -140,7 +140,7 @@ Mina SSHD.
 
 ### S3 Proxy Inbox
 
-> Note:
+> NOTE:
 > Sources are located at the separate repository:
 > <https://github.com/neicnordic/sda-s3proxy>
 
@@ -202,7 +202,7 @@ Several components have been developed:
 -   <https://github.com/uio-bmi/LocalEGA-TSD-proxy>
 -   <https://github.com/unioslo/tsd-api-client>
 
->Note:
+>NOTE:
 > Access is restricted to UiO network. Please, contact TSD support for the
 > access, if needed. Documentation:
 > <https://test.api.tsd.usit.no/v1/docs/tsd-api-integration.html>

@@ -5,7 +5,7 @@ We use a Postgres database (version 13+ ) to store intermediate data, in
 order to track progress in file ingestion. The `lega` database schema is
 documented below.
 
-> Note:
+> NOTE:
 > Source code repository for DB component is available at:
 > <https://github.com/neicnordic/sda-db>
 
@@ -41,7 +41,7 @@ Variable         | Description                         | Default value
 `PG_VERIFY_PEER` | Enforce client verification         | 0
 `SSL_SUBJ`       | Subject for the self-signed certificate creation | `/C=SE/ST=Sweden/L=Uppsala/O=NBIS/OU=SysDevs/CN=LocalEGA`
 
-> Note:
+> NOTE:
 > If not already injected, the files located at `PG_SERVER_CERT` and
 > `PG_SERVER_KEY` will be generated, as a self-signed public/private
 > certificate pair, using `SSL_SUBJ`. Client verification is enforced if
@@ -73,7 +73,7 @@ releases of the secure data archive and database schema versions. A new
 secure data archive release may increase several schema
 versions/migrations or none.
 
-> Important:
+> IMPORTANT:
 > Any changes done to database schema initialization should be reflected
 > in a schema migration script.
 

@@ -1,14 +1,14 @@
 Data Retrieval API
 ==================
 
-> Note:
+> NOTE:
 > We maintain two Data Out API solutions, for which REST APIs are the
 > same.
 
 SDA-DOA
 -------
 
-> Note:
+> NOTE:
 > Source code repository is available at
 > [https://github.com/neicnordic/sda-doa](https://github.com/neicnordic/sda-doa).
 
@@ -55,7 +55,7 @@ Variable name                       | Default value                             
 
 ### Outbox functionality
 
-> Note:
+> NOTE:
 > Outbox can be disabled using `OUTBOX_ENABLED` environment variable.
 
 Outbox in DOA is RabbitMQ-based listener that can be triggered by
@@ -89,7 +89,7 @@ case connection to an AAI provider is not possible the
 `PASSPORT_PUBLIC_KEY_PATH` and `CRYPT4GH_PRIVATE_KEY_PATH` need to be
 set.
 
-> Note:
+> NOTE:
 > By default we use Elixir AAI as JWT for authentication
 > `OPENID_CONFIGURATION_URL` is set to:
 > <https://login.elixir-czech.org/oidc/.well-known/openid-configuration>
@@ -147,7 +147,7 @@ Dataset permissions are read from GA4GH RI claims of the type
 SDA-download
 ------------
 
-> Note:
+> NOTE:
 > Source code repository is available at:
 > [https://github.com/neicnordic/sda-download](https://github.com/neicnordic/sda-download)
 
@@ -165,7 +165,7 @@ of SDA, with features such as:
 REST API Endpoints
 ------------------
 
-> Note:
+> NOTE:
 > REST API can be disabled using `REST_ENABLED` environment variable.
 
 API endpoints listed as OpenAPI specification is available:

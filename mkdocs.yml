@@ -1,5 +1,7 @@
 site_name: NeIC SDA
 extra_css: [css/neic-sda.css]
+markdown_extensions:
+  - callouts
 plugins:
   - include-markdown
 theme:
