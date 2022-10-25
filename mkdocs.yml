@@ -1,0 +1,4 @@
+site_name: NeIC SDA
+extra_css: [css/neic-sda.css]
+theme:
+    name: readthedocs
