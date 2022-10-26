@@ -6,3 +6,14 @@ plugins:
   - include-markdown
 theme:
     name: readthedocs
+nav:
+  - Getting started: setup.md
+  - Database setup: db.md
+  - Deployments and Local Bootstrap: deploy.md
+  - Encryption: encryption.md
+  - Data Submission: submission.md
+  - Interfacing with CEGA: connection.md
+  - Data Retrieval API: dataout.md
+  - SDA-Pipeline: services/pipeline.md
+  - Tests: tests.md
+  - Contributing: CONTRIBUTING.md
