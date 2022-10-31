@@ -29,7 +29,7 @@ body { overflow-x: initial !important; } /* Fix readthedocs bug */
           this as on RTD they are loaded after this stylesheet */
        white-space: normal !important;
     }
- 
+
     .wy-table-responsive {
        overflow: visible !important;
     }

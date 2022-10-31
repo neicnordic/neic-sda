@@ -11,7 +11,7 @@ SDA is divided into several components, which can be deployed either for Federat
 
 ### Core Components
 
-Source code for core components (unless specified otherwise) is available at: https://github.com/neicnordic/sda-pipeline 
+Source code for core components (unless specified otherwise) is available at: https://github.com/neicnordic/sda-pipeline
 
 | Component     | Role |
 |---------------|------|
