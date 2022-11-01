@@ -13,7 +13,18 @@ for both S3 and POSIX storage.
 
 The SDA pipeline has four main steps:
 
-1. [Ingest](ingest.md)
-1. [Verify](verify.md)
-1. [Finalize](finalize.md)
-1. [Mapper](mapper.md)
+1. [Ingest](ingest.md) splits file headers from files, moving the header to the
+database and the file content to the archive storage.
+1. [Verify](verify.md) verifies that the header is encrypted with the correct
+key, and that the checksums match the user provided checksums.
+1. [Finalize](finalize.md) associates a stable accessionID with each archive
+file.
+1. [Mapper](mapper.md) maps file accessionIDs to a datasetID.
+
+There are also three additional support services:
+
+1. [Backup](backup.md) copies data from archive storage to backup storage,
+reencrypting the header.
+1. [Intercept](intercept.md) relays messages from Central-EGA to the system.
+1. [Notify](notify.md) sends user e-mail messages.
+

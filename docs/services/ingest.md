@@ -7,12 +7,13 @@ is sent to the storage backend (archive). No cryptographic tasks are done.
 The main function of the ingest service is to copy files from the file inbox to
 the archive, and register them in the database.
 
-When running, ingest reads messages from the configured rabbitMQ queue.
+When running, ingest reads messages from the configured RabbitMQ queue.
 For each message, these steps are taken (if not otherwise noted, errors halts
 progress and the service moves on to the next message):
 
-1. The message is validated as valid JSON. If the message can’t be validated it
-is discarded with an error message in the logs.
+1.  The message is validated as valid JSON that matches the "ingestion-trigger"
+schema (defined in sda-common). If the message can’t be validated it is
+discarded with an error message in the logs.
 
 1. A file reader is created for the filepath in the message. If the file reader
 can’t be created an error is written to the logs, the message is Nacked and
@@ -43,6 +44,6 @@ written to the archive. Errors are written to the error log.
 checksum, and the file is set as “archived”. Errors are written to the error
 log. This error does not halt ingestion.
 
-1. A message is sent back to the original rabbitMQ broker containing the upload
+1. A message is sent back to the original RabbitMQ broker containing the upload
 user, upload file path, database file id, archive file path and checksum of the
 archived file.
