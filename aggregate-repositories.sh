@@ -38,7 +38,6 @@ do
         git config --global user.name 'Github aggregate action'
         git config --global user.email 'aggregate@users.noreply.github.com'
         git commit -m "$msg"
-        git push
     else
         echo "No changes to commit"
     fi
