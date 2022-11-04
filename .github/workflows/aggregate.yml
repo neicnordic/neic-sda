@@ -1,0 +1,19 @@
+name: "Aggregate documentation"
+
+on:
+  workflow_dispatch:
+    inputs:
+      repository:
+        description: 'Repository to aggregate documentation from'
+        required: true
+        default: "neicnordic/sda-pipeline"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: bash aggregate-repositories.sh ${{ inputs.repository }}
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
