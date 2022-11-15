@@ -186,7 +186,7 @@ Rename message:
 
 ```javascript
 {
-   "operation": "remove",
+   "operation": "rename",
    "user":"john.smith@smth.org",
    "filepath":"somedir/encrypted-new.file.c4gh",
    "oldpath": "somedir/encrypted.file.c4gh",
