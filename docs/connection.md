@@ -122,7 +122,7 @@ files.verified       | For files ready to request accessionID
 Note that we do not need at the moment a queue to store the completed
 message, nor the errors, as we forward them to Central EGA.
 
-![RabbitMQ setup](/static/CEGA-LEGA.png)
+![RabbitMQ setup](./static/CEGA-LEGA.png)
 
 Connecting SDA to Central EGA
 -----------------------------

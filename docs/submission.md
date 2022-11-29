@@ -16,7 +16,7 @@ Structure of the message and its contents are described in
 
 ### Ingestion Workflow
 
-![Ingestion sequence diagram](/static/ingestion-sequence.svg)
+![Ingestion sequence diagram](./static/ingestion-sequence.svg)
 
 > NOTE:
 > Ingestion Workflow Legend
