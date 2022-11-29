@@ -1,0 +1,22 @@
+name: Docs update auto-merge
+on: pull_request
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  dependabot:
+    runs-on: ubuntu-latest
+    if: ${{ github.actor == 'neicnordic' && github.head_ref == 'create-pull-request/patch' }}
+    steps:
+      - name: Wait other jobs are passed or failed
+        uses: kachick/wait-other-jobs@v1
+        timeout-minutes: 30
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+      - name: Enable auto-merge for docs update PRs
+        run: gh pr review --approve "$PR_URL" && gh pr merge --auto --merge "$PR_URL"
+        env:
+          PR_URL: ${{github.event.pull_request.html_url}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
