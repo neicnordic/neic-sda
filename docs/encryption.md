@@ -37,7 +37,7 @@ can be a data encryption packet or an edit list packet.
 All header packets are encrypted using an elliptic curve based key
 algorithm (X25519 chacha20 ietf poly1305).
 
-[![Crypt4GH Encryption](/static/crypt4gh_structure.png)](http://samtools.github.io/hts-specs/crypt4gh.pdf)
+[![Crypt4GH Encryption](./static/crypt4gh_structure.png)](http://samtools.github.io/hts-specs/crypt4gh.pdf)
 
 The advantages of the format are, among others:
 
