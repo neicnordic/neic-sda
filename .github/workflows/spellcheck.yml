@@ -1,6 +1,10 @@
 name: Spelling Errors Check
 
-on: [push]
+on: 
+  pull_request:
+  push:
+    branches:
+      - master
 
 jobs:
   build:
@@ -12,12 +16,8 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
-    - uses: actions/checkout@v1
-    - name: Install dependencies
-      run: curl -L https://git.io/misspell | bash
-
-    # This will return an exit code of 2, thus triggering a failed build
-    - name: Test spelling errors
-      shell: bash
-      run: |
-        bin/misspell -error docs/*.rst
+    - uses: actions/checkout@v3
+    - uses: rojopolis/spellcheck-github-actions@0.27.0
+      name: Spellcheck
+      with:
+        config_path: .pyspelling.yml
