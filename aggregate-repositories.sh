@@ -36,7 +36,7 @@ do
         msg=$(date +"Update from $repo at %H:%M on %Y-%m-%d")
 
         git config --global user.name 'Github aggregate action'
-        git config --global user.email 'aggregate@users.noreply.github.com'
+        git config --global user.email 'neicnordic@users.noreply.github.com'
         git commit -m "$msg"
     else
         echo "No changes to commit"
