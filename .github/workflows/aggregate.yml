@@ -13,11 +13,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
       - run: bash aggregate-repositories.sh ${{ inputs.repository }}
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
         with:
           delete-branch: true
-          reviewers: neicnordic/sensitive-data-development-collaboration
           labels: "automated pr"
+          author: neicnordic <neicnordic@users.noreply.github.com>
