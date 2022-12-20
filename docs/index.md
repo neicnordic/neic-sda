@@ -4,7 +4,7 @@ NeIC Sensitive Data Archive
 
 The NeIC Sensitive Data Archive (SDA) software is a modular system of microservices that in alternative configurations can be setup to host sensitive data in an archival service, securely stored encrypted at rest.
 
-The modular architecture of SDA supports both stand alone deployment of an archive, and the use case of deploying a Federated node in the [Federated European Genome-phenome Archive network (FEGA)](https://ega-archive.org/federated), serving Findable sensitive datasets in the main [EGA web portal](https://ega-archive.org).
+The modular architecture of SDA supports both stand alone deployment of an archive, and the use case of deploying a Federated node in the [Federated European Genome-phenome Archive network (FEGA)](https://ega-archive.org/federated), serving discoverable sensitive datasets in the main [EGA web portal](https://ega-archive.org).
 
 > NOTE:
 > Throughout this documentation, we can refer to [Central
@@ -14,7 +14,7 @@ The modular architecture of SDA supports both stand alone deployment of an archi
 > `Sensitive Data Archive` or `SDA`.
 
 
-Overall arhictecture
+Overall architecture
 --------------------
 
 The main components and interaction partners of the NeIC Sensitive Data Archive deployment in a Federated EGA setup, are illustrated in the figure below. The different colored backgrounds represent different zones of separation in the federated deployment. 
@@ -51,7 +51,7 @@ This operations handbook is organized in four  main parts, that each has it's ow
 
 1.  **Structure**: Provides overview material for how the services can be deployed in different constellations and highlights communication paths.
 
-1.  **Communication**: Provides more detailed communication focussed documentation, such as OpenAPI-specs for APIs, rabbit-mq message flow, and database information flow details.
+1.  **Communication**: Provides more detailed communication focused documentation, such as OpenAPI-specs for APIs, rabbit-mq message flow, and database information flow details.
 
 1.  **Services**: Per service detailed specifications and documentation.
 
