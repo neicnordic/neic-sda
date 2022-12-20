@@ -1,3 +1,11 @@
+
+NeIC Sensitive Data Archive
+===========================
+
+The NeIC Sensitive Data Archive (SDA) software is a modular system of microservices that in alternative configurations can be setup to host sensitive data in an archival service, securely stored encrypted at rest.
+
+The modular architecture of SDA supports both stand alone deployment of an archive, and the use case of deploying a Federated node in the [Federated European Genome-phenome Archive network (FEGA)](https://ega-archive.org/federated), serving Findable sensitive datasets in the main [EGA web portal](https://ega-archive.org).
+
 > NOTE:
 > Throughout this documentation, we can refer to [Central
 > EGA](https://ega-archive.org/) as `CEGA`, or `CentralEGA`, and *any*
@@ -5,36 +13,56 @@
 > `LocalEGA`. In the context of NeIC we will refer to the LocalEGA as the
 > `Sensitive Data Archive` or `SDA`.
 
-NeIC Sensitive Data Archive
-===========================
 
-NeIC Sensitive Data Archive is divided into several microservices as
-illustrated in the figure below.
+Overall arhictecture
+--------------------
+
+The main components and interaction partners of the NeIC Sensitive Data Archive deployment in a Federated EGA setup, are illustrated in the figure below. The different colored backgrounds represent different zones of separation in the federated deployment. 
 
 ![](https://docs.google.com/drawings/d/e/2PACX-1vSCqC49WJkBduQ5AJ1VdwFq-FJDDcMRVLaWQmvRBLy7YihKQImTi41WyeNruMyH1DdFqevQ9cgKtXEg/pub?w=1440&amp;h=810)
 
-The components/microservices can be classified by use case:
+The components illustrated can be classified by which archive sub-process they take part in:
 
--   submission - used in the process on submitting and ingesting data.
--   data retrieval - used for data retrieval/download.
+-   Submission - the process of submitting sensitive data and meta-data to the inbox staging area
+-   Ingestion - the process of verifying uploaded data and securely storing it in archive storage, while synchronizing state and identifier information with CEGA
+-   Data Retrieval - the process of re-encrypting and staging data for retrieval/download.
 
 
 
-Service | Description | Use cases activating service | Status
--------:|:------------|:-----------------------------|:-----:
-db | A Postgres database with appropriate schema, stores the file header the accession id, file path and checksums as well as other relevant information. | Submission and Data Retrieval | <i class="fa fa-battery-full ega-stable" title="Stable"></i>
-mq (broker) | A RabbitMQ message broker with appropriate accounts, exchanges, queues and bindings. We use a federated queue to get messages from CentralEGA's broker and shovels to send answers back.| Submission | <i class="fa fa-battery-full ega-stable" title="Stable"></i>
-Inbox | Upload service for incoming data, acting as a dropbox. Uses credentials from Central EGA. | Submission | <i class="fa fa-battery-full ega-stable" title="Stable"></i>
-Intercept | relays message between the queue provided from the federated service and local queues. | Submission | <i class="fa fa-battery-full ega-stable" title="Stable"></i>
-[Ingest](services/ingest.md) | Splits the Crypt4GH header and moves it to database. The remainder of the file is sent to the storage backend (archive). No cryptographic tasks are done. | Submission | <i class="fa fa-battery-full ega-stable" title="Stable"></i>
-[Verify](services/verify.md) | Uses a crypt4gh secret key, this service can decrypt the stored files and checksum them against the embedded checksum for the unencrypted file. | Submission | <i class="fa fa-battery-full ega-stable" title="Stable"></i>
-Archive | Storage backend: can be a regular (POSIX) file system or a S3 object store. | Submission and Data Retrieval | <i class="fa fa-battery-full ega-stable" title="Stable"></i>
-[Finalize](services/finalize.md) | Handles the so-called <i>Accession ID (stable ID)</i> to filename mappings from CentralEGA store. | Submission | <i class="fa fa-battery-full ega-stable" title="Stable"></i>
-[Mapper](services/mapper.md) | The mapper service register mapping of accessionIDs (stable ids for files) to datasetIDs. | Submission Data Retrieval | <i class="fa fa-battery-full ega-stable" title="Stable"></i>
-Data Out API | Provides a download/data access API for streaming archived data either in encrypted or decrypted format. | Data Retrieval | <i class="fa fa-battery-half ega-dev" title="Work in progress"></i>
-Metadata | Component used in standalone version of SDA. Provides an interface and backend to submit Metadata and associated with a file in the Archive. | Submission Data Retrieval | <i class="fa fa-battery-half ega-dev" title="Work in progress"></i>
-Orchestrator | Component used in standalone version of SDA. Provides an automated ingestion and dataset ID and file ID mapping. | Submission Data Retrieval | <i class="fa fa-battery-half ega-dev" title="Work in progress"></i>
+Service/component | Description | Archive sub-process 
+-------:|:------------|:-----------------------------
+db | A Postgres database with appropriate schema, stores the file header the accession id, file path and checksums as well as other relevant information. | Submission, Ingestion and Data Retrieval 
+mq (broker) | A RabbitMQ message broker with appropriate accounts, exchanges, queues and bindings. We use a federated queue to get messages from CentralEGA's broker and shovels to send answers back.| Submission and Ingestion 
+Inbox | Upload service for incoming data, acting as a dropbox. Uses credentials from Central EGA. | Submission 
+Intercept | relays message between the queue provided from the federated service and local queues. | Submission and Ingestion 
+[Ingest](services/ingest.md) | Splits the Crypt4GH header and moves it to database. The remainder of the file is sent to the storage backend (archive). No cryptographic tasks are done. | Ingestion 
+[Verify](services/verify.md) | Uses a crypt4gh secret key, this service can decrypt the stored files and checksum them against the embedded checksum for the unencrypted file. | Ingestion 
+[Finalize](services/finalize.md) | Handles the so-called <i>Accession ID (stable ID)</i> to filename mappings from CentralEGA. | Ingestion 
+[Mapper](services/mapper.md) | The mapper service register mapping of accessionIDs (stable ids for files) to datasetIDs. | Ingestion </i>
+Archive | Storage backend: can be a regular (POSIX) file system or a S3 object store. | Ingestion and Data Retrieval 
+Data Out API | Provides a download/data access API for streaming archived data either in encrypted or decrypted format. | Data Retrieval 
+Metadata | Component used in standalone version of SDA. Provides an interface and backend to submit Metadata and associated with a file in the Archive. | Submission, Ingestion and Data Retrieval 
+Orchestrator | Component used in standalone version of SDA. Provides an automated ingestion and dataset ID and file ID mapping. | Submission, Ingestion and Data Retrieval
 
+Organisation of the NeIC SDA Operations handbook
+------------------------------------------------
+
+This operations handbook is organized in four  main parts, that each has it's own main section in the left navigation menu. Here we provide a condensed summary, follow the links below or use the menu navigation to each section's own detailed introduction page: 
+
+1.  **Structure**: Provides overview material for how the services can be deployed in different constellations and highlights communication paths.
+
+1.  **Communication**: Provides more detailed communication focussed documentation, such as OpenAPI-specs for APIs, rabbit-mq message flow, and database information flow details.
+
+1.  **Services**: Per service detailed specifications and documentation.
+
+1.  **Guides**: Topic-guides for topics like "Deployment", "Federated vs. Standalone", "Troubleshooting services", etc.
+
+
+
+
+
+> NOTE:
+> NB!!! Content below to be considered moved into introductory pages of STRUCTURE and COMMUNICATION sections:
 
 The overall data workflow consists of three parts:
 
