@@ -2,7 +2,7 @@
 NeIC Sensitive Data Archive
 ===========================
 
-The NeIC Sensitive Data Archive (SDA) software is a modular system of microservices that in alternative configurations can be setup to host sensitive data in an archival service, securely stored encrypted at rest.
+The NeIC Sensitive Data Archive (SDA) is an encrypted data archive, originally implemented for storage of sensitive biological data. It is implemented as a modular microservice system that can be deployed in different configurations depending on the service needs.
 
 The modular architecture of SDA supports both stand alone deployment of an archive, and the use case of deploying a Federated node in the [Federated European Genome-phenome Archive network (FEGA)](https://ega-archive.org/federated), serving discoverable sensitive datasets in the main [EGA web portal](https://ega-archive.org).
 
@@ -31,12 +31,12 @@ The components illustrated can be classified by which archive sub-process they t
 
 Service/component | Description | Archive sub-process 
 -------:|:------------|:-----------------------------
-db | A Postgres database with appropriate schema, stores the file header the accession id, file path and checksums as well as other relevant information. | Submission, Ingestion and Data Retrieval 
+db | A Postgres database with appropriate schema, stores the file header, the accession id, file path and checksums as well as other relevant information. | Submission, Ingestion and Data Retrieval 
 mq (broker) | A RabbitMQ message broker with appropriate accounts, exchanges, queues and bindings. We use a federated queue to get messages from CentralEGA's broker and shovels to send answers back.| Submission and Ingestion 
 Inbox | Upload service for incoming data, acting as a dropbox. Uses credentials from Central EGA. | Submission 
-Intercept | relays message between the queue provided from the federated service and local queues. | Submission and Ingestion 
-[Ingest](services/ingest.md) | Splits the Crypt4GH header and moves it to database. The remainder of the file is sent to the storage backend (archive). No cryptographic tasks are done. | Ingestion 
-[Verify](services/verify.md) | Uses a crypt4gh secret key, this service can decrypt the stored files and checksum them against the embedded checksum for the unencrypted file. | Ingestion 
+Intercept | Relays messages between the queue provided from the federated service and local queues. | Submission and Ingestion 
+[Ingest](services/ingest.md) | Splits the Crypt4GH header and moves it to the database. The remainder of the file is sent to the storage backend (archive). No cryptographic tasks are done. | Ingestion 
+[Verify](services/verify.md) | Using the archive crypt4gh secret key, this service can decrypt the stored files and checksum them against the embedded checksum for the unencrypted file. | Ingestion 
 [Finalize](services/finalize.md) | Handles the so-called <i>Accession ID (stable ID)</i> to filename mappings from CentralEGA. | Ingestion 
 [Mapper](services/mapper.md) | The mapper service register mapping of accessionIDs (stable ids for files) to datasetIDs. | Ingestion </i>
 Archive | Storage backend: can be a regular (POSIX) file system or a S3 object store. | Ingestion and Data Retrieval 
