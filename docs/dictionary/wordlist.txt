@@ -57,6 +57,7 @@ decrypted
 decryptedchecksums
 decryptor
 dev
+discoverable
 doi
 dsn
 ebi
@@ -69,6 +70,7 @@ egas
 endcoordinate
 envs
 exportrequests
+fega
 fileid
 filepath
 filesystem
@@ -103,6 +105,7 @@ lega
 localega
 localmq
 logstash
+microservice
 microservices
 migratedb
 mina
@@ -133,6 +136,7 @@ ou
 pacx
 pem
 pgvolume
+phenome
 pkcs
 png
 posix
