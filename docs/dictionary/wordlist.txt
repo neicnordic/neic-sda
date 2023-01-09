@@ -133,6 +133,7 @@ ou
 pacx
 pem
 pgvolume
+phenome
 pkcs
 png
 posix
@@ -172,6 +173,7 @@ tada
 testsuite
 thumbsup
 tls
+todo
 tryggve
 tsd
 ttl
