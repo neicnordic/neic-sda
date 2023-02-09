@@ -45,7 +45,7 @@ Inter-communication between services
 
 There are 3 main ways that the system is passing on information and persist state in the system:
 
-1. though AMQP messages sent from and to micro services;
+1. through AMQP messages sent from and to micro services;
 2. changes in the database of the status of a file being processed via the the `sda-pipeline`;
 3. location and state of files in either of the three file storage areas.
 
