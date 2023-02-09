@@ -146,6 +146,7 @@ oldpath
 openapi
 openid
 openjdk
+openshift
 openssl
 orchestrator
 orgs
@@ -156,8 +157,10 @@ pgvolume
 phenome
 pkcs
 png
+podman
 posix
 postgres
+postgresql
 pre
 prepended
 publickey
@@ -173,6 +176,7 @@ reencrypt
 reencrypted
 reencrypting
 repo
+requesters
 rootedfilesystem
 routingkey
 rsa

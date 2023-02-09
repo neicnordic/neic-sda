@@ -9,6 +9,7 @@ theme:
 nav:
   - Home: 'index.md'
   - 'Structure':
+      - Introduction: 'structure.md'
       - Getting started: 'setup.md'
       - 'deploy.md'
       - Tests: 'tests.md'
