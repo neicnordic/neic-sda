@@ -6,7 +6,7 @@ on:
       repository:
         description: 'Repository to aggregate documentation from'
         required: true
-        default: "neicnordic/sda-pipeline"
+        default: "neicnordic/sensitive-data-archive"
 
 jobs:
   build:

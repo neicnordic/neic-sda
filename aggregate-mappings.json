@@ -1,12 +1,12 @@
 {
-    "neicnordic/sda-pipeline": {
-        "cmd/backup/backup.md": "docs/services/backup.md",
-        "cmd/finalize/finalize.md": "docs/services/finalize.md",
-        "cmd/ingest/ingest.md": "docs/services/ingest.md",
-        "cmd/intercept/intercept.md": "docs/services/intercept.md",
-        "cmd/mapper/mapper.md": "docs/services/mapper.md",
-        "cmd/notify/notify.md": "docs/services/notify.md",
-        "cmd/verify/verify.md": "docs/services/verify.md",
-        "cmd/pipeline.md": "docs/services/pipeline.md"
+    "neicnordic/sensitive-data-archive": {
+        "sda-pipeline/cmd/backup/backup.md": "docs/services/backup.md",
+        "sda/cmd/finalize/finalize.md": "docs/services/finalize.md",
+        "sda/cmd/ingest/ingest.md": "docs/services/ingest.md",
+        "sda-pipeline/cmd/intercept/intercept.md": "docs/services/intercept.md",
+        "sda-pipeline/cmd/mapper/mapper.md": "docs/services/mapper.md",
+        "sda-pipeline/cmd/notify/notify.md": "docs/services/notify.md",
+        "sda/cmd/verify/verify.md": "docs/services/verify.md",
+        "sda-pipeline/cmd/pipeline.md": "docs/services/pipeline.md"
     }
 }
