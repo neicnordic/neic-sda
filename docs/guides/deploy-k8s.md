@@ -6,13 +6,13 @@
 > [github](https://github.com/neicnordic/neic-sda)!
 
 
-## Guide summary 
+## Guide summary
 
 This guide explains how to deploy the Sensitive Data Archive (SDA) in kubernetes.
 - What it intends to cover
 - What to expect, scope, explain level of details
 - How self-contained the guide is
-- Examples expected to work directly or not, must be configured (example configs, most updated version?)
+- Examples expected to work directly or not, must be configured (example configurations, most updated version?)
 
 ## Local security / zone considerations
 
@@ -25,7 +25,7 @@ This guide explains how to deploy the Sensitive Data Archive (SDA) in kubernetes
  - k8s/helm minimal versions
  - rough estimate of hardware resources
 
-## Minimal working configuration 
+## Minimal working configuration
 
 ## Security issues
 
