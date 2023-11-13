@@ -13,6 +13,9 @@ The production deployment repositories are:
 -   [Docker Swarm
     deployment](https://github.com/neicnordic/LocalEGA-deploy-swarm/).
 
-The following container images are used in the deployments:
+The following container image is used in the deployments `neicnordic/sensitive-data-archive`, provides the SDA services as well as PostgreSQL and RabbitMQ configuration. The tag is what separates the services:
 
--   `neicnordic/sensitive-data-archive`, provides the SDA services as well as PostgreSQL and RabbitMQ configuration.
+- `ghcr.io/neicnordic/sensitive-data-archive:<version>-postgres` - PostgreSQL database
+- `ghcr.io/neicnordic/sensitive-data-archive:<version>-rabbitmq` - RabbitMQ message broker
+- `ghcr.io/neicnordic/sensitive-data-archive:<version>-sftp-inbox` - sftp inbox
+- `ghcr.io/neicnordic/sensitive-data-archive:<version>-<service>` - where `<service>` corresponds to services such as: `finalize`, `ingest`, `intercept`, `verify`, `mapper`, `download`, `s3inbox`, `auth`

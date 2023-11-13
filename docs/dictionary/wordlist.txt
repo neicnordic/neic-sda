@@ -85,6 +85,7 @@ getheader
 getheaderforstableid
 getinboxpath
 gh
+ghcr
 golang
 gradle
 hostname
