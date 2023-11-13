@@ -33,7 +33,7 @@ Upload one or a number of files of different sizes and check that,
 
 - the file(s) exists in the configured `inbox` of the storage backend (e.g. S3 bucket or POSIX path)
 - the file(s) entry exists in the database in the `sda.files` and `sda.file_event_log` tables
-- there exists an `uploaded` event for each specific file in the `sda.file_event_log`
+- If the `s3inbox` is used, there should be an `uploaded` event for each specific file in the `sda.file_event_log`
 - the file(s) exists in the CEGA metadata portal (here for the test instance) under the tab files which can be accessed after pressing the three lines button.
 
 ### Make a test submission
@@ -52,5 +52,7 @@ Finally, when all files have been ingested, the submission portal should allow f
 
 - the message for the dataset arrives to the mapper service
 - the dataset is created in the database and it includes the correct files by checking the `sda.datasets` and `sda.file_dataset` tables.
+- the dataset has the status `registered` in the `sda.dataset_event_log`
+- the dataset gets the status `released` in the `sda.dataset_event_log`, this might take a while depending on what date was chosen in the submitter portal.
 
 Once all the submission steps have been verified, we can assume that the pipeline part of the deployment is working properly.
