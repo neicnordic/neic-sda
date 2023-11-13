@@ -5,29 +5,25 @@ markdown_extensions:
 plugins:
   - include-markdown
 theme:
-    name: readthedocs
+  name: readthedocs
 nav:
-  - Home: 'index.md'
-  - 'Structure':
-      - Introduction: 'structure.md'
-      - Getting started: 'setup.md'
-      - 'deploy.md'
-      - Tests: 'tests.md'
-  - 'Communication':
-      - Database setup: 'db.md'
-      - Encryption: 'encryption.md'
-      - Data Submission: 'submission.md'
-      - Interfacing with CEGA: 'connection.md'
-  - 'Services':
-      - SDA-Pipeline: 'services/pipeline.md'
-      - 'services/ingest.md'
-      - 'services/verify.md'
-      - 'services/finalize.md'
-      - 'services/backup.md'
-      - 'services/mapper.md'
-      - Data Retrieval API: 'dataout.md'
-  - 'Guides':
-      - Contributing: 'CONTRIBUTING.md'
-
-
-      
+  - Home: "index.md"
+  - "Structure":
+      - Introduction: "structure.md"
+      - Getting started: "setup.md"
+      - "deploy.md"
+      - Tests: "tests.md"
+  - "Communication":
+      - Database setup: "db.md"
+      - Encryption: "encryption.md"
+      - Data Submission: "submission.md"
+      - Interfacing with CEGA: "connection.md"
+  - "Services":
+      - SDA: "services/sda.md"
+      - "services/ingest.md"
+      - "services/verify.md"
+      - "services/finalize.md"
+      - "services/mapper.md"
+      - Data Retrieval API: "dataout.md"
+  - "Guides":
+      - Contributing: "CONTRIBUTING.md"
