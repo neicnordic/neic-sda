@@ -12,7 +12,7 @@ Structure of the message and its contents are described in
 
 > NOTE:
 > Source code repository for Submission components is available at:
-> <https://github.com/neicnordic/sda-pipeline>
+> <https://github.com/neicnordic/sensitive-data-archive>
 
 ### Ingestion Workflow
 
@@ -133,7 +133,7 @@ Mina SSHD.
 
 > NOTE:
 > Sources are located at the separate repository:
-> <https://github.com/neicnordic/sda-inbox-sftp> Essentially, it's a
+> <https://github.com/neicnordic/sensitive-data-archive/tree/main/sda-inbox-sftp> Essentially, it's a
 > Spring-based Maven project, integrated with the
 > [Local Message Broker](connection.md#local-message-broker).
 
@@ -142,12 +142,12 @@ Mina SSHD.
 
 > NOTE:
 > Sources are located at the separate repository:
-> <https://github.com/neicnordic/sda-s3proxy>
+> <https://github.com/neicnordic/sensitive-data-archive/blob/main/sda/cmd/s3inbox/>
 
 The S3 Proxy uses access tokens as the main authentication mechanism.
 
 The sda authentication service
-(<https://github.com/neicnordic/sda-auth>) is designed to convert CEGA
+(<https://github.com/neicnordic/sensitive-data-archive/tree/main/sda-auth>) is designed to convert CEGA
 REST endpoint authentication to a JWT that can be used when uploading to
 the S3 proxy.
 
@@ -184,7 +184,7 @@ Variable name          | Default value | Description
 `BROKER_CACERT`        |               | CA cert used for broker connectivity
 `BROKER_VERIFYPEER`    |               | Enforce mTLS for broker connection
 `BROKER_CLIENTCERT`    |               | Client cert used for broker connectivity
-`BROKER_CLINETKEY`     |               | Client key used for broker connectivity
+`BROKER_CLIENTKEY`     |               | Client key used for broker connectivity
 `SERVER_CERT`          |               | Certificate for the S3 endpoint
 `SERVER_KEY`           |               | Certificate key for the S3 endpoint
 `SERVER_JWTPUBKEYPATH` |               | Path to the folder where the public JWT key is located

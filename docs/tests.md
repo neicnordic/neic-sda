@@ -13,6 +13,4 @@ scenarios, users will utilize the system as a whole.
 > Unit tests and integration tests are automatically executed with every
 > push and PR to the `NeIC Github repo` via Github Actions.
 
-In order to replicate integration tests on a local machine see:
-[sda-pipeline Local testing
-howto](https://github.com/neicnordic/sda-pipeline/tree/master/dev_utils#readme)
+**TO ADD: Local Setup Testing**

@@ -1,13 +1,13 @@
 Database Setup
 ==============
 
-We use a Postgres database (version 13+ ) to store intermediate data, in
+We use a Postgres database (version 15+ ) to store intermediate data, in
 order to track progress in file ingestion. The `lega` database schema is
 documented below.
 
 > NOTE:
 > Source code repository for DB component is available at:
-> <https://github.com/neicnordic/sda-db>
+> <https://github.com/neicnordic/sensitive-data-archive/tree/main/postgresql>
 
 The database container will initialize and create the necessary database
 structure and functions if started with an empty area. Procedures for
@@ -15,7 +15,7 @@ structure and functions if started with an empty area. Procedures for
 the secure data archive project.
 
 Look at [the SQL
-definitions](https://github.com/neicnordic/sda-db/tree/master/initdb.d)
+definitions](https://github.com/neicnordic/sensitive-data-archive/tree/main/postgresql/initdb.d)
 if you are also interested in the database triggers.
 
 Configuration
@@ -82,8 +82,8 @@ both the database initialization scripts (and bumping the bootstrapped
 schema version) as well as creating the corresponding migration script
 to perform the changes on a database in use.
 
-Migration scripts should be placed in `/migratedb.d/` in the sda-db repo
-(<https://github.com/neicnordic/sda-db>). We recommend naming them
+Migration scripts should be placed in `/migratedb.d/` in the *sensitive-data-archive* repo
+(<https://github.com/neicnordic/sensitive-data-archive/tree/main/postgresql>). We recommend naming them
 corresponding to the schema version they provide migration to. There is
 an "empty" migration script (`01.sql`) that can be used as a
 template.

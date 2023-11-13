@@ -154,7 +154,7 @@ SDA-download
 Recommended provisioning method for production is:
 
 -   on a `kubernetes cluster` using the [helm
-    chart](https://github.com/neicnordic/sda-helm/).
+    chart](https://github.com/neicnordic/sensitive-data-archive/tree/main/charts).
 
 `sda-download` focuses on enabling deployment of a stand-alone version
 of SDA, with features such as:
