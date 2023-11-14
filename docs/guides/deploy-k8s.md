@@ -18,6 +18,17 @@ This guide explains how to deploy the Sensitive Data Archive (SDA) in kubernetes
 
 - Differences in deployment make concrete examples challenges, explain what can be exemplified and what not in this guide
 
+
+For secure deployment of the system one can think it by what can be accessed from where, for all ways of deploying two trust boundaries can be used, external and internal. For an extra layer of security also the storage trust boundary can be separate. The service is provided for customers on the internet therefore an example of deploying the service is using two separate Kubernetes clusters, one for responding customers and other communication outside, and the other cluster is more secure storage facing internal cluster. One thing to consider is where to release the data, that could be closed protected environment with tightly restricted access, Data out can be put in internal cluster.
+
+The services could be divided into two trust boundaries
+- The services in external in external cluster are Inbox and MQ
+- The services in internal cluster are  Intercept, Ingest, Verify, Mapper, Finalize, Backup and Data out.
+
+The innermost trust zone contains the database and the archive, which be accessed only from internal cluster.
+
+
+
 ## Charts overview
 
 ## System requirements
