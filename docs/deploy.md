@@ -18,4 +18,6 @@ The following container image is used in the deployments `neicnordic/sensitive-d
 - `ghcr.io/neicnordic/sensitive-data-archive:<version>-postgres` - PostgreSQL database
 - `ghcr.io/neicnordic/sensitive-data-archive:<version>-rabbitmq` - RabbitMQ message broker
 - `ghcr.io/neicnordic/sensitive-data-archive:<version>-sftp-inbox` - sftp inbox
-- `ghcr.io/neicnordic/sensitive-data-archive:<version>-<service>` - where `<service>` corresponds to services such as: `finalize`, `ingest`, `intercept`, `verify`, `mapper`, `download`, `s3inbox`, `auth`
+- `ghcr.io/neicnordic/sensitive-data-archive:<version>-auth` - authentication service
+- `ghcr.io/neicnordic/sensitive-data-archive:<version>-download` - download service
+- `ghcr.io/neicnordic/sensitive-data-archive:<version>` - all other services such as: `finalize`, `ingest`, `intercept`, `verify`, `mapper` and `s3inbox`
