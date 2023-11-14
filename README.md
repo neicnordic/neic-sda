@@ -15,7 +15,7 @@ Source code for core components is available at: https://github.com/neicnordic/s
 
 | Component     | Role |
 |---------------|------|
-| inbox         | SFTP, S3 or HTTPS server, acting as a dropbox, where user credentials are fetched from CentralEGA or via LifeScience AAI. [s3inbox](https://github.com/neicnordic/sensitive-data-archive/tree/main/sda/cmd/s3inbox/s3inbox.md) or [sftp-inbox](https://github.com/neicnordic/sensitive-data-archive/tree/main/sda-sftp-inbox) |
+| inbox         | SFTP, S3 or HTTPS server, acting as a dropbox, where user credentials are fetched from CentralEGA or via LifeScience AAI. [s3inbox](https://github.com/neicnordic/sensitive-data-archive/tree/main/sda/cmd/s3inbox/s3inbox.md) or [sftp-inbox](https://github.com/neicnordic/sensitive-data-archive/tree/main/sda-sftp-inbox/README.md) |
 | intercept     | The intercept service relays message between the queue provided from the federated service and local queues. **(Required for Federated EGA use case)** |
 | ingest        | Split the Crypt4GH header and move the remainder to the storage backend. No cryptographic task, nor access to the decryption keys. |
 | verify        | Decrypt the stored files and checksum them against their embedded checksum. |
@@ -23,7 +23,7 @@ Source code for core components is available at: https://github.com/neicnordic/s
 | finalize      | Handle the so-called _Accession ID_ to filename mappings from CentralEGA. |
 | mapper        | The mapper service register mapping of accessionIDs (IDs for files) to datasetIDs. |
 | data out API  | Provides a download/data access API for streaming archived data either in encrypted or decrypted format - source at: https://github.com/neicnordic/sda-doa |
-| download      | Provides a download/data access API for streaming (decrypted) archived data - source at: https://github.com/neicnordic/sda-download |
+| download      | Provides a download/data access API for streaming (decrypted) archived data - source at: [https://github.com/neicnordic/sensitive-data-archive](https://github.com/neicnordic/sensitive-data-archive/tree/main/sda-download/README.md) |
 
 ### Associated components
 
