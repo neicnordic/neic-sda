@@ -4,6 +4,7 @@
         "sda/cmd/ingest/ingest.md": "docs/services/ingest.md",
         "sda/cmd/intercept/intercept.md": "docs/services/intercept.md",
         "sda/cmd/mapper/mapper.md": "docs/services/mapper.md",
-        "sda/cmd/verify/verify.md": "docs/services/verify.md"
+        "sda/cmd/verify/verify.md": "docs/services/verify.md",
+        "sda/sda.md": "docs/services/sda.md"
     }
 }
