@@ -34,7 +34,7 @@ Upload one or a number of files of different sizes and check that,
 - the file(s) exists in the configured `inbox` of the storage backend (e.g. S3 bucket or POSIX path)
 - the file(s) entry exists in the database in the `sda.files` and `sda.file_event_log` tables
 - If the `s3inbox` is used, there should be an `uploaded` event for each specific file in the `sda.file_event_log`
-- the file(s) exists in the CEGA metadata portal (here for the test instance) under the tab files which can be accessed after pressing the three lines button.
+- the file(s) exists in the CEGA Submission portal (here for the test instance) Files listing, which can be accessed after pressing the three lines menu button.
 
 ### Make a test submission
 
