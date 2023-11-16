@@ -4,6 +4,8 @@ CLIENTKEY
 GetArchived
 GetHeader
 GetHeaderForStableId
+GetInboxPath
+UpdateDatasetEvent
 InsertFile
 Keyfile
 LIBPQ
