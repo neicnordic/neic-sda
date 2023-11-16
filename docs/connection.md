@@ -10,16 +10,15 @@ The RabbitMQ message brokers of each SDA instance are the **only**
 components with the necessary credentials to connect to Central EGA
 message broker.
 
-We call `CEGAMQ` and `LocalMQ` (Local Message Broker, also known as
-`sda-mq`), the RabbitMQ message brokers of, respectively, `Central EGA`
-and `SDA`/`LocalEGA`.
+We call `CEGAMQ` and `LocalMQ` (Local Message Broker, sometimes know as `sda-mq`), 
+the RabbitMQ message brokers of, respectively, `Central EGA` and `SDA`/`LocalEGA`.
 
 Local Message Broker
 --------------------
 
 > NOTE:
 > Source code repository for MQ component is available at:
-> [https://github.com/neicnordic/sda-mq](https://github.com/neicnordic/sda-mq)
+> [sensitive-data-archive RabbitMQ](https://github.com/neicnordic/sensitive-data-archive/tree/main/rabbitmq)
 
 
 ### Configuration
@@ -85,7 +84,6 @@ following queues, in the default `vhost`:
 Name             | Purpose
 :----------------|:---------------------------------------
 archived         | Archived files.
-backup           | Signal files to backup
 completed        | Files are backed up
 error            | User-related errors
 files            | Receive notification for ingestion from `CEGAMQ` or Orchestrator
@@ -147,7 +145,7 @@ Central EGA and any Local EGAs. Central EGA's messages are
 JSON-formatted.
 
 The JSON schemas can be found in:
-<https://github.com/neicnordic/sda-pipeline/tree/master/schemas>
+<https://github.com/neicnordic/sensitive-data-archive/tree/main/sda/schemas>
 
 When a `Submission Inbox` sends an `upload` message to CentralEGA it contains the
 following:
@@ -210,7 +208,7 @@ of messages:
 > sha256 checksum will be calculated by `Ingest` service.
 
 The message received from Central EGA to start ingestion at a Federated EGA node.
-Processed by the the sda-pipeline `ingest` service.
+Processed by the the `ingest` service.
 
 ```javascript
 {
@@ -258,9 +256,8 @@ adding the [Accession ID]{.title-ref}.
 ```
 
 `Finalize` service should receive the message below and assign the
-`Accession ID` to the corresponding file and send a message to `backup`
-queue for the backup services or in case there is no backup service to
-the `completed` queue.
+`Accession ID` to the corresponding file and send a message to the `completed` queue
+when the `accession ID` has been set (in case of Federated EGA this also means backup copy has been done).
 
 ```javascript
 {
@@ -275,7 +272,7 @@ the `completed` queue.
 }
 ```
 
-The message sent from the sda-pipeline `finalize` service to the `backup` service via `completed` queue.
+The message sent from the `finalize` service to the `completed` queue.
 
 ```javascript
 {

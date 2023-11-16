@@ -2,7 +2,7 @@
 
 Recommended provisioning methods provided for production are:
 
-* on a [Kubernetes cluster](https://github.com/neicnordic/sda-helm/), using `kubernetes` and `helm` charts;
+* on a [Kubernetes cluster](https://github.com/neicnordic/sensitive-data-archive/tree/main/charts), using `kubernetes` and `helm` charts;
 * on a [Docker Swarm cluster](https://github.com/neicnordic/LocalEGA-deploy-swarm), using `gradle` and `docker swarm`.
 
 ## Architecture
@@ -11,11 +11,11 @@ SDA is divided into several components, which can be deployed either for Federat
 
 ### Core Components
 
-Source code for core components (unless specified otherwise) is available at: https://github.com/neicnordic/sda-pipeline 
+Source code for core components is available at: https://github.com/neicnordic/sensitive-data-archive
 
 | Component     | Role |
 |---------------|------|
-| inbox         | SFTP, S3 or HTTPS server, acting as a dropbox, where user credentials are fetched from CentralEGA or via ELIXIR AAI. https://github.com/neicnordic/sda-s3proxy/ or https://github.com/neicnordic/sda-inbox-sftp |
+| inbox         | SFTP, S3 or HTTPS server, acting as a dropbox, where user credentials are fetched from CentralEGA or via LifeScience AAI. [s3inbox](https://github.com/neicnordic/sensitive-data-archive/tree/main/sda/cmd/s3inbox/s3inbox.md) or [sftp-inbox](https://github.com/neicnordic/sensitive-data-archive/tree/main/sda-sftp-inbox/README.md) |
 | intercept     | The intercept service relays message between the queue provided from the federated service and local queues. **(Required for Federated EGA use case)** |
 | ingest        | Split the Crypt4GH header and move the remainder to the storage backend. No cryptographic task, nor access to the decryption keys. |
 | verify        | Decrypt the stored files and checksum them against their embedded checksum. |
@@ -23,18 +23,18 @@ Source code for core components (unless specified otherwise) is available at: ht
 | finalize      | Handle the so-called _Accession ID_ to filename mappings from CentralEGA. |
 | mapper        | The mapper service register mapping of accessionIDs (IDs for files) to datasetIDs. |
 | data out API  | Provides a download/data access API for streaming archived data either in encrypted or decrypted format - source at: https://github.com/neicnordic/sda-doa |
+| download      | Provides a download/data access API for streaming (decrypted) archived data - source at: [https://github.com/neicnordic/sensitive-data-archive](https://github.com/neicnordic/sensitive-data-archive/tree/main/sda-download/README.md) |
 
 ### Associated components
 
 | Component     | Role |
 |---------------|------|
-| db            | A Postgres database with appropriate schemas and isolations https://github.com/neicnordic/sda-db/ |
-| mq            | A (local) RabbitMQ message broker with appropriate accounts, exchanges, queues and bindings, connected to the CentralEGA counter-part. https://github.com/neicnordic/sda-mq/ |
+| db            | A [Postgres database](https://github.com/neicnordic/sensitive-data-archive/tree/main/postgresql) with appropriate schemas and isolations |
+| mq            | A [(local) RabbitMQ](https://github.com/neicnordic/sensitive-data-archive/tree/main/rabbitmq) message broker with appropriate accounts, exchanges, queues and bindings, connected to the CentralEGA counter-part. |
 
 
 ### Stand-alone components
 
 | Component     | Role |
 |---------------|------|
-| metadata      | Component used in standalone version of SDA. Provides an interface and backend to submit Metadata and associated with a file in the Archive. https://github.com/neicnordic/sda-metadata-mirror/ with UI https://github.com/neicnordic/FormSubmission_UI |
 | orchestrate   | Component that automates ingestion in stand-alone deployments of SDA Pipeline https://github.com/neicnordic/sda-orchestration |
