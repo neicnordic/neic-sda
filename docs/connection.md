@@ -272,7 +272,7 @@ when the `accession ID` has been set (in case of Federated EGA this also means b
 }
 ```
 
-The message sent from the `finalize` to the `completed` queue.
+The message sent from the `finalize` service to the `completed` queue.
 
 ```javascript
 {
