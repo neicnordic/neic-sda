@@ -35,6 +35,46 @@ This guide explains how to deploy the Sensitive Data Archive (SDA) in kubernetes
 ## Network policies
 
  - DNS names and ingress for services
+ 
+   When deploying applications on Kubernetes, it is essential to understand the DNS naming conventions and ingress configurations for Pods and Services. Each Pod within the cluster is assigned a DNS name in the format of `pod-ip-address.<cluster>.pod.cluster.local`. This DNS resolution allows seamless communication between Pods within the same cluster.
+
+   Services, representing sets of Pods, are assigned A DNS records with names structured as `<service_name>.<namespace>.svc.cluster.local`. This DNS record resolves to the cluster IP of the respective Service.
+
+    | Service Name | Common DNS Name                         |
+    | ------------ | ----------------------------------------|
+    | inbox        | sda-svc-inbox.<namespace>.svc.cluster.local   |
+    | download     | sda-svc-download.<namespace>.svc.cluster.local|
+    | auth         | sda-svc-auth.<namespace>.svc.cluster.local    |
+    | mq           | broker-sda-mq.<namespace>.svc.cluster.local   |
+
+    Certain services, such as `inbox`, `download`, and `auth`, are configured to expect an ingress. Ingress provides external access to these services, allowing external clients to communicate with them. The following services specifically expect an ingress:
+
+    - inbox
+    - download
+    - auth
+
+    In addition, Kubernetes allows you to define Network Policies to control the communication between Pods. Network Policies are crucial for enforcing security measures within your cluster. They enable you to specify which Pods can communicate with each other and define rules for ingress and egress traffic.
+    Here's a basic example of a Network Policy that allows traffic only to the 'inbox', 'download' and 'auth' service:
+
+    ```yaml
+    apiVersion: networking.k8s.io/v1
+    kind: NetworkPolicy
+    metadata:
+    name: allow-auth-service
+    spec:
+    podSelector: {}
+    ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+            app: sda-svc-inbox
+        - podSelector:
+            matchLabels:
+            app: sda-svc-download
+        - podSelector:
+            matchLabels:
+            app: sda-svc-auth
+    ```
 
 ## Complementary services
 
