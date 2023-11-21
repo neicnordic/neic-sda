@@ -13,6 +13,7 @@ aj
 amqp
 amqps
 apis
+apiVersion
 atitle
 auth
 backend
@@ -121,6 +122,7 @@ localega
 localmq
 logstash
 mapfilestodataset
+matchLabels
 markcompleted
 markready
 microservice
@@ -137,9 +139,11 @@ mtls
 nack
 nack'ed
 nacked
+namespace
 nbis
 neic
 neicnordic
+NetworkPolicy
 notls
 oidc
 ol
@@ -159,6 +163,7 @@ phenome
 pkcs
 png
 podman
+podSelector
 posix
 postgres
 postgresql
@@ -199,6 +204,7 @@ ssl
 sslmode
 startcoordinate
 storeheader
+svc
 svg
 sysdevs
 tada
