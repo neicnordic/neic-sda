@@ -88,6 +88,7 @@ gh
 ghcr
 golang
 gradle
+helpdesk
 hostname
 howto
 href
@@ -178,6 +179,7 @@ reencrypt
 reencrypted
 reencrypting
 repo
+reqs
 requesters
 rootedfilesystem
 routingkey
@@ -190,6 +192,7 @@ secretkey
 setaccessionid
 setarchived
 sftp
+sftpinbox
 sha
 smth
 somedir
@@ -199,6 +202,8 @@ ssl
 sslmode
 startcoordinate
 storeheader
+submitters
+svc
 svg
 sysdevs
 tada
@@ -231,8 +236,3 @@ wyenrumyh
 yaml
 yihkqimti
 yml
-PREFETCHCOUNT
-SetAccessionID
-DNS
-helpdesk
-submitters
