@@ -75,9 +75,9 @@ The table below reflects the minimum required resources to run the services in t
 
 ## Minimal set of configuration variables
 
-Here we provide a minimal list of variables that need to be configured in the `values.yml` file of the Helm charts in order to achieve a working deployment of the `sensitive data archive` services. In the following it is assumed that a *federated* setup is being deployed.
+Here we provide a minimal list of variables that need to be configured in the [values.yml](https://github.com/neicnordic/sensitive-data-archive/blob/main/charts/sda-svc/values.yaml) file of the Helm charts in order to achieve a working deployment of the `sensitive data archive` [services](https://github.com/neicnordic/sensitive-data-archive/tree/main/charts/sda-svc). In the following it is assumed that a *federated* setup is being deployed.
 
-## Global Variables
+### Global Variables
 
 TLS support:
 - `global.tls.issuer` or `glbal.tls.clusterIssuer`
@@ -108,14 +108,14 @@ RabbitMQ:
 - `global.broker.backupRoutingKey`: The backup routing key for the broker.
 
 Crypt4gh:
-- `global.c4gh.secretName`: The secret name for c4gh.
-- `global.c4gh.keyFile`: The key file for c4gh.
+- `global.c4gh.secretName`: The name by which the kubernetes secret for c4gh is referenced in the Helm charts.
+- `global.c4gh.keyFile`: The crypt4gh private key file.
 - `global.c4gh.passphrase`: The passphrase for c4gh.
 
 CEGA:
-- `global.cega.host`: The host for cega.
-- `global.cega.user`: The user for cega.
-- `global.cega.password`: The password for cega.
+- `global.cega.host`: The host for [Federated EGA NSS API](https://nss.ega-archive.org/spec/#/).
+- `global.cega.user`: The user for accessing Federated EGA NSS API.
+- `global.cega.password`: The password for Federated EGA NSS API.
 
 Database:
 - `global.db.host`: The host for the database.
