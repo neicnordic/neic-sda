@@ -46,7 +46,7 @@ Service/component | Description | Archive sub-process
 -------:|:------------|:-----------------------------
 Database | A Postgres database with appropriate schema, stores the file header, the accession id, file path and checksums as well as other relevant information. | Submission, Ingestion and Data Retrieval 
 MQ  | A RabbitMQ message broker with appropriate accounts, exchanges, queues and bindings. We use a federated queue to get messages from CentralEGA's broker and shovels to send answers back.| Submission and Ingestion 
-Inbox | Upload service for incoming data, acting as a dropbox. Uses credentials from Central EGA. | Submission 
+Inbox | Upload service for incoming data, acting as a dropbox. Uses credentials from `CentralEGA`. | Submission 
 Intercept | Relays messages between the queue provided from the federated service and local queues. | Submission and Ingestion 
 [Ingest](services/ingest.md) | Splits the Crypt4GH header and moves it to the database. The remainder of the file is sent to the storage backend (archive). No cryptographic tasks are done. | Ingestion 
 [Verify](services/verify.md) | Using the archive crypt4gh secret key, this service can decrypt the stored files and checksum them against the embedded checksum for the unencrypted file. | Ingestion 
@@ -76,32 +76,32 @@ This operations handbook is organized in four  main parts, that each has it's ow
 
 The overall data workflow consists of three parts:
 
--   The users logs onto the Local EGA's inbox and uploads the encrypted
-    files. They then go to the Central EGA's interface to prepare a
+-   The users logs onto the `FederatedEGA`'s inbox and uploads the encrypted
+    files. They then go to the `CentralEGA`'s interface to prepare a
     submission;
 -   Upon submission completion, the files are ingested into the archive
-    and become searchable by the Central EGA's engine;
+    and become searchable by the `CentralEGA`'s engine;
 -   Once the file has been successfully archived, it can be accessed by
     researchers in accordance with permissions given by the
     corresponding Data Access Committee.
 
 ------------------------------------------------------------------------
 
-Central EGA contains a database of users with permissions to upload to a
-specific Sensitive Data Archive. The Central EGA ID is used to
+`CentralEGA` contains a database of users with permissions to upload to a
+specific Sensitive Data Archive. The `CentralEGA` ID is used to
 authenticate the user against either their EGA password or a private
 key.
 
-For every uploaded file, Central EGA receives a notification that the
+For every uploaded file, `CentralEGA` receives a notification that the
 file is present in a SDA's inbox. The uploaded file must be encrypted
 in the [Crypt4GH file format](https://samtools.github.io/hts-specs/crypt4gh.pdf) using that SDA public Crypt4gh key. The file is
-checksumed and presented in the Central EGA's interface in order for
+checksumed and presented in the `CentralEGA`'s interface in order for
 the user to double-check that it was properly uploaded.
 
 More details about process in [Data Submission](submission.md#data-submission).
 
-When a submission is ready, Central EGA triggers an ingestion process on
-the user-chosen SDA instance. Central EGA's interface is updated with
+When a submission is ready, `CentralEGA` triggers an ingestion process on
+the user-chosen SDA instance. `CentralEGA`'s interface is updated with
 progress notifications whether the ingestion was successful, or whether
 there was an error.
 

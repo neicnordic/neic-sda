@@ -38,7 +38,7 @@ This chart deploys a pre-configured database ([PostgreSQL](https://www.postgresq
 
 ### sda-mq - RabbitMQ component for Sensitive Data Archive (SDA) installation
 
-This chart deploys a pre-configured message broker ([RabbitMQ](https://www.rabbitmq.com/)) designed to work [European Genome-Phenome Archive](https://ega-archive.org/) federated messaging interface between Central EGA and Local/Federated EGAs.
+This chart deploys a pre-configured message broker ([RabbitMQ](https://www.rabbitmq.com/)) designed to work [European Genome-Phenome Archive](https://ega-archive.org/) federated messaging interface between `CentralEGA` and Local/Federated EGAs.
 
 ### sda-svc - Components for Sensitive Data Archive (SDA) installation
 

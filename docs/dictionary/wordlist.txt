@@ -74,6 +74,7 @@ egas
 endcoordinate
 envs
 exportrequests
+federatedega
 fega
 fileid
 filepath

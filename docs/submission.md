@@ -4,7 +4,7 @@ Data Submission
 Ingestion Procedure
 -------------------
 
-For a given LocalEGA, Central EGA selects the associated `vhost` and
+For a given `FederatedEGA` node, `CentralEGA` selects the associated `vhost` and
 drops, in the `files` queue, one message per file to ingest.
 
 Structure of the message and its contents are described in
@@ -55,7 +55,7 @@ that the integrated checksum is valid.
 
 At this stage, the associated decryption key is retrieved. If decryption
 completes and the checksum is valid, a message of completion is sent to
-Central EGA: Ingestion completed.
+`CentralEGA`: Ingestion completed.
 
 > **Important**
 > If a file disappears or is overwritten in the inbox before ingestion is completed, ingestion may not be possible.
@@ -63,13 +63,13 @@ Central EGA: Ingestion completed.
 If any of the above steps generates an error, we exit the workflow and
 log the error. In case the error is related to a misuse from the user,
 such as submitting the wrong checksum or tampering with the encrypted
-file, the error is forwarded to Central EGA in order to be displayed in
+file, the error is forwarded to `CentralEGA` in order to be displayed in
 the Submission Interface.
 
 Submission Inbox
 ----------------
 
-Central EGA contains a database of users, with IDs and passwords. We
+`CentralEGA` contains a database of users, with IDs and passwords. We
 have developed several solutions allowing user authentication against
 CentralEGA user database:
 

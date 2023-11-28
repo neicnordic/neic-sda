@@ -9,11 +9,11 @@ Deployment related choices
 
 ### Federated vs stand-alone
 
-In a Federated setup, the Local EGA archive node setup locally need to exchange status updates with the Central EGA in a synchronized manner to basically orchestrate two parallel processes
+In a Federated setup, the `FederatedEGA` archive node setup locally need to exchange status updates with the `CentralEGA` in a synchronized manner to basically orchestrate two parallel processes
 
 1. The multi-step process of uploading and safely archiving encrypted files holding both sensitive phenome and genome data.
 
-2. The process of the Submitter annotating the archived data in an online portal at Central EGA, resulting in assigned accession numbers for items such as DataSet, Study, Files etc.
+2. The process of the Submitter annotating the archived data in an online portal at `CentralEGA`, resulting in assigned accession numbers for items such as DataSet, Study, Files etc.
 
 
 In a stand-alone setup, the deployed service has less remote synchronisation to worry about, but on the other hand need more components to also handle annotations/meta-data locally, as well as to deal with identifiers etc.
@@ -66,7 +66,7 @@ Additional components
 
 ### Authentication of users
 
-In a Federated setup, a data submitter will usually be required to have a user profile with the Central EGA services as well as a user identity trusted by the Federated EGA node services.The [Life Science AAI](https://lifescience-ri.eu/) login identity is primarily used (a.k.a. ELIXIR AAI identity) for the latter. Integration towards both authentication services will likely need to be incorporated into a Federated EGA nodes upload mechanism and download mechanism.
+In a Federated setup, a data submitter will usually be required to have a user profile with the `CentralEGA` services as well as a user identity trusted by the Federated EGA node services.The [Life Science AAI](https://lifescience-ri.eu/) login identity is primarily used (a.k.a. ELIXIR AAI identity) for the latter. Integration towards both authentication services will likely need to be incorporated into a Federated EGA nodes upload mechanism and download mechanism.
 
 ### Authorizing access to datasets
 
