@@ -16,7 +16,7 @@ In a Federated setup, the `FederatedEGA` archive node setup locally need to exch
 2. The process of the Submitter annotating the archived data in an online portal at `CentralEGA`, resulting in assigned accession numbers for items such as DataSet, Study, Files etc.
 
 
-In a stand-alone setup, the deployed service has less remote synchronisation to worry about, but on the other hand need more components to also handle annotations/meta-data locally, as well as to deal with identifiers etc.
+In a stand-alone setup, the deployed service has less remote synchronisation to worry about, but on the other hand more components might be required (e.g ([orchestrator](services/orchestrator))) to also handle annotations/meta-data locally, as well as to deal with identifiers etc.
 
 The NeIC SDA is targeting both use cases in several projects in the Nordics.
 
