@@ -4,7 +4,7 @@ NeIC Sensitive Data Archive
 
 The NeIC Sensitive Data Archive (SDA) is an encrypted data archive, originally implemented for storage of sensitive biological data. It is implemented as a modular microservice system that can be deployed in different configurations depending on the service needs.
 
-The modular architecture of SDA supports both stand alone deployment of an archive, and the use case of deploying a Federated node in the [Federated European Genome-phenome Archive network (FEGA)](https://ega-archive.org/federated), serving discoverable sensitive datasets in the main [EGA web portal](https://ega-archive.org).
+The modular architecture of SDA supports both stand alone deployment of an archive, and the use case of deploying a Federated node in the [Federated European Genome-phenome Archive network (FEGA)](https://ega-archive.org/about/projects-and-funders/federated-ega/), serving discoverable sensitive datasets in the main [EGA web portal](https://ega-archive.org).
 
 > NOTE:
 > Throughout this documentation, we can refer to [Central
@@ -44,7 +44,7 @@ The components illustrated can be classified by which archive sub-process they t
 |                         Metadata | Component used in standalone version of SDA. Provides an interface and backend to submit Metadata and associated with a file in the Archive.                                             | Submission, Ingestion and Data Retrieval |
 |                     Orchestrator | Component used in standalone version of SDA. Provides an automated ingestion and dataset ID and file ID mapping.                                                                         | Submission, Ingestion and Data Retrieval |
 
-Organisation of the NeIC SDA Operations handbook
+Organisation of the NeIC SDA Operations Handbook
 ------------------------------------------------
 
 This operations handbook is organized in four  main parts, that each has it's own main section in the left navigation menu. Here we provide a condensed summary, follow the links below or use the menu navigation to each section's own detailed introduction page: 
@@ -56,9 +56,6 @@ This operations handbook is organized in four  main parts, that each has it's ow
 1.  **Services**: Per service detailed specifications and documentation.
 
 1.  **Guides**: Topic-guides for topics like "Deployment", "Federated vs. Standalone", "Troubleshooting services", etc.
-
-
-
 
 
 > NOTE:

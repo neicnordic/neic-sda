@@ -1,4 +1,4 @@
-site_name: NeIC SDA Operations handbook
+site_name: NeIC SDA Operations Handbook
 extra_css: [css/neic-sda.css]
 markdown_extensions:
   - callouts
