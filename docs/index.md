@@ -17,15 +17,15 @@ The modular architecture of SDA supports both stand alone deployment of an archi
 Overall architecture
 --------------------
 
-The main components and interaction partners of the NeIC Sensitive Data Archive deployment in a Federated EGA setup, are illustrated in the figure below. The different colored backgrounds represent different zones of separation in the federated deployment. 
+The main components and interaction flows of the NeIC Sensitive Data Archive deployment in a Federated EGA setup, are illustrated in the figure below. The different colored backgrounds represent different zones of separation in the federated deployment. 
 
 ![](https://docs.google.com/drawings/d/e/2PACX-1vSCqC49WJkBduQ5AJ1VdwFq-FJDDcMRVLaWQmvRBLy7YihKQImTi41WyeNruMyH1DdFqevQ9cgKtXEg/pub?w=960&h=540)
 
 The components illustrated can be classified by which archive sub-process they take part in:
 
--   Submission - the process of submitting sensitive data and meta-data to the inbox staging area
--   Ingestion - the process of verifying uploaded data and securely storing it in archive storage, while synchronizing state and identifier information with CEGA
--   Data Retrieval - the process of re-encrypting and staging data for retrieval/download.
+-   `Submission` - the process of submitting sensitive data and meta-data to the inbox staging area
+-   `Ingestion` - the process of verifying uploaded data and securely storing it in archive storage, while synchronizing state and identifier information with CEGA
+-   `Data Retrieval` - the process of re-encrypting and staging data for retrieval/download.
 
 
 
@@ -41,8 +41,8 @@ The components illustrated can be classified by which archive sub-process they t
 |     [Mapper](services/mapper.md) | The mapper service register mapping of accessionIDs (stable ids for files) to datasetIDs.                                                                                                | Ingestion </i>                           |
 |                          Archive | Storage backend: can be a regular (POSIX) file system or a S3 object store.                                                                                                              | Ingestion and Data Retrieval             |
 |                     Data Out API | Provides a download/data access API for streaming archived data either in encrypted or decrypted format.                                                                                 | Data Retrieval                           |
-|                         Metadata | Component used in standalone version of SDA. Provides an interface and backend to submit Metadata and associated with a file in the Archive.                                             | Submission, Ingestion and Data Retrieval |
-|                     Orchestrator | Component used in standalone version of SDA. Provides an automated ingestion and dataset ID and file ID mapping.                                                                         | Submission, Ingestion and Data Retrieval |
+|                         Metadata | Component used in stand-alone version of SDA. Provides an interface and backend to submit Metadata and associated with a file in the Archive.                                             | Submission, Ingestion and Data Retrieval |
+|                     Orchestrator | Component used in stand-alone version of SDA. Provides an automated ingestion and dataset ID and file ID mapping.                                                                         | Submission, Ingestion and Data Retrieval |
 
 Organisation of the NeIC SDA Operations Handbook
 ------------------------------------------------
@@ -51,12 +51,11 @@ This operations handbook is organized in four  main parts, that each has it's ow
 
 1.  **Structure**: Provides overview material for how the services can be deployed in different constellations and highlights communication paths.
 
-1.  **Communication**: Provides more detailed communication focused documentation, such as OpenAPI-specs for APIs, rabbit-mq message flow, and database information flow details.
+2.  **Communication**: Provides more detailed communication focused documentation, such as OpenAPI-specs for APIs, rabbit-mq message flow, and database information flow details.
 
-1.  **Services**: Per service detailed specifications and documentation.
+3.  **Services**: Per service detailed specifications and documentation.
 
-1.  **Guides**: Topic-guides for topics like "Deployment", "Federated vs. Standalone", "Troubleshooting services", etc.
-
+4.  **Guides**: Topic-guides for topics like "Deployment", "Federated vs. Stand-alone", "Troubleshooting services", etc.
 
 > NOTE:
 > NB!!! Content below to be considered moved into introductory pages of STRUCTURE and COMMUNICATION sections:
@@ -81,7 +80,7 @@ key.
 
 For every uploaded file, Central EGA receives a notification that the
 file is present in a SDA's inbox. The uploaded file must be encrypted
-in the [Crypt4GH file format](http://samtools.github.io/hts-specs/crypt4gh.pdf) using that SDA public Crypt4gh key. The file is
+in the [Crypt4GH file format](https://samtools.github.io/hts-specs/crypt4gh.pdf) using that SDA public Crypt4gh key. The file is
 checksumed and presented in the Central EGA's interface in order for
 the user to double-check that it was properly uploaded.
 

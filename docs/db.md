@@ -10,8 +10,7 @@ documented below.
 > <https://github.com/neicnordic/sensitive-data-archive/tree/main/postgresql>
 
 The database container will initialize and create the necessary database
-structure and functions if started with an empty area. Procedures for
-*backing up the database* are important but considered out of scope for
+structure and functions if started with an empty area. Procedures for *backing up the database* are important, however considered out of scope for
 the secure data archive project.
 
 Look at [the SQL
