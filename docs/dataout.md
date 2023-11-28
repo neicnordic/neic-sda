@@ -84,9 +84,7 @@ and can't expose REST API (but still can receive RabbitMQ messages).
 Handling Permissions
 --------------------
 
-Data Out API can be run with connection to an AAI or without. In the
-case connection to an AAI provider is not possible the
-`PASSPORT_PUBLIC_KEY_PATH` and `CRYPT4GH_PRIVATE_KEY_PATH` need to be
+Data Out API can be run with connection to an AAI or without. If connection to an AAI provider is not possible, the `PASSPORT_PUBLIC_KEY_PATH` and `CRYPT4GH_PRIVATE_KEY_PATH` need to be
 set.
 
 > NOTE:

@@ -64,7 +64,7 @@ changes are required that risk being time consuming on large databases,
 it may be best to split that work in small chunks.
 
 Doing so helps in both demonstrating progress as well as avoiding
-rollbacks of the entire process (and thus working needing to be done) if
+rollbacks of the entire process, in case that
 something fails. Each schema migration is done in a transaction.
 
 Schema versions are integers. There is no strong coupling between
