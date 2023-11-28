@@ -29,18 +29,18 @@ The following environment variables can be used to configure the broker:
 > We use [RabbitMQ](https://hub.docker.com/_/rabbitmq) >= `3.8.16` including
 > the management plugins.
 
-Variable             | Description
-:--------------------|:----------------------------------------------
-`MQ_VHOST`           | Default vhost other than `/`
-`MQ_VERIFY`          | Set to `verify_none` to disable verification of client certificate
-`MQ_USER`            | Default user (with admin rights)
-`MQ_PASSWORD_HASH`   | Password hash for the above user
-`CEGA_CONNECTION`    | DSN URL for the shovels and federated queues with CentralEGA
-`MQ_SERVER_CERT`     | Path to the server SSL certificate                                                                          
-`MQ_SERVER_KEY`      | Path to the server SSL key                                                                                    
-`MQ_CA`              | Path to the CA root certificate
-`MQ_VERIFY`          | Require the clients to have valid TLS certificates (`verify_peer`) or do not require clients to have certificates (`verify_none`)
-`NOTLS`              | Run the server without TLS enabled (default is to run the server with TLS activated)
+| Variable           | Description                                                                                                                       |
+|:-------------------|:----------------------------------------------------------------------------------------------------------------------------------|
+| `MQ_VHOST`         | Default vhost other than `/`                                                                                                      |
+| `MQ_VERIFY`        | Set to `verify_none` to disable verification of client certificate                                                                |
+| `MQ_USER`          | Default user (with admin rights)                                                                                                  |
+| `MQ_PASSWORD_HASH` | Password hash for the above user                                                                                                  |
+| `CEGA_CONNECTION`  | DSN URL for the shovels and federated queues with CentralEGA                                                                      |
+| `MQ_SERVER_CERT`   | Path to the server SSL certificate                                                                                                |
+| `MQ_SERVER_KEY`    | Path to the server SSL key                                                                                                        |
+| `MQ_CA`            | Path to the CA root certificate                                                                                                   |
+| `MQ_VERIFY`        | Require the clients to have valid TLS certificates (`verify_peer`) or do not require clients to have certificates (`verify_none`) |
+| `NOTLS`            | Run the server without TLS enabled (default is to run the server with TLS activated)                                              |
 
 > NOTE:
 > For SDA stand-alone do not use `CEGA_CONNECTION` and do not set up
@@ -70,28 +70,28 @@ amqp[s]://<user>:<password>@<cega-host>:<port>/<vhost>
 versioning and is internal to CentralEGA. The queues connected to that
 exchange are also internal to CentralEGA.
 
-Name             | Purpose
-:----------------|:------------------------------------------------
-files            | Triggers for file ingestion
-completed        | When files are backed up
-verified         | When files are properly ingested and verified
-errors           | User-related errors
-inbox            | Notifications of uploaded files
+| Name      | Purpose                                       |
+|:----------|:----------------------------------------------|
+| files     | Triggers for file ingestion                   |
+| completed | When files are backed up                      |
+| verified  | When files are properly ingested and verified |
+| errors    | User-related errors                           |
+| inbox     | Notifications of uploaded files               |
 
 `LocalMQ` contains two exchanges named `sda` and `to_cega`, and the
 following queues, in the default `vhost`:
 
-Name             | Purpose
-:----------------|:---------------------------------------
-archived         | Archived files.
-completed        | Files are backed up
-error            | User-related errors
-files            | Receive notification for ingestion from `CEGAMQ` or Orchestrator
-inbox            | Notifications of uploaded files
-ingest           | Trigger for file ingestion
-mappings         | Received Dataset to file mapping
-accessionIDs     | Receive Accession IDs from `CEGAMQ` or Orchestrator
-verified         | Files ingested and verified
+| Name         | Purpose                                                          |
+|:-------------|:-----------------------------------------------------------------|
+| archived     | Archived files.                                                  |
+| completed    | Files are backed up                                              |
+| error        | User-related errors                                              |
+| files        | Receive notification for ingestion from `CEGAMQ` or Orchestrator |
+| inbox        | Notifications of uploaded files                                  |
+| ingest       | Trigger for file ingestion                                       |
+| mappings     | Received Dataset to file mapping                                 |
+| accessionIDs | Receive Accession IDs from `CEGAMQ` or Orchestrator              |
+| verified     | Files ingested and verified                                      |
 
 `LocalMQ` registers `CEGAMQ` as an *upstream* and listens to the
 incoming messages in `files` using a *federated queue*. Ingestion
@@ -110,12 +110,12 @@ CentralEGA (using the routing key based on the name
 `files.<internal_queue_name>`). We propagate the different status of the
 workflow to CentralEGA, using the following routing keys:
 
-Name                 | Purpose
----------------------|:-------------------------------------------------
-files.completed      | For back-up files, ready to be distributed
-files.error          | In case a user-related error is detected
-files.inbox          | For inbox file operations
-files.verified       | For files ready to request accessionID
+| Name            | Purpose                                    |
+|-----------------|:-------------------------------------------|
+| files.completed | For back-up files, ready to be distributed |
+| files.error     | In case a user-related error is detected   |
+| files.inbox     | For inbox file operations                  |
+| files.verified  | For files ready to request accessionID     |
 
 Note that we do not need at the moment a queue to store the completed
 message, nor the errors, as we forward them to Central EGA.
