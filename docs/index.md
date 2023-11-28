@@ -84,7 +84,7 @@ key.
 
 For every uploaded file, Central EGA receives a notification that the
 file is present in a SDA's inbox. The uploaded file must be encrypted
-in the [Crypt4GH file format](http://samtools.github.io/hts-specs/crypt4gh.pdf) using that SDA public Crypt4gh key. The file is
+in the [Crypt4GH file format](https://samtools.github.io/hts-specs/crypt4gh.pdf) using that SDA public Crypt4gh key. The file is
 checksumed and presented in the Central EGA's interface in order for
 the user to double-check that it was properly uploaded.
 

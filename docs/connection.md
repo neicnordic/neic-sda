@@ -2,7 +2,7 @@ Interfacing with CEGA ⇌ SDA
 ===========================
 
 All Local EGA instances are connected to Central EGA using
-[RabbitMQ](http://www.rabbitmq.com), a Message Broker, that allows the
+[RabbitMQ](https://www.rabbitmq.com), a Message Broker, that allows the
 components to send and receive messages, which are queued, not lost, and
 resent on network failure or connection problems.
 

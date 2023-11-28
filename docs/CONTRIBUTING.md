@@ -69,7 +69,7 @@ Some tips about writing helpful commit messages:
  6. Wrap the body at 72 characters.
  7. Use the body to explain what and why vs. how.
 
-For an in-depth explanation of the above points, please see [How to Write a Git Commit Message](http://chris.beams.io/posts/git-commit/).
+For an in-depth explanation of the above points, please see [How to Write a Git Commit Message](https://chris.beams.io/posts/git-commit/).
 
 
 ### How we do code reviews
