@@ -5,6 +5,7 @@
         "sda/cmd/intercept/intercept.md": "docs/services/intercept.md",
         "sda/cmd/mapper/mapper.md": "docs/services/mapper.md",
         "sda/cmd/verify/verify.md": "docs/services/verify.md",
+        "sda/cmd/s3inbox/s3inbox.md": "docs/services/s3inbox.md",
         "sda/sda.md": "docs/services/sda.md"
     }
 }
