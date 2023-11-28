@@ -131,7 +131,7 @@ Mina SSHD.
 
 > NOTE:
 > Sources are located at the separate repository:
-> <https://github.com/neicnordic/sensitive-data-archive/tree/main/sda-inbox-sftp> Essentially, it's a
+> <https://github.com/neicnordic/sensitive-data-archive/tree/main/sda-sftp-inbox> Essentially, it's a
 > Spring-based Maven project, integrated with the
 > [Local Message Broker](connection.md#local-message-broker).
 
