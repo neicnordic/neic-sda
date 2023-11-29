@@ -28,34 +28,20 @@ The components illustrated can be classified by which archive sub-process they t
 -   `Data Retrieval` - the process of re-encrypting and staging data for retrieval/download.
 
 
-|                Service/component | Description                                                                                                                                                                              | Archive sub-process                      |
-|---------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------|
-|                               db | A Postgres database with appropriate schema, stores the file header, the accession id, file path and checksums as well as other relevant information.                                    | Submission, Ingestion and Data Retrieval |
-|                      mq (broker) | A RabbitMQ message broker with appropriate accounts, exchanges, queues and bindings. We use a federated queue to get messages from CentralEGA's broker and shovels to send answers back. | Submission and Ingestion                 |
-|                            Inbox | Upload service for incoming data, acting as a dropbox. Uses credentials from Central EGA.                                                                                                | Submission                               |
-|                        Intercept | Relays messages between the queue provided from the federated service and local queues.                                                                                                  | Submission and Ingestion                 |
-|     [Ingest](services/ingest.md) | Splits the Crypt4GH header and moves it to the database. The remainder of the file is sent to the storage backend (archive). No cryptographic tasks are done.                            | Ingestion                                |
-|     [Verify](services/verify.md) | Using the archive crypt4gh secret key, this service can decrypt the stored files and checksum them against the embedded checksum for the unencrypted file.                               | Ingestion                                |
-| [Finalize](services/finalize.md) | Handles the so-called <i>Accession ID (stable ID)</i> to filename mappings from CentralEGA.                                                                                              | Ingestion                                |
-|     [Mapper](services/mapper.md) | The mapper service register mapping of accessionIDs (stable ids for files) to datasetIDs.                                                                                                | Ingestion </i>                           |
-|                          Archive | Storage backend: can be a regular (POSIX) file system or a S3 object store.                                                                                                              | Ingestion and Data Retrieval             |
-|                     Data Out API | Provides a download/data access API for streaming archived data either in encrypted or decrypted format.                                                                                 | Data Retrieval                           |
-|                         Metadata | Component used in stand-alone version of SDA. Provides an interface and backend to submit Metadata and associated with a file in the Archive.                                             | Submission, Ingestion and Data Retrieval |
-|                     Orchestrator | Component used in stand-alone version of SDA. Provides an automated ingestion and dataset ID and file ID mapping.                                                                         | Submission, Ingestion and Data Retrieval |
-Service/component | Description | Archive sub-process 
--------:|:------------|:-----------------------------
-Database | A Postgres database with appropriate schema, stores the file header, the accession id, file path and checksums as well as other relevant information. | Submission, Ingestion and Data Retrieval 
-MQ  | A RabbitMQ message broker with appropriate accounts, exchanges, queues and bindings. We use a federated queue to get messages from CentralEGA's broker and shovels to send answers back.| Submission and Ingestion 
-Inbox | Upload service for incoming data, acting as a dropbox. Uses credentials from `CentralEGA`. | Submission 
-Intercept | Relays messages between the queue provided from the federated service and local queues. | Submission and Ingestion 
-[Ingest](services/ingest.md) | Splits the Crypt4GH header and moves it to the database. The remainder of the file is sent to the storage backend (archive). No cryptographic tasks are done. | Ingestion 
-[Verify](services/verify.md) | Using the archive crypt4gh secret key, this service can decrypt the stored files and checksum them against the embedded checksum for the unencrypted file. | Ingestion 
-[Finalize](services/finalize.md) | Handles the so-called <i>Accession ID (stable ID)</i> to filename mappings from CentralEGA. | Ingestion 
-[Mapper](services/mapper.md) | The mapper service register mapping of accessionIDs (stable ids for files) to datasetIDs. | Ingestion </i>
-Archive (Storage) | Storage backend: can be a regular (POSIX) file system or a S3 object store. | Ingestion and Data Retrieval 
-[Data Retrieval API](dataout.md) | Provides a download/data access API for streaming archived data either in encrypted or decrypted format. | Data Retrieval 
-Inbox (Storage) | Storage backend: can be a regular (POSIX) file system or a S3 object store. | Ingestion
-Backup (Storage) | Storage backend: can be a regular (POSIX) file system or a S3 object store. | Ingestion
+| Service/component                | Description                                                                                                                                                                              | Archive sub-process                      |
+|----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------|
+| Database                         | A Postgres database with appropriate schema, stores the file header, the accession id, file path and checksums as well as other relevant information.                                    | Submission, Ingestion and Data Retrieval |
+| MQ                               | A RabbitMQ message broker with appropriate accounts, exchanges, queues and bindings. We use a federated queue to get messages from CentralEGA's broker and shovels to send answers back. | Submission and Ingestion                 |
+| Inbox                            | Upload service for incoming data, acting as a dropbox. Uses credentials from `CentralEGA`.                                                                                               | Submission                               |
+| Intercept                        | Relays messages between the queue provided from the federated service and local queues.                                                                                                  | Submission and Ingestion                 |
+| [Ingest](services/ingest.md)     | Splits the Crypt4GH header and moves it to the database. The remainder of the file is sent to the storage backend (archive). No cryptographic tasks are done.                            | Ingestion                                |
+| [Verify](services/verify.md)     | Using the archive crypt4gh secret key, this service can decrypt the stored files and checksum them against the embedded checksum for the unencrypted file.                               | Ingestion                                |
+| [Finalize](services/finalize.md) | Handles the so-called Accession ID (stable ID) to filename mappings from CentralEGA.                                                                                                     | Ingestion                                |
+| [Mapper](services/mapper.md)     | The mapper service register mapping of accessionIDs (stable ids for files) to datasetIDs.                                                                                                | Ingestion                                |
+| Archive (Storage)                | Storage backend: can be a regular (POSIX) file system or a S3 object store.                                                                                                              | Ingestion and Data Retrieval             |
+| [Data Retrieval API](dataout.md) | Provides a download/data access API for streaming archived data either in encrypted or decrypted format.                                                                                 | Data Retrieval                           |
+| Inbox (Storage)                  | Storage backend: can be a regular (POSIX) file system or a S3 object store.                                                                                                              | Ingestion                                |
+| Backup (Storage)                 | Storage backend: can be a regular (POSIX) file system or a S3 object store.                                                                                                              | Ingestion                                |
 
 
 Organisation of the NeIC SDA Operations Handbook
