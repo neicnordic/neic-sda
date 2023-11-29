@@ -24,22 +24,22 @@ Configuration
 The following environment variables can be used to configure the
 database:
 
-Variable              | Description                        | Default value
-----------------------|------------------------------------|-----------------
-`PGVOLUME`            | Mountpoint for the writable volume | /var/lib/postgresql
-`DB_LEGA_IN_PASSWORD` | *lega_in*'s password               | -
-`DB_LEGA_OUT_PASSWORD`| *lega_out*'s password              | -
-`TZ`                  | Timezone for the Postgres server   | Europe/stockholm
+| Variable               | Description                        | Default value       |
+|------------------------|------------------------------------|---------------------|
+| `PGVOLUME`             | Mountpoint for the writable volume | /var/lib/postgresql |
+| `DB_LEGA_IN_PASSWORD`  | *lega_in*'s password               | -                   |
+| `DB_LEGA_OUT_PASSWORD` | *lega_out*'s password              | -                   |
+| `TZ`                   | Timezone for the Postgres server   | Europe/stockholm    |
 
 For TLS support use the variables below:
 
-Variable         | Description                         | Default value
-:----------------|:------------------------------------|:---------------
-`PG_SERVER_CERT` | Public Certificate in PEM format    | `$PGVOLUME/pg.cert`
-`PG_SERVER_KEY`  | Private Key in PEM format           | `$PGVOLUME/pg.key`
-`PG_CA`          | Public CA Certificate in PEM format | `$PGVOLUME/CA.cert`
-`PG_VERIFY_PEER` | Enforce client verification         | 0
-`SSL_SUBJ`       | Subject for the self-signed certificate creation | `/C=SE/ST=Sweden/L=Uppsala/O=NBIS/OU=SysDevs/CN=LocalEGA`
+| Variable         | Description                                      | Default value                                             |
+|:-----------------|:-------------------------------------------------|:----------------------------------------------------------|
+| `PG_SERVER_CERT` | Public Certificate in PEM format                 | `$PGVOLUME/pg.cert`                                       |
+| `PG_SERVER_KEY`  | Private Key in PEM format                        | `$PGVOLUME/pg.key`                                        |
+| `PG_CA`          | Public CA Certificate in PEM format              | `$PGVOLUME/CA.cert`                                       |
+| `PG_VERIFY_PEER` | Enforce client verification                      | 0                                                         |
+| `SSL_SUBJ`       | Subject for the self-signed certificate creation | `/C=SE/ST=Sweden/L=Uppsala/O=NBIS/OU=SysDevs/CN=LocalEGA` |
 
 > NOTE:
 > If not already injected, the files located at `PG_SERVER_CERT` and
