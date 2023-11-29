@@ -24,14 +24,14 @@ If this fails an error will be written to the logs.
 If this fails an error will be written to the logs.
 7. If the `re_verify` boolean is not set in the RabbitMQ message, the message processing ends here, and continues with the next message.
 Otherwise the processing continues with verification:
-  1. A verification message is created, and validated against the `ingestion-accession-request` schema.
-  If this fails an error will be written to the logs.
-  2. The file is marked as *verified* in the database (*COMPLETED* if you are using database schema <= `3`).
-  If this fails an error will be written to the logs.
-  3. The verification message created in step 7.1 is sent to the `verified` queue.
-  If this fails an error will be written to the logs.
-  4. The original RabbitMQ message is ACKed.
-  If this fails an error is written to the logs, but processing continues to the next step.
+   1. A verification message is created, and validated against the `ingestion-accession-request` schema.
+     If this fails an error will be written to the logs.
+   2. The file is marked as *verified* in the database (*COMPLETED* if you are using database schema <= `3`).
+     If this fails an error will be written to the logs.
+   3. The verification message created in step 7.1 is sent to the `verified` queue.
+     If this fails an error will be written to the logs.
+   4. The original RabbitMQ message is ACKed.
+     If this fails an error is written to the logs, but processing continues to the next step.
 
 ## Communication
 
