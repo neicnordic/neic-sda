@@ -31,7 +31,7 @@ do
 
     # add special use case for sda.md links
 
-    sed -i -E 's/cmd\/(.+)\//services\//g' docs/services/sda.md
+    sed -i -E 's#cmd\/(.+)\/#''#g' docs/services/sda.md
     git add docs/services/sda.md
 
     # check if there are any changes
