@@ -18,7 +18,7 @@ In a Federated setup, the `FederatedEGA` archive node setup locally need to exch
 
 In a stand-alone setup, the deployed service has less remote synchronisation to worry about, but on the other hand more components might be required (e.g ([orchestrator](services/orchestrator))) to also handle annotations/meta-data locally, as well as to deal with identifiers etc.
 
-The NeIC SDA is targeting both types of setup, to open up the use of the re-use of components to more use cases than initially envisioned.
+The NeIC SDA is targeting both types of setup but also to allow for the possibility to re-use components in more use cases than initially envisioned.
 
 
 ### Container deployment options

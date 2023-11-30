@@ -7,7 +7,7 @@ components to send and receive messages, which are queued, not lost, and
 resent on network failure or connection problems.
 
 The RabbitMQ message brokers of each SDA instance are the **only**
-components with the necessary credentials to connect to CentralEGA
+components with the necessary credentials to connect to `CentralEGA`
 message broker.
 
 We call `CEGAMQ` and `LocalMQ` (Local Message Broker, sometimes know as `sda-mq`), 
@@ -136,7 +136,7 @@ and the shovel mechanism in their local broker.
 instance, on the given `vhost`.
 
 The exchanges and routing keys will be the same as all the other
-FederatedEGA instances, since the clustering is done per `vhost`.
+`FederatedEGA` instances, since the clustering is done per `vhost`.
 
 ### Message Format
 
