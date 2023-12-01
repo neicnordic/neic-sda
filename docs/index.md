@@ -14,10 +14,24 @@ The modular architecture of SDA supports both stand alone deployment of an archi
 > `Sensitive Data Archive` or `SDA`.
 
 
-Overall architecture
---------------------
+Organisation of the NeIC SDA Operations Handbook
+------------------------------------------------
 
-The main components and the interaction between them, based on the NeIC Sensitive Data Archive deployment in a Federated EGA setup, are illustrated in the figure below. The different colored backgrounds represent different zones of separation in the federated deployment. 
+This operations handbook is organized in four  main parts, that each has it's own main section in the left navigation menu. Here we provide a condensed summary, follow the links below or use the menu navigation to each section's own detailed introduction page: 
+
+1.  **Structure**: Provides overview material for how the services can be deployed in different constellations and highlights communication paths.
+
+2.  **Communication**: Provides more detailed documentation focused on inter-service communication, as OpenAPI-specs for APIs, RabbitMQ message flow, and database information flow details.
+
+3.  **Services**: Per service detailed specifications and documentation.
+
+4.  **Guides**: Topic-guides for topics like _"Deployment"_, _"Federated vs. Stand-alone"_, _"Troubleshooting services"_, etc.
+
+
+SDA Components and Architecture
+-------------------------------
+
+The main components and the interaction between them, based on the NeIC Sensitive Data Archive deployment in a `FederatedEGA` setup, are illustrated in the figure below. The different colored backgrounds represent different zones of separation in the federated deployment. 
 
 ![](https://docs.google.com/drawings/d/e/2PACX-1vSCqC49WJkBduQ5AJ1VdwFq-FJDDcMRVLaWQmvRBLy7YihKQImTi41WyeNruMyH1DdFqevQ9cgKtXEg/pub?w=960&h=540)
 
@@ -42,20 +56,5 @@ The components illustrated can be classified by which archive sub-process they t
 | [Data Retrieval API](dataout.md) | Provides a download/data access API for streaming archived data either in encrypted or decrypted format.                                                                                 | Data Retrieval                           |
 | Inbox (Storage)                  | Storage backend: can be a regular (POSIX) file system or a S3 object store.                                                                                                              | Ingestion                                |
 | Backup (Storage)                 | Storage backend: can be a regular (POSIX) file system or a S3 object store.                                                                                                              | Ingestion                                |
-
-
-Organisation of the NeIC SDA Operations Handbook
-------------------------------------------------
-
-This operations handbook is organized in four  main parts, that each has it's own main section in the left navigation menu. Here we provide a condensed summary, follow the links below or use the menu navigation to each section's own detailed introduction page: 
-
-1.  **Structure**: Provides overview material for how the services can be deployed in different constellations and highlights communication paths.
-
-2.  **Communication**: Provides more detailed communication focused documentation, such as OpenAPI-specs for APIs, rabbit-mq message flow, and database information flow details.
-
-3.  **Services**: Per service detailed specifications and documentation.
-
-4.  **Guides**: Topic-guides for topics like "Deployment", "Federated vs. Stand-alone", "Troubleshooting services", etc.
-
 
 ------------------------------------------------------------------------
