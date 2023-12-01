@@ -25,7 +25,7 @@ Next step is to make sure that the remote connections (CEGA RabbitMQ) are workin
 
 ## End-to-end testing
 
-NOTE: This guide assumes that there exists a test instance account with Central EGA. Make sure that the account is approved and added to the submitters group.
+NOTE: This guide assumes that there exists a test instance account with `CentralEGA`. Make sure that the account is approved and added to the submitters group.
 
 ### Upload file(s)
 

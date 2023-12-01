@@ -1,6 +1,6 @@
 ---
 name: Support Issue
-about: Ask for support on running and/or developing LocalEGA
+about: Ask for support on running and/or developing FederatedEGA
 labels: Support
 
 ---

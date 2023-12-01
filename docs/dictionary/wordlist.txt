@@ -43,7 +43,6 @@ confpath
 controlledaccessgrants
 copyheader
 creds
-cryptograhy
 cryptographic
 cscfi
 dac
@@ -58,6 +57,7 @@ decrypt
 decryptable
 decrypted
 decryptedchecksums
+decrypting
 decryptor
 dev
 discoverable
@@ -74,6 +74,7 @@ egas
 endcoordinate
 envs
 exportrequests
+federatedega
 fega
 fileid
 filepath

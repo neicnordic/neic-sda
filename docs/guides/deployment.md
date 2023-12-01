@@ -5,7 +5,7 @@
 > If you have feedback to give on the content, please contact us on
 > [github](https://github.com/neicnordic/neic-sda)!
 
-Different nodes of the Federated EGA network, and projects using the standalone SDA
+Different nodes of the Federated EGA network, and projects using the stand-alone SDA
 have made different decisions in how to deploy the system.
 Adaptations needs to be made depending on the system to deploy on,
 as well as the requirements of your deployment.

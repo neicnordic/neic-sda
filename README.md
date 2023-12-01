@@ -15,7 +15,7 @@ Source code for core components is available at: https://github.com/neicnordic/s
 
 | Component     | Role |
 |---------------|------|
-| inbox         | SFTP, S3 or HTTPS server, acting as a dropbox, where user credentials are fetched from CentralEGA or via LifeScience AAI. [s3inbox](https://github.com/neicnordic/sensitive-data-archive/tree/main/sda/cmd/s3inbox/s3inbox.md) or [sftp-inbox](https://github.com/neicnordic/sensitive-data-archive/tree/main/sda-sftp-inbox/README.md) |
+| inbox         | SFTP, S3 or HTTPS server, acting as a dropbox, where user credentials are fetched from CentralEGA or via [Life Science AAI](https://lifescience-ri.eu/). [s3inbox](https://github.com/neicnordic/sensitive-data-archive/tree/main/sda/cmd/s3inbox/s3inbox.md) or [sftp-inbox](https://github.com/neicnordic/sensitive-data-archive/tree/main/sda-sftp-inbox/README.md) |
 | intercept     | The intercept service relays message between the queue provided from the federated service and local queues. **(Required for Federated EGA use case)** |
 | ingest        | Split the Crypt4GH header and move the remainder to the storage backend. No cryptographic task, nor access to the decryption keys. |
 | verify        | Decrypt the stored files and checksum them against their embedded checksum. |

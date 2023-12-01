@@ -4,7 +4,7 @@ Data Submission
 Ingestion Procedure
 -------------------
 
-For a given LocalEGA, Central EGA selects the associated `vhost` and
+For a given `FederatedEGA` node, `CentralEGA` selects the associated `vhost` and
 drops, in the `files` queue, one message per file to ingest.
 
 Structure of the message and its contents are described in
@@ -31,8 +31,7 @@ Structure of the message and its contents are described in
 > services/actuators match those used for the events initiated by the
 > respective services, except for the interactions in case of errors,
 > which are highlighted with red. The optional fragments are only executed
-> if errors occur during ingestion, verify or finalize. Note that time in
-> this diagram is all about ordering, not duration.
+> if errors occur during ingestion, verify or finalize. **Note that the time axis in this diagram is all about the sequence of events not duration.**
 
 ### Ingestion Steps
 
@@ -55,22 +54,21 @@ that the integrated checksum is valid.
 
 At this stage, the associated decryption key is retrieved. If decryption
 completes and the checksum is valid, a message of completion is sent to
-Central EGA: Ingestion completed.
+`CentralEGA`: Ingestion completed.
 
->Important
-> If a file disappears or is overwritten in the inbox before ingestion is
-> completed, ingestion may not be possible.
+> **Important**
+> If a file disappears or is overwritten in the inbox before ingestion is completed, ingestion may not be possible.
 
 If any of the above steps generates an error, we exit the workflow and
 log the error. In case the error is related to a misuse from the user,
-such as submitting the wrong checksum or tempering with the encrypted
-file, the error is forwarded to Central EGA in order to be displayed in
+such as submitting the wrong checksum or tampering with the encrypted
+file, the error is forwarded to `CentralEGA` in order to be displayed in
 the Submission Interface.
 
 Submission Inbox
 ----------------
 
-Central EGA contains a database of users, with IDs and passwords. We
+`CentralEGA` contains a database of users, with IDs and passwords. We
 have developed several solutions allowing user authentication against
 CentralEGA user database:
 

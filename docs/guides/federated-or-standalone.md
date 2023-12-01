@@ -1,4 +1,4 @@
-# Federated or Standalone Archive
+# Federated or Stand-alone Archive
 
 > TODO:
 > This guide is a stub and has yet to be finished.

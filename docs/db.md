@@ -10,8 +10,7 @@ documented below.
 > <https://github.com/neicnordic/sensitive-data-archive/tree/main/postgresql>
 
 The database container will initialize and create the necessary database
-structure and functions if started with an empty area. Procedures for
-*backing up the database* are important but considered out of scope for
+structure and functions if started with an empty area. Procedures for *backing up the database* are important, however considered out of scope for
 the secure data archive project.
 
 Look at [the SQL
@@ -65,7 +64,7 @@ changes are required that risk being time consuming on large databases,
 it may be best to split that work in small chunks.
 
 Doing so helps in both demonstrating progress as well as avoiding
-rollbacks of the entire process (and thus working needing to be done) if
+rollbacks of the entire process, in case that
 something fails. Each schema migration is done in a transaction.
 
 Schema versions are integers. There is no strong coupling between
