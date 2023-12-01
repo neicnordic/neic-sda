@@ -57,45 +57,5 @@ This operations handbook is organized in four  main parts, that each has it's ow
 
 4.  **Guides**: Topic-guides for topics like "Deployment", "Federated vs. Stand-alone", "Troubleshooting services", etc.
 
-> NOTE:
-> NB!!! Content below to be considered moved into introductory pages of STRUCTURE and COMMUNICATION sections:
-
-The overall data workflow consists of three parts:
-
--   The users logs onto the `FederatedEGA`'s inbox and uploads the encrypted
-    files. They then go to the `CentralEGA`'s interface to prepare a
-    submission;
--   Upon submission completion, the files are ingested into the archive
-    and become searchable by the `CentralEGA`'s engine;
--   Once the file has been successfully archived, it can be accessed by
-    researchers in accordance with permissions given by the
-    corresponding Data Access Committee.
-
-------------------------------------------------------------------------
-
-`CentralEGA` contains a database of users with permissions to upload to a
-specific Sensitive Data Archive. The `CentralEGA` ID is used to
-authenticate the user against either their EGA password or a private
-key.
-
-For every uploaded file, `CentralEGA` receives a notification that the
-file is present in a SDA's inbox. The uploaded file must be encrypted
-in the [Crypt4GH file format](https://samtools.github.io/hts-specs/crypt4gh.pdf) using that SDA public Crypt4gh key. The file is
-checksumed and presented in the `CentralEGA`'s interface in order for
-the user to double-check that it was properly uploaded.
-
-More details about process in [Data Submission](submission.md#data-submission).
-
-When a submission is ready, `CentralEGA` triggers an ingestion process on
-the user-chosen SDA instance. `CentralEGA`'s interface is updated with
-progress notifications whether the ingestion was successful, or whether
-there was an error.
-
-More details about the [Ingestion Workflow](submission.md#ingestion-workflow).
-
-Once a file has been successfully submitted and the ingestion process
-has been finalised, including receiving an `Accession ID` from Central
-EGA. The Data Out API can be utilised to retrieve set file by utilising
-the `Accession ID`. More details in [Data Retrieval API](dataout.md#data-retrieval-api).
 
 ------------------------------------------------------------------------
