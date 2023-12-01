@@ -68,7 +68,6 @@ The table below reflects the minimum required resources to run the services in t
 | verify     | 100m  | 128Mi  | -    |
 | finalize   | 100m  | 128Mi  | -    |
 | download   | 100m  | 256Mi  | -    |
-| backup     | 100m  | 128Mi  | -    |
 | auth       | 100m  | 128Mi  | -    |
 | s3inbox    | 100m  | 128Mi  | -    |
 | sftpinbox  | 100m  | 128Mi  | -    |
