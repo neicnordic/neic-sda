@@ -136,6 +136,22 @@ Mina SSHD.
 > [Local Message Broker](connection.md#local-message-broker).
 
 
+### TSD File API
+
+In order to utilise Tryggve2 SDA within
+[TSD](https://www.uio.no/english/services/it/research/sensitive-data/)
+Several components have been developed:
+
+-   <https://github.com/unioslo/tsd-file-api>
+-   <https://github.com/uio-bmi/LocalEGA-TSD-proxy>
+-   <https://github.com/unioslo/tsd-api-client>
+
+>NOTE:
+> Access is restricted to UiO network. Please, contact TSD support for the
+> access, if needed. Documentation:
+> <https://test.api.tsd.usit.no/v1/docs/tsd-api-integration.html>
+
+
 ### S3 Proxy Inbox
 
 > NOTE:
@@ -153,54 +169,8 @@ The proxy requires the user to set the bucket name the same as the
 username when uploading data,
 `s3cmd put FILE s3://USER_NAME/path/to/file`
 
-#### S3 proxy Configuration
 
-The S3 proxy server can be configured via a yaml formatted file with the
-top level blocks, `aws:`, `broker:` and `server:`.
-
-ENVs take precedence over file based configurations.
-
-Environment variables used:
-
-| Variable name          | Default value | Description                                            |
-|:-----------------------|:--------------|:-------------------------------------------------------|
-| `AWS_URL`              |               | Inbox S3 backend URL                                   |
-| `AWS_ACCESSKEY`        |               | Inbox S3 backend access key                            |
-| `AWS_SECRETKEY`        |               | Inbox S3 backend secret key                            |
-| `AWS_REGION`           | us-east-1     | Inbox S3 backend region                                |
-| `AWS_BUCKET`           |               | S3 backend bucket name                                 |
-| `AWS_READYPATH`        |               | Path on the S3 backend that reports readiness          |
-| `AWS_CACERT`           |               | CA file to useif the S3 backend is private             |
-| `BROKER_HOST`          |               | RabbitMQ broker host                                   |
-| `BROKER_USER`          |               | RabbitMQ broker username                               |
-| `BROKER_PASSWORD`      |               | RabbitMQ broker password                               |
-| `BROKER_PORT`          |               | RabbitMQ broker port                                   |
-| `BROKER_VHOST`         |               | RabbitMQ broker vhost                                  |
-| `BROKER_exchange`      |               | RabbitMQ exchange to publish to                        |
-| `BROKER_ROUTINGKEY`    |               | Routing key used when publishing messages              |
-| `BROKER_SSL`           |               | Use AMQPS for broker connection                        |
-| `BROKER_CACERT`        |               | CA cert used for broker connectivity                   |
-| `BROKER_VERIFYPEER`    |               | Enforce mTLS for broker connection                     |
-| `BROKER_CLIENTCERT`    |               | Client cert used for broker connectivity               |
-| `BROKER_CLIENTKEY`     |               | Client key used for broker connectivity                |
-| `SERVER_CERT`          |               | Certificate for the S3 endpoint                        |
-| `SERVER_KEY`           |               | Certificate key for the S3 endpoint                    |
-| `SERVER_JWTPUBKEYPATH` |               | Path to the folder where the public JWT key is located |
-| `SERVER_JWTPUBEYURL`   |               | URL to the jwk endpoint of the OIDC server             |
-| `SERVER_CONFPATH`      | .             | Path to the folder where the config file can be found  |
-| `SERVER_CONFFILE`      | config.yaml   | Full path to the server config file                    |
-
-### TSD File API
-
-In order to utilise Tryggve2 SDA within
-[TSD](https://www.uio.no/english/services/it/research/sensitive-data/)
-Several components have been developed:
-
--   <https://github.com/unioslo/tsd-file-api>
--   <https://github.com/uio-bmi/LocalEGA-TSD-proxy>
--   <https://github.com/unioslo/tsd-api-client>
-
->NOTE:
-> Access is restricted to UiO network. Please, contact TSD support for the
-> access, if needed. Documentation:
-> <https://test.api.tsd.usit.no/v1/docs/tsd-api-integration.html>
+{%
+   include-markdown "services/s3inbox.md"
+   heading-offset=3
+%}
