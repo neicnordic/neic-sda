@@ -30,7 +30,7 @@ progress notifications whether the ingestion was successful, or whether there wa
 More details about the [Ingestion Workflow](submission.md#ingestion-workflow).
 
 Once a file has been successfully submitted and the ingestion process has been finalised, including receiving an `Accession ID` from Central
-EGA. The Data Out API can be utilised to retrieve set file by utilising the `Accession ID`. More details in [Data Retrieval API](dataout.md#data-retrieval-api).
+EGA. The Data Retrieval API can be utilised to retrieve set file by utilising the `Accession ID`. More details in [Data Retrieval API](dataout.md#data-retrieval-api).
 
 
 Inter-communication between services
