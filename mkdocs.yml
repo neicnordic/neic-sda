@@ -27,3 +27,5 @@ nav:
       - Data Retrieval API: "dataout.md"
   - "Guides":
       - Contributing: "CONTRIBUTING.md"
+      - Local dev and testing: "guides/local-dev-and-testing.md"
+      
