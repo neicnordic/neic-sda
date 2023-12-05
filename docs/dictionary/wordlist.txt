@@ -238,6 +238,8 @@ wyenrumyh
 yaml
 yihkqimti
 yml
+JWTPUBKEYURL
+RegisterFile
 PREFETCHCOUNT
 SetAccessionID
 DNS
