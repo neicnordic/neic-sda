@@ -110,6 +110,7 @@ jwk
 jwt
 jwtpubeyurl
 jwtpubkeypath
+jwtpubkeyurl
 jwts
 jwttoken
 keyfile
@@ -180,6 +181,7 @@ recommned
 reencrypt
 reencrypted
 reencrypting
+registerfile
 repo
 reqs
 requesters
