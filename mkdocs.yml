@@ -4,6 +4,7 @@ markdown_extensions:
   - callouts
 plugins:
   - include-markdown
+  - mermaid2
 theme:
   name: readthedocs
 nav:
