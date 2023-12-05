@@ -73,22 +73,23 @@ The table below reflects the minimum required resources to run the services in t
 | sftpinbox  | 100m  | 128Mi  | -    |
 | doa        | 100m  | 128Mi  | -    |
 
-Here we provide minimal lists of variables that need to be configured in the respective `values.yml` file of each of the Helm charts for:
+Here we provide minimal lists of variables that need to be configured, in addition to the defaults, in the respective `values.yml` file of each of the Helm charts for:
 
 - [SDA services](#sda-services-chart)
 - [RabbitMQ](#rabbitmq-chart)
+- [SDA Database](#database-chart)
 
 in order to achieve a working deployment of the `sensitive data archive`. In the following it is assumed that a *federated* setup is being deployed.
 
 ### SDA services chart
 
-Below is a minimal list of variables that need to be configured in the [values.yml](https://github.com/neicnordic/sensitive-data-archive/blob/main/charts/sda-svc/values.yaml) file of the Helm charts for the `sensitive data archive` services in order to achieve a working deployment. Detailed documentation on all of the chart's variables can be found [here](https://github.com/neicnordic/sensitive-data-archive/tree/main/charts/sda-svc).
+Below is a minimal list of variables that need to be configured in the [values.yml](https://github.com/neicnordic/sensitive-data-archive/blob/main/charts/sda-svc/values.yaml) file of the Helm chart for the `sensitive data archive` services in order to achieve a working deployment. Detailed documentation on all of the chart's variables can be found [here](https://github.com/neicnordic/sensitive-data-archive/tree/main/charts/sda-svc).
 
 #### Global Variables
 
 ##### TLS support
 
-- `global.tls.issuer` or `global.tls.clusterIssuer`
+- `global.tls.issuer` or `global.tls.clusterIssuer`: The issuer or cluster issuer for TLS
 
 ##### Storage
 
@@ -214,7 +215,7 @@ To enable Backup functionality:
 
 ### RabbitMQ chart
 
-Below is a minimal list of variables that need to be configured in the [values.yml](https://github.com/neicnordic/sensitive-data-archive/blob/main/charts/sda-mq/values.yaml) file of the `RabbitMQ` Helm charts in order to achieve a working deployment. Detailed documentation on all of the chart's variables can be found [here](https://github.com/neicnordic/sensitive-data-archive/tree/main/charts/sda-mq).
+Below is a minimal list of variables that need to be configured in the [values.yml](https://github.com/neicnordic/sensitive-data-archive/blob/main/charts/sda-mq/values.yaml) file of the `RabbitMQ` Helm chart in order to achieve a working deployment. Detailed documentation on all of the chart's variables can be found [here](https://github.com/neicnordic/sensitive-data-archive/tree/main/charts/sda-mq).
 
 - `global.adminUser`: The username for the admin user
 - `global.adminPassword`: The password for the admin user
@@ -223,6 +224,14 @@ Below is a minimal list of variables that need to be configured in the [values.y
 - `global.shovel.port`: The port on which the shovel server is running
 - `global.shovel.user`: The username to authenticate with the shovel server
 - `global.shovel.vhost`: The virtual host on the shovel server
+
+### Database chart
+
+Below is a minimal list of variables that need to be configured in the [values.yml](https://github.com/neicnordic/sensitive-data-archive/blob/main/charts/sda-db/values.yaml) file of the `SDA Database` Helm chart in order to achieve a working deployment. Detailed documentation on all of the chart's variables can be found [here](https://github.com/neicnordic/sensitive-data-archive/tree/main/charts/sda-db).
+
+- `global.postgresAdminPassword`: The password for the postgres admin user
+- `global.tls.clusterIssuer`: The cluster issuer for TLS
+- `global.tls.secretName`: The name by which the kubernetes secret for TLS is referenced in the Helm charts
 
 ## Security issues
 
