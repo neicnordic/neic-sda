@@ -238,3 +238,5 @@ wyenrumyh
 yaml
 yihkqimti
 yml
+JWTPUBKEYURL
+RegisterFile
