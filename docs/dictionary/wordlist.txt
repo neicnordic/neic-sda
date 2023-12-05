@@ -269,3 +269,10 @@ adminUser
 postgresAdminPassword
 autonumber
 sequenceDiagram
+BIGINT
+FK
+PGDATA
+bigint
+dbschema
+erDiagram
+jsonb
