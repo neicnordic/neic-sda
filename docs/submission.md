@@ -16,7 +16,77 @@ Structure of the message and its contents are described in
 
 ### Ingestion Workflow
 
-![Ingestion sequence diagram](./static/ingestion-sequence.svg)
+```mermaid
+   
+   sequenceDiagram
+      autonumber
+      participant Upload Tool
+      box SDA
+      participant Inbox
+      participant Ingest
+      participant Verify
+      participant Finalize
+      participant Mapper
+      participant SDA Database
+      participant Intercept
+      participant SDA RabbitMQ
+      end
+      box Central EGA
+      participant Central EGA RabbitMQ
+      end
+      Upload Tool->>Inbox: upload encrypted file
+      activate Inbox
+      Inbox-->>SDA RabbitMQ: msg: Upload Done
+      SDA RabbitMQ-->>Central EGA RabbitMQ: shovel msg:[to_cega][files.inbox]
+      deactivate Inbox
+      Central EGA RabbitMQ-->>SDA RabbitMQ: federated msg: [from_cega][ingest type]
+      SDA RabbitMQ-->>Intercept: Intercept reads message
+      Intercept->>Ingest: msg: [sda][ingest] begin ingestion
+      activate Ingest
+      Ingest->>SDA Database: mark ingested
+      opt
+      Ingest-->>SDA RabbitMQ: msg: error
+      SDA RabbitMQ-->>Central EGA RabbitMQ: shovel msg:[to_cega][files.error]
+      end
+      Ingest->>SDA Database: mark archived
+      Ingest-->>SDA RabbitMQ: msg [sda][archived]
+      deactivate Ingest
+      activate Verify
+      SDA RabbitMQ-->>Verify: msg [sda][archived] triggers verify
+      opt
+      Verify-->>SDA RabbitMQ: msg: error
+      SDA RabbitMQ-->>Central EGA RabbitMQ: shovel msg:[to_cega][files.error]
+      end
+      Verify->>SDA Database: mark verified
+      Verify-->>SDA RabbitMQ: msg: [sda][verified]
+      deactivate Verify
+      SDA RabbitMQ-->>Central EGA RabbitMQ: shovel msg:[to_cega][files.verified]
+      Central EGA RabbitMQ-->>SDA RabbitMQ: federated msg: [from_cega][accession type]
+      SDA RabbitMQ-->>Intercept: Intercept reads message
+      Intercept->>Finalize: msg: [sda][accession] map file to accession ID
+      activate Finalize
+      note right of Finalize: Finalize makes the file backup
+      opt
+      Finalize-->>SDA RabbitMQ: msg: error
+      SDA RabbitMQ-->>Central EGA RabbitMQ: shovel msg:[to_cega][files.error]
+      end
+      Finalize->>SDA Database: mark completed
+      Finalize-->>SDA RabbitMQ: msg: [sda][completed]
+      deactivate Finalize
+      SDA RabbitMQ-->>Central EGA RabbitMQ: shovel msg:[to_cega][files.completed]
+      Central EGA RabbitMQ-->>SDA RabbitMQ: federated msg: [from_cega][mappings type]
+      SDA RabbitMQ-->>Intercept: Intercept reads message
+      Intercept->>Mapper: msg: [sda][mappings] begin ingestion
+      activate Mapper
+      opt
+      Mapper-->>SDA RabbitMQ: msg: error
+      SDA RabbitMQ-->>Central EGA RabbitMQ: shovel msg:[to_cega][files.error]
+      end
+      Mapper->>SDA Database: map file to dataset accession ID
+      Mapper->>Inbox: remove file from inbox
+      deactivate Mapper
+    
+```
 
 > NOTE:
 > Ingestion Workflow Legend

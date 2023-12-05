@@ -267,3 +267,5 @@ svc
 adminPassword
 adminUser
 postgresAdminPassword
+autonumber
+sequenceDiagram
