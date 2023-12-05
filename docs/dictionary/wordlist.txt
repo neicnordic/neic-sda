@@ -15,6 +15,7 @@ amqps
 apis
 atitle
 auth
+automagically
 backend
 backuppubkey
 bbug
@@ -37,6 +38,7 @@ clientcert
 clientkey
 cmd
 cn
+commandline
 conffile
 config
 confpath
@@ -47,6 +49,7 @@ cryptographic
 cscfi
 dac
 dacs
+dataflow
 dataout
 dataset
 datasetid
@@ -89,6 +92,8 @@ getinboxpath
 gh
 ghcr
 golang
+golangci
+gopath
 gradle
 helpdesk
 hostname
@@ -102,6 +107,7 @@ init
 initd
 initdb
 insertfile
+integrationtest
 isolations
 jks
 jku
@@ -123,6 +129,7 @@ lifescience
 localega
 localmq
 logstash
+makefile
 mapfilestodataset
 markcompleted
 markready
@@ -137,6 +144,7 @@ mountpoint
 mq
 msgtype
 mtls
+mvn
 nack
 nack'ed
 nacked

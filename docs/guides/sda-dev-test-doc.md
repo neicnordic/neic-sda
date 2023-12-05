@@ -27,7 +27,7 @@ $ make build-all
 ...
 ```
 
-To build the container for a speciffic component replace `all` with the folder name:
+To build the container for a specific component replace `all` with the folder name:
 
 ```sh
 $ make build-<folder-name>
