@@ -73,11 +73,16 @@ The table below reflects the minimum required resources to run the services in t
 | sftpinbox  | 100m  | 128Mi  | -    |
 | doa        | 100m  | 128Mi  | -    |
 
-## Minimal set of configuration variables
+Here we provide minimal lists of variables that need to be configured in the respective `values.yml` file of each of the Helm charts for:
 
-Here we provide a minimal list of variables that need to be configured in the [values.yml](https://github.com/neicnordic/sensitive-data-archive/blob/main/charts/sda-svc/values.yaml) file of the Helm charts in order to achieve a working deployment of the `sensitive data archive` [services](https://github.com/neicnordic/sensitive-data-archive/tree/main/charts/sda-svc). In the following it is assumed that a *federated* setup is being deployed.
+- [SDA services](#sda-services-chart)
+- [RabbitMQ](#rabbitmq-chart)
 
-### SDA services
+in order to achieve a working deployment of the `sensitive data archive`. In the following it is assumed that a *federated* setup is being deployed.
+
+### SDA services chart
+
+Below is a minimal list of variables that need to be configured in the [values.yml](https://github.com/neicnordic/sensitive-data-archive/blob/main/charts/sda-svc/values.yaml) file of the Helm charts for the `sensitive data archive` services in order to achieve a working deployment. Detailed documentation on all of the chart's variables can be found [here](https://github.com/neicnordic/sensitive-data-archive/tree/main/charts/sda-svc).
 
 #### Global Variables
 
@@ -206,6 +211,18 @@ To enable Backup functionality:
 - `credentials.inbox.dbPassword`: The database password for inbox
 - `credentials.inbox.mqUser`: The message queue user for inbox
 - `credentials.inbox.mqPassword`: The message queue password for inbox
+
+### RabbitMQ chart
+
+Below is a minimal list of variables that need to be configured in the [values.yml](https://github.com/neicnordic/sensitive-data-archive/blob/main/charts/sda-mq/values.yaml) file of the `RabbitMQ` Helm charts in order to achieve a working deployment. Detailed documentation on all of the chart's variables can be found [here](https://github.com/neicnordic/sensitive-data-archive/tree/main/charts/sda-mq).
+
+- `global.adminUser`: The username for the admin user
+- `global.adminPassword`: The password for the admin user
+- `global.shovel.host`: The hostname of the shovel server
+- `global.shovel.pass`: The password to authenticate with the shovel server
+- `global.shovel.port`: The port on which the shovel server is running
+- `global.shovel.user`: The username to authenticate with the shovel server
+- `global.shovel.vhost`: The virtual host on the shovel server
 
 ## Security issues
 

@@ -260,3 +260,5 @@ storageType
 NSS
 nss
 svc
+adminPassword
+adminUser
