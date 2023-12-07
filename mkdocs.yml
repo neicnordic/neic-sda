@@ -25,6 +25,7 @@ nav:
       - "services/verify.md"
       - "services/finalize.md"
       - "services/mapper.md"
+      - "services/syncapi.md"
       - Data Retrieval API: "dataout.md"
   - "Guides":
       - Contributing: "CONTRIBUTING.md"
