@@ -13,45 +13,164 @@ The database container will initialize and create the necessary database
 structure and functions if started with an empty area. Procedures for *backing up the database* are important, however considered out of scope for
 the secure data archive project.
 
-Look at [the SQL
-definitions](https://github.com/neicnordic/sensitive-data-archive/tree/main/postgresql/initdb.d)
+Look at [the SQL definitions](https://github.com/neicnordic/sensitive-data-archive/tree/main/postgresql/initdb.d)
 if you are also interested in the database triggers.
 
 Configuration
 -------------
 
-The following environment variables can be used to configure the
-database:
+Security is hardened:
 
-| Variable               | Description                        | Default value       |
-|------------------------|------------------------------------|---------------------|
-| `PGVOLUME`             | Mountpoint for the writable volume | /var/lib/postgresql |
-| `DB_LEGA_IN_PASSWORD`  | *lega_in*'s password               | -                   |
-| `DB_LEGA_OUT_PASSWORD` | *lega_out*'s password              | -                   |
-| `TZ`                   | Timezone for the Postgres server   | Europe/stockholm    |
+- We do not use 'trust' even for local connections
+- Requiring password authentication for all
+- Enforcing TLS communication
+- Enforcing client-certificate verification
 
-For TLS support use the variables below:
+The following environment variables can be used to configure the database:
 
-| Variable         | Description                                      | Default value                                             |
-|:-----------------|:-------------------------------------------------|:----------------------------------------------------------|
-| `PG_SERVER_CERT` | Public Certificate in PEM format                 | `$PGVOLUME/pg.cert`                                       |
-| `PG_SERVER_KEY`  | Private Key in PEM format                        | `$PGVOLUME/pg.key`                                        |
-| `PG_CA`          | Public CA Certificate in PEM format              | `$PGVOLUME/CA.cert`                                       |
-| `PG_VERIFY_PEER` | Enforce client verification                      | 0                                                         |
-| `SSL_SUBJ`       | Subject for the self-signed certificate creation | `/C=SE/ST=Sweden/L=Uppsala/O=NBIS/OU=SysDevs/CN=LocalEGA` |
+| Variable               | Description                         | Default value            |
+| :--------------------- | :---------------------------------- | :----------------------- |
+| PGDATA                 | Mountpoint for the writable volume  | /var/lib/postgresql/data |
+| POSTGRES_DB            | Name of the database                | sda                      |
+| POSTGRES_PASSWORD      | Password for the user `postgres`    | -                        |
+| POSTGRES_SERVER_CERT   | Public Certificate in PEM format    | -                        |
+| POSTGRES_SERVER_KEY    | Private Key in PEM format           | -                        |
+| POSTGRES_SERVER_CACERT | Public CA Certificate in PEM format | -                        |
+| POSTGRES_VERIFY_PEER   | Enforce client verification         | verify-ca                |
 
-> NOTE:
-> If not already injected, the files located at `PG_SERVER_CERT` and
-> `PG_SERVER_KEY` will be generated, as a self-signed public/private
-> certificate pair, using `SSL_SUBJ`. Client verification is enforced if
-> and only if `PG_CA` exists and `PG_VERIFY_PEER` is set to `1`.
+Client verification is enforced if `POSTGRES_VERIFY_PEER` is set to `verify-ca` or `verify-full`.
+
 
 Database schema
 ---------------
 
 The current database schema is documented below.
 
-### Database schema migration
+```mermaid
+
+    erDiagram
+        checksums {
+            text checksum 
+            uuid file_id FK,UK 
+            integer id PK 
+            checksum_source source UK 
+            checksum_algorithm type UK 
+        }
+
+        dataset_event_log {
+            text dataset_id FK 
+            text event FK 
+            timestamp_with_time_zone event_date 
+            integer id PK 
+            jsonb message 
+        }
+
+        dataset_events {
+            text description 
+            integer id PK 
+            character_varying title UK 
+        }
+
+        dataset_references {
+            timestamp_with_time_zone created_at 
+            integer dataset_id FK 
+            timestamp_without_time_zone expired_at 
+            integer id PK 
+            text reference_id 
+            text reference_scheme 
+        }
+
+        datasets {
+            timestamp_with_time_zone created_at 
+            text description 
+            integer id PK 
+            text stable_id UK 
+            text title 
+        }
+
+        dbschema_version {
+            timestamp_with_time_zone applied 
+            character_varying description 
+            integer version PK 
+        }
+
+        file_dataset {
+            integer dataset_id FK,UK 
+            uuid file_id FK,UK 
+            integer id PK 
+        }
+
+        file_event_log {
+            uuid correlation_id 
+            jsonb details 
+            text error 
+            text event FK 
+            uuid file_id FK 
+            timestamp_without_time_zone finished_at 
+            integer id PK 
+            jsonb message 
+            timestamp_with_time_zone started_at 
+            boolean success 
+            text user_id 
+        }
+
+        file_events {
+            text description 
+            integer id PK 
+            character_varying title UK 
+        }
+
+        file_references {
+            timestamp_with_time_zone created_at 
+            timestamp_without_time_zone expired_at 
+            uuid file_id FK 
+            text reference_id 
+            text reference_scheme 
+        }
+
+        files {
+            text archive_file_path UK 
+            bigint archive_file_size 
+            text backup_path 
+            timestamp_with_time_zone created_at 
+            name created_by 
+            bigint decrypted_file_size 
+            text encryption_method 
+            text header 
+            uuid id PK 
+            timestamp_with_time_zone last_modified 
+            name last_modified_by 
+            text stable_id UK 
+            text submission_file_path UK 
+            bigint submission_file_size 
+            text submission_user 
+        }
+
+        checksums }o--|| files : "file_id"
+        dataset_event_log }o--|| dataset_events : "event"
+        dataset_event_log }o--|| datasets : "dataset_id"
+        dataset_references }o--|| datasets : "dataset_id"
+        file_dataset }o--|| datasets : "dataset_id"
+        file_dataset }o--|| files : "file_id"
+        file_event_log }o--|| file_events : "event"
+        file_event_log }o--|| files : "file_id"
+        file_references }o--|| files : "file_id"
+```
+
+Database Functions
+------------------
+
+- `files_updated()` -  When there is an update, update the last_modified and last_modified_by fields on the files table.
+
+- `register_file(submission_file_path TEXT, submission_user TEXT)` - Function for registering files on upload
+
+- `set_archived(file_uuid UUID, corr_id UUID, file_path TEXT, file_size BIGINT, inbox_checksum_value TEXT, inbox_checksum_type TEXT)` - function for registering files as archived, along with their original path in the inbox
+
+- `set_verified(file_uuid UUID, corr_id UUID, archive_checksum TEXT, archive_checksum_type TEXT, decrypted_size BIGINT, decrypted_checksum TEXT, decrypted_checksum_type TEXT)` - utilised to mark files as verified along with all the necessary checksum details (decrypted and archived versions)
+
+
+Database schema migration
+-------------------------
 
 For continuity/ease of upgrade in production the database supports
 automatic migrations between schema versions. This is handled by
