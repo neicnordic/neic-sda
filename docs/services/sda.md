@@ -5,7 +5,7 @@ Repository:
 [neicnordic/sensitive-data-archive](https://github.com/neicnordic/sensitive-data-archive)
 
 `sda` repository consists of a suite of services which are part of [NeIC Sensitive Data Archive](https://neic-sda.readthedocs.io/en/latest/) and implements the components required for data submission.
-It can be used as part of a [Federated EGA](https://ega-archive.org/federated) or as an isolated Sensitive Data Archive.
+It can be used as part of a [Federated EGA](https://ega-archive.org/federated) or as a stand-alone (isolated) Sensitive Data Archive.
 `sda` was built with support for both S3 and POSIX storage.
 
 The SDA submission pipeline has four main steps:
@@ -15,7 +15,9 @@ The SDA submission pipeline has four main steps:
 3. [Finalize](finalize.md) associates a stable accessionID with each archive file and backups the file.
 4. [Mapper](mapper.md) maps file accessionIDs to a datasetID.
 
-There are also three additional support services:
+There are also additional support services:
 
 1. [Intercept](intercept.md) relays messages from `CentralEGA` to the system.
 2. [s3inbox](s3inbox.md) proxies uploads to the an S3 compatible storage backend.
+3. [sync]() project.
+4. [syncapi]() project for mirroring data between two installations of SDA.
