@@ -10,8 +10,7 @@ Swarm](https://docs.docker.com/engine/swarm/) for production.
 The production deployment repositories are:
 
 -   [Kubernetes Helm charts](https://github.com/neicnordic/sensitive-data-archive/tree/main/charts);
--   [Docker Swarm
-    deployment](https://github.com/neicnordic/LocalEGA-deploy-swarm/).
+-   [Docker Swarm deployment](https://github.com/neicnordic/LocalEGA-deploy-swarm/).
 
 `neicnordic/sensitive-data-archive`, provides the SDA services as well as PostgreSQL and RabbitMQ configuration. The following container image is used in the deployments where the tag separates between services:
 
@@ -21,3 +20,12 @@ The production deployment repositories are:
 - `ghcr.io/neicnordic/sensitive-data-archive:<version>-auth` - authentication service
 - `ghcr.io/neicnordic/sensitive-data-archive:<version>-download` - download service
 - `ghcr.io/neicnordic/sensitive-data-archive:<version>` - all other services such as: `finalize`, `ingest`, `intercept`, `verify`, `mapper` and `s3inbox`
+
+Guides
+------
+
+Different nodes of the Federated EGA network, and projects using the stand-alone SDA have made different decisions in how to deploy the system.
+Adaptations needs to be made depending on the system to deploy on, as well as the requirements of your deployment.
+
+- [Deploying with Docker Swarm](guides/deploy-swarm.md)
+- [Deploying with Kubernetes](guides/deploy-k8s.md)
