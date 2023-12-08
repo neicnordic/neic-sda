@@ -13,7 +13,6 @@ nav:
       - Introduction: "structure.md"
       - Getting started: "setup.md"
       - "deploy.md"
-      - Tests: "tests.md"
   - "Communication":
       - Database setup: "db.md"
       - Encryption: "encryption.md"
