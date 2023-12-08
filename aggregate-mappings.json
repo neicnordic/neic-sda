@@ -8,6 +8,6 @@
         "sda/cmd/s3inbox/s3inbox.md": "docs/services/s3inbox.md",
         "sda/cmd/syncapi/syncapi.md": "docs/services/syncapi.md",
         "sda/sda.md": "docs/services/sda.md",
-        "GETTINGSTARTED.md": "docs/sda-dev-test-doc.md"
+        "GETTINGSTARTED.md": "docs/guides/sda-dev-test-doc.md"
     }
 }
