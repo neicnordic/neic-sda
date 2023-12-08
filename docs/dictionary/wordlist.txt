@@ -284,3 +284,10 @@ bigint
 dbschema
 erDiagram
 jsonb
+ACCESSIONROUTING
+Bigpicture
+INGESTROUTING
+MAPPINGROUTING
+bigpicture
+stableIDs
+syncapi
