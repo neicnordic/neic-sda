@@ -34,6 +34,18 @@ do
     sed -i -E 's#cmd\/(.+)\/#''#g' docs/services/sda.md
     git add docs/services/sda.md
 
+    # update wordlist
+    pip3 install -q pyspelling
+
+    spell_result=$(pyspelling -c .pyspelling | awk '!/^<context>|^Misspelled|^--|check failed|Spelling check passed/ && NF > 0')
+
+    if [ -n "$spell_result" ]
+    then
+        echo "$spell_result" >> docs/dictionary/wordlist.txt
+        sort -u docs/dictionary/wordlist.txt -o docs/dictionary/wordlist.txt
+        git add docs/dictionary/wordlist.txt
+    fi
+
     # check if there are any changes
     if ! git status | grep 'nothing to commit'
     then
