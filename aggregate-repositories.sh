@@ -35,9 +35,7 @@ do
     git add docs/services/sda.md
 
     # update wordlist
-    pip3 install -q pyspelling
-
-    spell_result=$(pyspelling -c .pyspelling | awk '!/^<context>|^Misspelled|^--|check failed|Spelling check passed/ && NF > 0')
+    spell_result=$(pyspelling | awk '!/^<context>|^Misspelled|^--|check failed|Spelling check passed/ && NF > 0')
 
     if [ -n "$spell_result" ]
     then
