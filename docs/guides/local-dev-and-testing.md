@@ -1,6 +1,5 @@
 # Local development and testing guide
 
-
 ## Guide summary
 
 This guide provides a brief introduction on how to locally install and run the Sensitive Data Archive (SDA) components on your development system, and run all the tests locally. 

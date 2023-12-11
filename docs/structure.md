@@ -77,14 +77,14 @@ Deployment related choices
 
 ### Federated vs stand-alone
 
-In a Federated setup, the `FederatedEGA` archive node setup locally need to exchange status updates with the `CentralEGA` in a synchronized manner to basically orchestrate two parallel processes
+In a Federated setup, the `FederatedEGA` archive node setup locally need to exchange status updates with the `CentralEGA` in a synchronized manner to basically orchestrate two parallel processes:
 
 1. The multi-step process of uploading and safely archiving encrypted files holding both sensitive phenome and genome data.
 
 2. The process of the Submitter annotating the archived data in an online portal at `CentralEGA`, resulting in assigned accession numbers for items such as DataSet, Study, Files etc.
 
 
-In a stand-alone setup, the deployed service has less remote synchronisation to worry about, but on the other hand more components might be required (e.g ([orchestrator](services/orchestrator))) to also handle annotations/meta-data locally, as well as to deal with identifiers etc.
+In a stand-alone setup, the deployed service has less remote synchronisation to worry about (there is no dependency on `CentralEGA` provided services), on the other hand more components might be required (e.g (orchestrator)) to also handle annotations/meta-data locally, as well as to deal with identifiers and send all the relevant messages to the appropriate services etc.
 
 The NeIC SDA is targeting both types of setup but also to allow for the possibility to re-use components in more use cases than initially envisioned.
 
@@ -97,11 +97,11 @@ The components of SDA are all container based using Docker standards for buildin
 2. Docker Swarm
 3. PodMan
 
-For testing on local developer PC's etc, Docker compose is catered for in several of the test codes available in the SDA software repositories.
+For testing on local developer PC's etc, Docker compose is part of the [local development and testing](guides/local-dev-and-testing.md) guide.
 
 
 ### Choice of storage back-end
 
 To support different needs of different deployment locations, SDA is heavily configurable in several aspects. For the main archive storage, SDA supports both S3 storage and POSIX filesystem storage options, utilizing the exact same microservices with different parameters.
 
-For other storage dependent functionality, such as upload areas (aka inbox) and download areas (aka outbox), there are different choices of microservices (using different storage technology and transfer protocols) that can be orchestrated together with the main SDA microservices to meet local needs and requirements. 
+For other storage dependent functionality, such as upload areas i.e. `inbox` and data retrieval API, there are different choices of microservices (using different storage technology and transfer protocols) that can be orchestrated together with the main SDA microservices to meet local needs and requirements. 
