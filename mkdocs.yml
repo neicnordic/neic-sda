@@ -29,4 +29,5 @@ nav:
   - "Guides":
       - Contributing: "CONTRIBUTING.md"
       - Local dev and testing: "guides/local-dev-and-testing.md"
+      - Deploying with Kubernetes: "guides/deploy-k8s.md"
       
