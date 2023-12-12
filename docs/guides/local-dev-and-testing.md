@@ -28,7 +28,7 @@ The SDA code itself contains some very useful development helpers, that let's yo
  - ...and some more useful actions
 
 Once you have cloned the [neicnordic/sensitive-data-archive](https://github.com/neicnordic/sensitive-data-archive/) to your development system, you can start to
- explore these tools as explained in [this page](/guides/sda-dev-test-doc/).
+ explore these tools as explained in [this page](sda-dev-test-doc.md).
  
 ## What's next, once everything is up and running?
 
