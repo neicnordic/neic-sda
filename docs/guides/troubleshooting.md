@@ -13,6 +13,8 @@ The first step is to verify that the services are up and running and the credent
 - credentials for access to RabbitMQ and Postgres are securely injected to the respective services in the form of secrets
 - all the pods/containers are in `Ready`/`Up` status and and no restarts among the pods/containers.
     - for `FederatedEGA` setup the following pods are required: `intercept`, `ingest`, `verify`, `finalize`, `mapper` and a [Data Retrieval API](/docs/dataout.md)
+    - check the pods/container logs contain as the last message (after they have started): `time="2023-12-12T19:25:02Z" level=info msg="Starting <service-name> service"` for `intercept`, `ingest`, `verify`, `finalize`, `mapper`
+    - check the pods/container logs contain as the last message (after they have started) `time="2023-12-12T19:28:16Z" level=info msg="(5/5) Starting web server"` for `download` Data Retrieval service
 
 Next step is to make sure that the remote connections (`CentralEGA` RabbitMQ) are working. Login to the RabbitMQ admin page and check that:
 
@@ -42,7 +44,7 @@ Upload one or a number of files of different sizes and check that,
 Make a submission with the portal and select the file(s) that were uploaded in the previous step. Once the analysis or runs (one of the two is required) step is finished, the messages for the ingestion of the files should appear in the logs of the `ingest` service. Make sure that:
 
 - the messages are arriving for the file(s) included in the submission
-- the `ingestion`, `verify` and `finalise` processes are started and send a message when finished
+- the `ingestion`, `verify` and `finalize` processes are started and send a message when finished
 - the data in `sda.files` table are correct
 - the files are logged in the `sda.file_event_log` table for each of the services and files
 - the file(s) exists in the configured `archive` storage backend, see the `archive_file_path` in the `sda.files` table for the name of the archived file(s)
