@@ -30,6 +30,7 @@ cegamq
 centralega
 centralega's
 cgktxeg
+cidr
 chacha
 checksumed
 checksums
@@ -100,6 +101,7 @@ init
 initd
 initdb
 insertfile
+ipBlock
 isolations
 jks
 jku
@@ -140,10 +142,12 @@ nack
 nack'ed
 nacked
 namespace
+namespaceSelector
 nbis
 neic
 neicnordic
 NetworkPolicy
+nginx
 notls
 oidc
 ol
@@ -164,6 +168,7 @@ pkcs
 png
 podman
 podSelector
+policyTypes
 posix
 postgres
 postgresql
