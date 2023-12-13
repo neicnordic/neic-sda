@@ -1,4 +1,4 @@
-## Developing components of the SDA stack
+## Getting Started developing components of the SDA stack
 
 If you wish to work on the SDA stack itself you'll first need [Go](https://www.golang.org/) installed on your machine. The recommended version can be checked by running:
 
@@ -27,7 +27,7 @@ $ make build-all
 ...
 ```
 
-To build the container for a specific component replace `all` with the folder name:
+To build the container for a speciffic component replace `all` with the folder name:
 
 ```sh
 $ make build-<folder-name>
@@ -66,7 +66,7 @@ $ make lint-all
 ...
 ```
 
-To run golangci-lint for a specific component replace `all` with the folder name (`sda`, `sda-auth`, `sda-download`):
+To run golangci-lint for a speciffic component replace `all` with the folder name (`sda`, `sda-auth`, `sda-download`):
 
 ```sh
 $ make lint-<folder-name>
@@ -84,7 +84,7 @@ $ make test-all
 ...
 ```
 
-To run the static code tests for a specific component replace `all` with the folder name (`sda`, `sda-auth`, `sda-download`, `sda-sftp-inbox`):
+To run the static code tests for a speciffic component replace `all` with the folder name (`sda`, `sda-auth`, `sda-download`, `sda-sftp-inbox`):
 
 ```sh
 $ make test-<folder-name>
