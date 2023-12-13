@@ -1,7 +1,6 @@
-# Contributing guidelines
+# Contributing Guidelines
 
-We thank you in advance :thumbsup: :tada: for taking the time to contribute, whether with *code* or with *ideas*, to the NeIC SDA project.
-
+We thank you in advance 👍 🎉 for taking the time to contribute, whether with *code* or with *ideas*, to the NeIC SDA project.
 
 ## Did you find a bug?
 
@@ -43,7 +42,6 @@ Once the feature is done you can request it to be merged back into `master` by m
 Before making the pull request it is a good idea to rebase your branch to `master` to ensure that eventual conflicts with the `master` branch is solved before the PR is reviewed and we can therefore have a clean merge.
 
 
-
 ### General stuff about git and commit messages
 
 In general it is better to commit often. Small commits are easier to roll back and also makes the code easier to review.
@@ -69,7 +67,7 @@ Some tips about writing helpful commit messages:
  6. Wrap the body at 72 characters.
  7. Use the body to explain what and why vs. how.
 
-For an in-depth explanation of the above points, please see [How to Write a Git Commit Message](http://chris.beams.io/posts/git-commit/).
+For an in-depth explanation of the above points, please see [How to Write a Git Commit Message](https://chris.beams.io/posts/git-commit/).
 
 
 ### How we do code reviews
@@ -100,6 +98,6 @@ If it takes long for some partner to review code we try to contact them on slack
 Thanks again,
 /NeIC System Developers
 
-[searching under Issues]: https://github.com/neicnordic/neic-sda/issues?utf8=%E2%9C%93&q=is%3Aissue%20label%3Abug%20%5BBUG%5D%20in%3Atitle
-[open a new one]: https://github.com/neicnordic/neic-sda/issues/new?title=%5BBUG%5D
-[template to report a bug]: https://github.com/neicnordic/neic-sda/issues/new?template=bug-report.md
+[searching under Issues]: https://github.com/neicnordic/sensitive-data-archive/issues?utf8=%E2%9C%93&q=is%3Aissue%20label%3Abug%20%5BBUG%5D%20in%3Atitle
+[open a new one]: https://github.com/neicnordic/sensitive-data-archive/issues/new?title=%5BBUG%5D
+[template to report a bug]: https://github.com/neicnordic/sensitive-data-archive/issues/new?template=bug-report.md

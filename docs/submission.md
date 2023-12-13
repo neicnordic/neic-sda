@@ -4,7 +4,7 @@ Data Submission
 Ingestion Procedure
 -------------------
 
-For a given LocalEGA, Central EGA selects the associated `vhost` and
+For a given `FederatedEGA` node, `CentralEGA` selects the associated `vhost` and
 drops, in the `files` queue, one message per file to ingest.
 
 Structure of the message and its contents are described in
@@ -16,7 +16,77 @@ Structure of the message and its contents are described in
 
 ### Ingestion Workflow
 
-![Ingestion sequence diagram](./static/ingestion-sequence.svg)
+```mermaid
+   
+   sequenceDiagram
+      autonumber
+      participant Upload Tool
+      box SDA
+      participant Inbox
+      participant Ingest
+      participant Verify
+      participant Finalize
+      participant Mapper
+      participant SDA Database
+      participant Intercept
+      participant SDA RabbitMQ
+      end
+      box Central EGA
+      participant Central EGA RabbitMQ
+      end
+      Upload Tool->>Inbox: upload encrypted file
+      activate Inbox
+      Inbox-->>SDA RabbitMQ: msg: Upload Done
+      SDA RabbitMQ-->>Central EGA RabbitMQ: shovel msg:[to_cega][files.inbox]
+      deactivate Inbox
+      Central EGA RabbitMQ-->>SDA RabbitMQ: federated msg: [from_cega][ingest type]
+      SDA RabbitMQ-->>Intercept: Intercept reads message
+      Intercept->>Ingest: msg: [sda][ingest] begin ingestion
+      activate Ingest
+      Ingest->>SDA Database: mark ingested
+      opt
+      Ingest-->>SDA RabbitMQ: msg: error
+      SDA RabbitMQ-->>Central EGA RabbitMQ: shovel msg:[to_cega][files.error]
+      end
+      Ingest->>SDA Database: mark archived
+      Ingest-->>SDA RabbitMQ: msg [sda][archived]
+      deactivate Ingest
+      activate Verify
+      SDA RabbitMQ-->>Verify: msg [sda][archived] triggers verify
+      opt
+      Verify-->>SDA RabbitMQ: msg: error
+      SDA RabbitMQ-->>Central EGA RabbitMQ: shovel msg:[to_cega][files.error]
+      end
+      Verify->>SDA Database: mark verified
+      Verify-->>SDA RabbitMQ: msg: [sda][verified]
+      deactivate Verify
+      SDA RabbitMQ-->>Central EGA RabbitMQ: shovel msg:[to_cega][files.verified]
+      Central EGA RabbitMQ-->>SDA RabbitMQ: federated msg: [from_cega][accession type]
+      SDA RabbitMQ-->>Intercept: Intercept reads message
+      Intercept->>Finalize: msg: [sda][accession] map file to accession ID
+      activate Finalize
+      note right of Finalize: Finalize makes the file backup
+      opt
+      Finalize-->>SDA RabbitMQ: msg: error
+      SDA RabbitMQ-->>Central EGA RabbitMQ: shovel msg:[to_cega][files.error]
+      end
+      Finalize->>SDA Database: mark completed
+      Finalize-->>SDA RabbitMQ: msg: [sda][completed]
+      deactivate Finalize
+      SDA RabbitMQ-->>Central EGA RabbitMQ: shovel msg:[to_cega][files.completed]
+      Central EGA RabbitMQ-->>SDA RabbitMQ: federated msg: [from_cega][mappings type]
+      SDA RabbitMQ-->>Intercept: Intercept reads message
+      Intercept->>Mapper: msg: [sda][mappings] begin ingestion
+      activate Mapper
+      opt
+      Mapper-->>SDA RabbitMQ: msg: error
+      SDA RabbitMQ-->>Central EGA RabbitMQ: shovel msg:[to_cega][files.error]
+      end
+      Mapper->>SDA Database: map file to dataset accession ID
+      Mapper->>Inbox: remove file from inbox
+      deactivate Mapper
+    
+```
 
 > NOTE:
 > Ingestion Workflow Legend
@@ -31,8 +101,8 @@ Structure of the message and its contents are described in
 > services/actuators match those used for the events initiated by the
 > respective services, except for the interactions in case of errors,
 > which are highlighted with red. The optional fragments are only executed
-> if errors occur during ingestion, verify or finalize. Note that time in
-> this diagram is all about ordering, not duration.
+> if errors occur in `ingest`, `verify` or `finalize` services. 
+> **Note that the time axis in this diagram is all about the sequence of events not duration.**
 
 ### Ingestion Steps
 
@@ -55,22 +125,21 @@ that the integrated checksum is valid.
 
 At this stage, the associated decryption key is retrieved. If decryption
 completes and the checksum is valid, a message of completion is sent to
-Central EGA: Ingestion completed.
+`CentralEGA`: Ingestion completed.
 
->Important
-> If a file disappears or is overwritten in the inbox before ingestion is
-> completed, ingestion may not be possible.
+> **Important**
+> If a file disappears or is overwritten in the inbox before ingestion is completed, ingestion may not be possible.
 
 If any of the above steps generates an error, we exit the workflow and
 log the error. In case the error is related to a misuse from the user,
-such as submitting the wrong checksum or tempering with the encrypted
-file, the error is forwarded to Central EGA in order to be displayed in
+such as submitting the wrong checksum or tampering with the encrypted
+file, the error is forwarded to `CentralEGA` in order to be displayed in
 the Submission Interface.
 
 Submission Inbox
 ----------------
 
-Central EGA contains a database of users, with IDs and passwords. We
+`CentralEGA` contains a database of users, with IDs and passwords. We
 have developed several solutions allowing user authentication against
 CentralEGA user database:
 
@@ -104,38 +173,54 @@ We can configure default cache TTL via `CACHE_TTL` environment variable.
 
 Environment variables used:
 
-Variable name         | Default value      | Description
-:---------------------|:-------------------|:-----------------------------------
-`BROKER_USERNAME`     | guest              | RabbitMQ broker username
-`BROKER_PASSWORD`     | guest              | RabbitMQ broker password
-`BROKER_HOST`         | mq                 | RabbitMQ broker host
-`BROKER_PORT`         | 5672               | RabbitMQ broker port
-`BROKER_VHOST`        | `/`                | RabbitMQ broker vhost
-`INBOX_PORT`          | `2222`             | Inbox port
-`INBOX_LOCATION`      | /ega/inbox/        | Path to POSIX Inbox backend
-`INBOX_KEYPAIR`       |                    | Path to RSA keypair file
-`KEYSTORE_TYPE`       | JKS                | Keystore type to use, JKS or PKCS12
-`KEYSTORE_PATH`       | /etc/ega/inbox.jks | Path to Keystore file
-`KEYSTORE_PASSWORD`   |                    | Password to access the Keystore
-`CACHE_TTL`           | 3600.0             | CEGA credentials time-to-live
-`CEGA_ENDPOINT`       |                    | CEGA REST endpoint
-`CEGA_ENDPOINT_CREDS` |                    | CEGA REST credentials
-`S3_ENDPOINT`         | inbox-backend:9000 | Inbox S3 backend URL
-`S3_REGION`           | us-east-1          | Inbox S3 backend region(us-east-1 is default in Minio)
-`S3_ACCESS_KEY`       |                    | Inbox S3 backend access key (S3 disabled if not specified)
-`S3_SECRET_KEY`       |                    | Inbox S3 backend secret key (S3 disabled if not specified)
-`USE_SSL`             | true               | true if S3 Inbox backend should be accessed by HTTPS
-`LOGSTASH_HOST`       |                    | Hostname of the Logstash instance (if any)
-`LOGSTASH_PORT`       |                    | Port of the Logstash instance (if any)
+| Variable name         | Default value      | Description                                                |
+|:----------------------|:-------------------|:-----------------------------------------------------------|
+| `BROKER_USERNAME`     | guest              | RabbitMQ broker username                                   |
+| `BROKER_PASSWORD`     | guest              | RabbitMQ broker password                                   |
+| `BROKER_HOST`         | mq                 | RabbitMQ broker host                                       |
+| `BROKER_PORT`         | 5672               | RabbitMQ broker port                                       |
+| `BROKER_VHOST`        | `/`                | RabbitMQ broker vhost                                      |
+| `INBOX_PORT`          | `2222`             | Inbox port                                                 |
+| `INBOX_LOCATION`      | /ega/inbox/        | Path to POSIX Inbox backend                                |
+| `INBOX_KEYPAIR`       |                    | Path to RSA keypair file                                   |
+| `KEYSTORE_TYPE`       | JKS                | Keystore type to use, JKS or PKCS12                        |
+| `KEYSTORE_PATH`       | /etc/ega/inbox.jks | Path to Keystore file                                      |
+| `KEYSTORE_PASSWORD`   |                    | Password to access the Keystore                            |
+| `CACHE_TTL`           | 3600.0             | CEGA credentials time-to-live                              |
+| `CEGA_ENDPOINT`       |                    | CEGA REST endpoint                                         |
+| `CEGA_ENDPOINT_CREDS` |                    | CEGA REST credentials                                      |
+| `S3_ENDPOINT`         | inbox-backend:9000 | Inbox S3 backend URL                                       |
+| `S3_REGION`           | us-east-1          | Inbox S3 backend region(us-east-1 is default in Minio)     |
+| `S3_ACCESS_KEY`       |                    | Inbox S3 backend access key (S3 disabled if not specified) |
+| `S3_SECRET_KEY`       |                    | Inbox S3 backend secret key (S3 disabled if not specified) |
+| `USE_SSL`             | true               | true if S3 Inbox backend should be accessed by HTTPS       |
+| `LOGSTASH_HOST`       |                    | Hostname of the Logstash instance (if any)                 |
+| `LOGSTASH_PORT`       |                    | Port of the Logstash instance (if any)                     |
 
 As mentioned above, the implementation is based on Java library Apache
 Mina SSHD.
 
 > NOTE:
 > Sources are located at the separate repository:
-> <https://github.com/neicnordic/sensitive-data-archive/tree/main/sda-inbox-sftp> Essentially, it's a
+> <https://github.com/neicnordic/sensitive-data-archive/tree/main/sda-sftp-inbox> Essentially, it's a
 > Spring-based Maven project, integrated with the
 > [Local Message Broker](connection.md#local-message-broker).
+
+
+### TSD File API
+
+In order to utilise Tryggve2 SDA within
+[TSD](https://www.uio.no/english/services/it/research/sensitive-data/)
+Several components have been developed:
+
+-   <https://github.com/unioslo/tsd-file-api>
+-   <https://github.com/uio-bmi/LocalEGA-TSD-proxy>
+-   <https://github.com/unioslo/tsd-api-client>
+
+>NOTE:
+> Access is restricted to UiO network. Please, contact TSD support for the
+> access, if needed. Documentation:
+> <https://test.api.tsd.usit.no/v1/docs/tsd-api-integration.html>
 
 
 ### S3 Proxy Inbox
@@ -155,54 +240,8 @@ The proxy requires the user to set the bucket name the same as the
 username when uploading data,
 `s3cmd put FILE s3://USER_NAME/path/to/file`
 
-#### S3 proxy Configuration
 
-The S3 proxy server can be configured via a yaml formatted file with the
-top level blocks, `aws:`, `broker:` and `server:`.
-
-ENVs take precedence over file based configurations.
-
-Environment variables used:
-
-Variable name          | Default value | Description
-:----------------------|:--------------|:--------------------------------------
-`AWS_URL`              |               | Inbox S3 backend URL
-`AWS_ACCESSKEY`        |               | Inbox S3 backend access key
-`AWS_SECRETKEY`        |               | Inbox S3 backend secret key
-`AWS_REGION`           | us-east-1     | Inbox S3 backend region
-`AWS_BUCKET`           |               | S3 backend bucket name
-`AWS_READYPATH`        |               | Path on the S3 backend that reports readiness
-`AWS_CACERT`           |               | CA file to useif the S3 backend is private
-`BROKER_HOST`          |               | RabbitMQ broker host
-`BROKER_USER`          |               | RabbitMQ broker username
-`BROKER_PASSWORD`      |               | RabbitMQ broker password
-`BROKER_PORT`          |               | RabbitMQ broker port
-`BROKER_VHOST`         |               | RabbitMQ broker vhost
-`BROKER_exchange`      |               | RabbitMQ exchange to publish to
-`BROKER_ROUTINGKEY`    |               | Routing key used when publishing messages
-`BROKER_SSL`           |               | Use AMQPS for broker connection
-`BROKER_CACERT`        |               | CA cert used for broker connectivity
-`BROKER_VERIFYPEER`    |               | Enforce mTLS for broker connection
-`BROKER_CLIENTCERT`    |               | Client cert used for broker connectivity
-`BROKER_CLIENTKEY`     |               | Client key used for broker connectivity
-`SERVER_CERT`          |               | Certificate for the S3 endpoint
-`SERVER_KEY`           |               | Certificate key for the S3 endpoint
-`SERVER_JWTPUBKEYPATH` |               | Path to the folder where the public JWT key is located
-`SERVER_JWTPUBEYURL`   |               | URL to the jwk endpoint of the OIDC server
-`SERVER_CONFPATH`      | .             | Path to the folder where the config file can be found
-`SERVER_CONFFILE`      | config.yaml   | Full path to the server config file
-
-### TSD File API
-
-In order to utilise Tryggve2 SDA within
-[TSD](https://www.uio.no/english/services/it/research/sensitive-data/)
-Several components have been developed:
-
--   <https://github.com/unioslo/tsd-file-api>
--   <https://github.com/uio-bmi/LocalEGA-TSD-proxy>
--   <https://github.com/unioslo/tsd-api-client>
-
->NOTE:
-> Access is restricted to UiO network. Please, contact TSD support for the
-> access, if needed. Documentation:
-> <https://test.api.tsd.usit.no/v1/docs/tsd-api-integration.html>
+{%
+   include-markdown "services/s3inbox.md"
+   heading-offset=3
+%}

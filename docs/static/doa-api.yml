@@ -1,8 +1,8 @@
 openapi: 3.0.0
 info:
-  description: SDA Data Out API Documentation derived from EGA Data API
+  description: SDA Data Retrieval API Documentation derived from EGA Data API
   version: "1.0"
-  title: SDA Data Out API Documentation 
+  title: SDA Data Retrieval API Documentation 
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0

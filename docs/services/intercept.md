@@ -1,6 +1,23 @@
 # intercept Service
 
-The `intercept` service relays messages between Central EGA and Federated EGA nodes.
+The `intercept` service relays messages between `CentralEGA` and Federated EGA nodes.
+
+## Service Description
+
+When running, `intercept` reads messages from the configured RabbitMQ queue (commonly: `from_cega`).
+For each message, these steps are taken:
+
+1. The message type is read from the message `type` field.
+   1. If the message `type` is not known, an error is logged and the message is Ack'ed.
+2. The correct queue for the message is decided based on message type.
+3. The message is sent to the queue. 
+   - This has no error handling as the resend-mechanism hasn't been finished.
+4. The message is Ack'ed.
+
+## Communication
+
+- `Intercept` reads messages from one queue (commonly: `from_cega`).
+- `Intercept` publishes messages to three queues, `accession`, `ingest`, and `mappings`.
 
 ## Configuration
 
@@ -36,26 +53,10 @@ These settings control how `intercept` connects to the RabbitMQ message broker.
 
 - `LOG_FORMAT` can be set to “json” to get logs in json format, all other values result in text logging.
 - `LOG_LEVEL` can be set to one of the following, in increasing order of severity:
-  - `trace`
-  - `debug`
-  - `info`
-  - `warn` (or `warning`)
-  - `error`
-  - `fatal`
-  - `panic`
-
-## Service Description
-
-When running, `intercept` reads messages from the configured RabbitMQ queue (commonly: `from_cega`).
-For each message, these steps are taken:
-
-1. The message type is read from the message `type` field.
-   1. If the message `type` is not known, an error is logged and the message is Ack'ed.
-2. The correct queue for the message is decided based on message type.
-3. The message is sent to the queue. This has no error handling as the resend-mechanism hasn't been finished.
-4. The message is Ack'ed.
-
-## Communication
-
-- `Intercept` reads messages from one queue (commonly: `from_cega`).
-- `Intercept` publishes messages to three queues, `accession`, `ingest`, and `mappings`.
+    - `trace`
+    - `debug`
+    - `info`
+    - `warn` (or `warning`)
+    - `error`
+    - `fatal`
+    - `panic`

@@ -2,7 +2,7 @@ Data Retrieval API
 ==================
 
 > NOTE:
-> We maintain two Data Out API solutions, for which REST APIs are the
+> We maintain two Data Retrieval API solutions, for which REST APIs are the
 > same.
 
 SDA-DOA
@@ -15,43 +15,43 @@ SDA-DOA
 Configuration
 -------------
 
-Variable name                       | Default value                                                         |  Description
-:-----------------------------------|:----------------------------------------------------------------------|:---------------------
-`REST_ENABLED`                      | true                                                                  | Enables/disables REST endpoints of DOA
-`SSL_ENABLED`                       | true                                                                  | Enables/disables TLS for DOA REST endpoints
-`KEYSTORE_PATH`                     | /etc/ega/ssl/server.cert                                              | Path to server keystore file
-`KEYSTORE_PASSWORD`                 |                                                                       | Password for the keystore
-`OUTBOX_ENABLED`                    | true                                                                  | Enables/disables the outbox functionality
-`OUTBOX_QUEUE`                      | exportRequests                                                        | MQ queue name for files/datasets export  requests
-`OUTBOX_LOCATION`                   | /ega/outbox/p11-%s/files/                                             | Outbox location with placeholder for the username
-`BROKER_HOST`                       | private-mq                                                            | Local RabbitMQ broker hostname
-`BROKER_PORT`                       | 5671                                                                  | Local RabbitMQ broker port
-`BROKER_VHOST`                      | /                                                                     | Local RabbitMQ broker virtual host
-`BROKER_VALIDATE`                   | true                                                                  | Validate server MQ certificate or not
-`DB_INSTANCE`                       | db                                                                    | Database hostname
-`DB_PORT`                           | 5432                                                                  | Database port
-`POSTGRES_DB`                       | lega                                                                  | Database name
-`ROOT_CERT_PATH`                    | /etc/ega/ssl/CA.cert                                                  | Path to the CA file for database connectivity
-`CERT_PATH`                         | /etc/ega/ssl/client.cert                                              | Path to the client cert for database connectivity
-`CERT_KEY`                          | /etc/ega/ssl/client.key                                               | Path to the client key for database connectivity
-`POSTGRES_USER`                     | lega_out                                                             | Database username
-`POSTGRES_PASSWORD`                 |                                                                       | Database password
-`S3_ENDPOINT`                       | vault                                                                 | S3 server hostname
-`S3_PORT`                           | 443                                                                   | S3 server port
-`S3_ACCESS_KEY`                     | minio                                                                 | S3 access key
-`S3_SECRET_KEY`                     | miniostorage                                                          | S3 secret key
-`S3_REGION`                         | us-west-1                                                             | S3 region
-`S3_BUCKET`                         | lega                                                                  | S3 bucket to use
-`S3_SECURE`                         | true                                                                  | true if S3 backend should be accessed over HTTPS
-`S3_ROOT_CERT_PATH`                 | /etc/ssl/certs/ca-certificates.crt                                    | Path to the CA certs file for S3 connectivity
-`ARCHIVE_PATH`                      | /                                                                     | Path to the filesystem-archive
-`PASSPORT_PUBLIC_KEY_PATH`          | /etc/ega/jwt/passport.pem                                             | Path to the public key for passport JWT validation
-`OPENID_CONFIGURATION_URL`          | <https://login.elixir-czech.org/oidc/.well-known/openid-configuration>| URL of the OpenID configuration endpoint
-`VISA_PUBLIC_KEY_PATH`              | /etc/ega/jwt/visa.pem                                                 | Path to the public key for visas JWT validation
-`CRYPT4GH_PRIVATE_KEY_PATH`         | /etc/ega/crypt4gh/key.pem                                             | Path to the Crypt4GH private key
-`CRYPT4GH_PRIVATE_KEY_PASSWORD_PATH`| /etc/ega/crypt4gh/key.pass                                            | Path to the Crypt4GH private key passphrase
-`LOGSTASH_HOST`                     |                                                                       | Hostname of the Logstash instance (if any)
-`LOGSTASH_PORT`                     |                                                                       | Port of the Logstash instance (if any)
+| Variable name                        | Default value                                                          | Description                                        |
+|:-------------------------------------|:-----------------------------------------------------------------------|:---------------------------------------------------|
+| `REST_ENABLED`                       | true                                                                   | Enables/disables REST endpoints of DOA             |
+| `SSL_ENABLED`                        | true                                                                   | Enables/disables TLS for DOA REST endpoints        |
+| `KEYSTORE_PATH`                      | /etc/ega/ssl/server.cert                                               | Path to server keystore file                       |
+| `KEYSTORE_PASSWORD`                  |                                                                        | Password for the keystore                          |
+| `OUTBOX_ENABLED`                     | true                                                                   | Enables/disables the outbox functionality          |
+| `OUTBOX_QUEUE`                       | exportRequests                                                         | MQ queue name for files/datasets export  requests  |
+| `OUTBOX_LOCATION`                    | /ega/outbox/p11-%s/files/                                              | Outbox location with placeholder for the username  |
+| `BROKER_HOST`                        | private-mq                                                             | Local RabbitMQ broker hostname                     |
+| `BROKER_PORT`                        | 5671                                                                   | Local RabbitMQ broker port                         |
+| `BROKER_VHOST`                       | /                                                                      | Local RabbitMQ broker virtual host                 |
+| `BROKER_VALIDATE`                    | true                                                                   | Validate server MQ certificate or not              |
+| `DB_INSTANCE`                        | db                                                                     | Database hostname                                  |
+| `DB_PORT`                            | 5432                                                                   | Database port                                      |
+| `POSTGRES_DB`                        | lega                                                                   | Database name                                      |
+| `ROOT_CERT_PATH`                     | /etc/ega/ssl/CA.cert                                                   | Path to the CA file for database connectivity      |
+| `CERT_PATH`                          | /etc/ega/ssl/client.cert                                               | Path to the client cert for database connectivity  |
+| `CERT_KEY`                           | /etc/ega/ssl/client.key                                                | Path to the client key for database connectivity   |
+| `POSTGRES_USER`                      | lega_out                                                               | Database username                                  |
+| `POSTGRES_PASSWORD`                  |                                                                        | Database password                                  |
+| `S3_ENDPOINT`                        | vault                                                                  | S3 server hostname                                 |
+| `S3_PORT`                            | 443                                                                    | S3 server port                                     |
+| `S3_ACCESS_KEY`                      | minio                                                                  | S3 access key                                      |
+| `S3_SECRET_KEY`                      | miniostorage                                                           | S3 secret key                                      |
+| `S3_REGION`                          | us-west-1                                                              | S3 region                                          |
+| `S3_BUCKET`                          | lega                                                                   | S3 bucket to use                                   |
+| `S3_SECURE`                          | true                                                                   | true if S3 backend should be accessed over HTTPS   |
+| `S3_ROOT_CERT_PATH`                  | /etc/ssl/certs/ca-certificates.crt                                     | Path to the CA certs file for S3 connectivity      |
+| `ARCHIVE_PATH`                       | /                                                                      | Path to the filesystem-archive                     |
+| `PASSPORT_PUBLIC_KEY_PATH`           | /etc/ega/jwt/passport.pem                                              | Path to the public key for passport JWT validation |
+| `OPENID_CONFIGURATION_URL`           | <https://login.elixir-czech.org/oidc/.well-known/openid-configuration> | URL of the OpenID configuration endpoint           |
+| `VISA_PUBLIC_KEY_PATH`               | /etc/ega/jwt/visa.pem                                                  | Path to the public key for visas JWT validation    |
+| `CRYPT4GH_PRIVATE_KEY_PATH`          | /etc/ega/crypt4gh/key.pem                                              | Path to the Crypt4GH private key                   |
+| `CRYPT4GH_PRIVATE_KEY_PASSWORD_PATH` | /etc/ega/crypt4gh/key.pass                                             | Path to the Crypt4GH private key passphrase        |
+| `LOGSTASH_HOST`                      |                                                                        | Hostname of the Logstash instance (if any)         |
+| `LOGSTASH_PORT`                      |                                                                        | Port of the Logstash instance (if any)             |
 
 ### Outbox functionality
 
@@ -84,19 +84,37 @@ and can't expose REST API (but still can receive RabbitMQ messages).
 Handling Permissions
 --------------------
 
-Data Out API can be run with connection to an AAI or without. In the
-case connection to an AAI provider is not possible the
-`PASSPORT_PUBLIC_KEY_PATH` and `CRYPT4GH_PRIVATE_KEY_PATH` need to be
+Data Retrieval API can be run with connection to an AAI or without. If connection to an AAI provider is not possible, the `PASSPORT_PUBLIC_KEY_PATH` and `CRYPT4GH_PRIVATE_KEY_PATH` need to be
 set.
 
 > NOTE:
-> By default we use Elixir AAI as JWT for authentication
+> By default we use LifeScience AAI as JWT for authentication
 > `OPENID_CONFIGURATION_URL` is set to:
-> <https://login.elixir-czech.org/oidc/.well-known/openid-configuration>
+> <https://proxy.aai.lifescience-ri.eu/.well-known/openid-configuration>
 
 If connected to an AAI provider the current implementation is based on
-[GA4GH
-Passports](https://github.com/ga4gh/data-security/blob/master/AAI/AAIConnectProfile.md)
+[GA4GH Passports](https://github.com/ga4gh/data-security/blob/master/AAI/AAIConnectProfile.md)
+
+```mermaid
+
+sequenceDiagram
+    actor client
+    client->>sda-download: request datasets/data
+    note right of client: send HTTP Authorization Bearer JWT
+    activate sda-download
+    client->>sda-download: check datasets/data exists
+    sda-download-->AAI: request GA4GH Visas permissions (userinfo endpoint)
+    activate AAI
+    AAI->>GA4GH Visa Issuer: get GA4GH Visa from Issuer
+    GA4GH Visa Issuer->>AAI: GA4GH Visas
+    deactivate AAI
+    AAI->>sda-download:  GA4GH Visas
+    note right of sda-download: check known GA4GH Visa Issuer
+    sda-download->GA4GH Visa Issuer: validate GA4GH visas signature
+    sda-download->>client: return datasets/data
+    deactivate sda-download
+
+```
 
 The AAI JWT payload should contain a GA4GH Passport claim in the scope:
 
@@ -151,10 +169,8 @@ SDA-download
 > Source code repository is available at:
 > [https://github.com/neicnordic/sda-download](https://github.com/neicnordic/sda-download)
 
-Recommended provisioning method for production is:
-
--   on a `kubernetes cluster` using the [helm
-    chart](https://github.com/neicnordic/sensitive-data-archive/tree/main/charts).
+Recommended provisioning method for production is on a `kubernetes cluster` using the 
+[helm chart](https://github.com/neicnordic/sensitive-data-archive/tree/main/charts) `sda-svc` which contains the `sda-download`.
 
 `sda-download` focuses on enabling deployment of a stand-alone version
 of SDA, with features such as:

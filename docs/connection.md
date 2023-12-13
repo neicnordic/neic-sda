@@ -1,17 +1,17 @@
 Interfacing with CEGA ⇌ SDA
 ===========================
 
-All Local EGA instances are connected to Central EGA using
+All `FederatedEGA` instances are connected to `CentralEGA` using
 [RabbitMQ](http://www.rabbitmq.com), a Message Broker, that allows the
 components to send and receive messages, which are queued, not lost, and
 resent on network failure or connection problems.
 
 The RabbitMQ message brokers of each SDA instance are the **only**
-components with the necessary credentials to connect to Central EGA
+components with the necessary credentials to connect to `CentralEGA`
 message broker.
 
 We call `CEGAMQ` and `LocalMQ` (Local Message Broker, sometimes know as `sda-mq`), 
-the RabbitMQ message brokers of, respectively, `Central EGA` and `SDA`/`LocalEGA`.
+the RabbitMQ message brokers of, respectively, `CentralEGA` and `SDA`/`FederatedEGA`.
 
 Local Message Broker
 --------------------
@@ -29,18 +29,18 @@ The following environment variables can be used to configure the broker:
 > We use [RabbitMQ](https://hub.docker.com/_/rabbitmq) >= `3.8.16` including
 > the management plugins.
 
-Variable             | Description
-:--------------------|:----------------------------------------------
-`MQ_VHOST`           | Default vhost other than `/`
-`MQ_VERIFY`          | Set to `verify_none` to disable verification of client certificate
-`MQ_USER`            | Default user (with admin rights)
-`MQ_PASSWORD_HASH`   | Password hash for the above user
-`CEGA_CONNECTION`    | DSN URL for the shovels and federated queues with CentralEGA
-`MQ_SERVER_CERT`     | Path to the server SSL certificate                                                                          
-`MQ_SERVER_KEY`      | Path to the server SSL key                                                                                    
-`MQ_CA`              | Path to the CA root certificate
-`MQ_VERIFY`          | Require the clients to have valid TLS certificates (`verify_peer`) or do not require clients to have certificates (`verify_none`)
-`NOTLS`              | Run the server without TLS enabled (default is to run the server with TLS activated)
+| Variable           | Description                                                                                                                       |
+|:-------------------|:----------------------------------------------------------------------------------------------------------------------------------|
+| `MQ_VHOST`         | Default vhost other than `/`                                                                                                      |
+| `MQ_VERIFY`        | Set to `verify_none` to disable verification of client certificate                                                                |
+| `MQ_USER`          | Default user (with admin rights)                                                                                                  |
+| `MQ_PASSWORD_HASH` | Password hash for the above user                                                                                                  |
+| `CEGA_CONNECTION`  | DSN URL for the shovels and federated queues with CentralEGA                                                                      |
+| `MQ_SERVER_CERT`   | Path to the server SSL certificate                                                                                                |
+| `MQ_SERVER_KEY`    | Path to the server SSL key                                                                                                        |
+| `MQ_CA`            | Path to the CA root certificate                                                                                                   |
+| `MQ_VERIFY`        | Require the clients to have valid TLS certificates (`verify_peer`) or do not require clients to have certificates (`verify_none`) |
+| `NOTLS`            | Run the server without TLS enabled (default is to run the server with TLS activated)                                              |
 
 > NOTE:
 > For SDA stand-alone do not use `CEGA_CONNECTION` and do not set up
@@ -49,7 +49,7 @@ Variable             | Description
 > would need to be set up to send and recive messages between other
 > services.
 
-Central EGA connection
+CentralEGA connection
 ----------------------
 
 `CEGAMQ` declares a `vhost` for each SDA instance. It also creates the
@@ -70,28 +70,28 @@ amqp[s]://<user>:<password>@<cega-host>:<port>/<vhost>
 versioning and is internal to CentralEGA. The queues connected to that
 exchange are also internal to CentralEGA.
 
-Name             | Purpose
-:----------------|:------------------------------------------------
-files            | Triggers for file ingestion
-completed        | When files are backed up
-verified         | When files are properly ingested and verified
-errors           | User-related errors
-inbox            | Notifications of uploaded files
+| Name      | Purpose                                       |
+|:----------|:----------------------------------------------|
+| files     | Triggers for file ingestion                   |
+| completed | When files are backed up                      |
+| verified  | When files are properly ingested and verified |
+| errors    | User-related errors                           |
+| inbox     | Notifications of uploaded files               |
 
 `LocalMQ` contains two exchanges named `sda` and `to_cega`, and the
 following queues, in the default `vhost`:
 
-Name             | Purpose
-:----------------|:---------------------------------------
-archived         | Archived files.
-completed        | Files are backed up
-error            | User-related errors
-files            | Receive notification for ingestion from `CEGAMQ` or Orchestrator
-inbox            | Notifications of uploaded files
-ingest           | Trigger for file ingestion
-mappings         | Received Dataset to file mapping
-accessionIDs     | Receive Accession IDs from `CEGAMQ` or Orchestrator
-verified         | Files ingested and verified
+| Name         | Purpose                                                          |
+|:-------------|:-----------------------------------------------------------------|
+| archived     | Archived files.                                                  |
+| completed    | Files are backed up                                              |
+| error        | User-related errors                                              |
+| files        | Receive notification for ingestion from `CEGAMQ` or Orchestrator |
+| inbox        | Notifications of uploaded files                                  |
+| ingest       | Trigger for file ingestion                                       |
+| mappings     | Received Dataset to file mapping                                 |
+| accessionIDs | Receive Accession IDs from `CEGAMQ` or Orchestrator              |
+| verified     | Files ingested and verified                                      |
 
 `LocalMQ` registers `CEGAMQ` as an *upstream* and listens to the
 incoming messages in `files` using a *federated queue*. Ingestion
@@ -102,7 +102,7 @@ Service will wait for messages to arrive.
 
 > NOTE:
 > More information can be found also at
-> [localEGA](https://localega.readthedocs.io/en/latest/amqp.html#message-interface-api-cega-connect-lega).
+> [localEGA repository](https://localega.readthedocs.io/en/latest/amqp.html#message-interface-api-cega-connect-lega) - repository that provides functionality for `FederatedEGA` use case.
 
 `CEGAMQ` receives notifications from `LocalMQ` using a *shovel*.
 Everything that is published to its `to_cega` exchange gets forwarded to
@@ -110,38 +110,38 @@ CentralEGA (using the routing key based on the name
 `files.<internal_queue_name>`). We propagate the different status of the
 workflow to CentralEGA, using the following routing keys:
 
-Name                 | Purpose
----------------------|:-------------------------------------------------
-files.completed      | For back-up files, ready to be distributed
-files.error          | In case a user-related error is detected
-files.inbox          | For inbox file operations
-files.verified       | For files ready to request accessionID
+| Name            | Purpose                                    |
+|-----------------|:-------------------------------------------|
+| files.completed | For back-up files, ready to be distributed |
+| files.error     | In case a user-related error is detected   |
+| files.inbox     | For inbox file operations                  |
+| files.verified  | For files ready to request accessionID     |
 
 Note that we do not need at the moment a queue to store the completed
-message, nor the errors, as we forward them to Central EGA.
+message, nor the errors, as we forward them to `CentralEGA`.
 
 ![RabbitMQ setup](./static/CEGA-LEGA.png)
 
-Connecting SDA to Central EGA
+Connecting SDA to CentralEGA
 -----------------------------
 
-Central EGA only has to prepare a user/password pair along with a
+`CentralEGA` only has to prepare a user/password pair along with a
 `vhost` in their RabbitMQ.
 
-When Central EGA has communicated these details to the given Local EGA
-instance, the latter can contact Central EGA using the federated queue
+When `CentralEGA` has communicated these details to the given `FederatedEGA`
+instance, the latter can contact `CentralEGA` using the federated queue
 and the shovel mechanism in their local broker.
 
-CentralEGA should then see 2 incoming connections from that new LocalEGA
+`CentralEGA` should then see 2 incoming connections from that new `FederatedEGA`
 instance, on the given `vhost`.
 
 The exchanges and routing keys will be the same as all the other
-LocalEGA instances, since the clustering is done per `vhost`.
+`FederatedEGA` instances, since the clustering is done per `vhost`.
 
 ### Message Format
 
 It is necessary to agree on the format of the messages exchanged between
-Central EGA and any Local EGAs. Central EGA's messages are
+`CentralEGA` and any `FederatedEGA`s. `CentralEGA`'s messages are
 JSON-formatted.
 
 The JSON schemas can be found in:
@@ -200,14 +200,14 @@ of messages:
 -   `type=cancel`: an ingestion cancellation
 -   `type=accession`: contains an accession id
 -   `type=mapping`: contains a dataset to accession ids mapping
--   `type=heartbeat`: A mean to check if the Local EGA instance is
+-   `type=heartbeat`: A mean to check if the `FederatedEGA` instance is
     "alive"
 
 > IMPORTANT:
 > The `encrypted_checksums` key is optional. If the key is not present the
 > sha256 checksum will be calculated by `Ingest` service.
 
-The message received from Central EGA to start ingestion at a Federated EGA node.
+The message received from `CentralEGA` to start ingestion at a Federated EGA node.
 Processed by the the `ingest` service.
 
 ```javascript
