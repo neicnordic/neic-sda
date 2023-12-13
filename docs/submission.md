@@ -101,7 +101,8 @@ Structure of the message and its contents are described in
 > services/actuators match those used for the events initiated by the
 > respective services, except for the interactions in case of errors,
 > which are highlighted with red. The optional fragments are only executed
-> if errors occur during ingestion, verify or finalize. **Note that the time axis in this diagram is all about the sequence of events not duration.**
+> if errors occur in `ingest`, `verify` or `finalize` services. 
+> **Note that the time axis in this diagram is all about the sequence of events not duration.**
 
 ### Ingestion Steps
 

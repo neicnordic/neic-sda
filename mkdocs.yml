@@ -20,13 +20,17 @@ nav:
       - Interfacing with CEGA: "connection.md"
   - "Services":
       - SDA: "services/sda.md"
+      - "services/intercept.md"
       - "services/ingest.md"
       - "services/verify.md"
       - "services/finalize.md"
       - "services/mapper.md"
       - "services/syncapi.md"
+      - "services/sync.md"
       - Data Retrieval API: "dataout.md"
   - "Guides":
       - Contributing: "CONTRIBUTING.md"
       - Local dev and testing: "guides/local-dev-and-testing.md"
+      - Deploying with Kubernetes: "guides/deploy-k8s.md"
+      - Troubleshooting: "guides/troubleshooting.md"
       

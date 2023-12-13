@@ -31,7 +31,7 @@ do
 
     # add special use case for sda.md links
 
-    sed -i -E 's#cmd\/(.+)\/#''#g' docs/services/sda.md
+    sed -i -E 's#cmd\/([a-z0-9\-]+)\/#''#g' docs/services/sda.md
     git add docs/services/sda.md
 
     # update wordlist
