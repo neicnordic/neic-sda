@@ -307,3 +307,7 @@ PEMKEYPASS
 PEMKEYPATH
 SYNCPUBKEYPATH
 rabbitmqctl
+TCP
+UDP
+kube
+nodeport
