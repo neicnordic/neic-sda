@@ -1,4 +1,4 @@
-## Developing components of the SDA stack
+## Getting Started developing components of the SDA stack
 
 If you wish to work on the SDA stack itself you'll first need [Go](https://www.golang.org/) installed on your machine. The recommended version can be checked by running:
 
