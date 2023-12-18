@@ -241,6 +241,99 @@ Below is a minimal list of variables that need to be configured in the [values.y
 ## Network policies
 
  - DNS names and ingress for services
+ 
+    When deploying applications on Kubernetes, it is essential to understand the DNS naming conventions and ingress configurations for [Pods](https://kubernetes.io/docs/concepts/workloads/pods/) and [Services](https://kubernetes.io/docs/concepts/services-networking/service/). Each Pod within the cluster is assigned a [DNS name](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/) in the format of `pod-ip-address.<cluster>.pod.cluster.local`. This DNS resolution allows seamless communication between Pods within the same cluster.
+
+   Services, representing sets of Pods, are assigned A DNS records with names structured as `<service_name>.<namespace>.svc.cluster.local`. This DNS record resolves to the cluster IP of the respective Service.
+
+    | Service Name | Common DNS Name                         |
+    | ------------ | ----------------------------------------|
+    | inbox        | sda-svc-inbox.<namespace>.svc.cluster.local   |
+    | download     | sda-svc-download.<namespace>.svc.cluster.local|
+    | auth         | sda-svc-auth.<namespace>.svc.cluster.local    |
+    | mq           | broker-sda-mq.<namespace>.svc.cluster.local   |
+
+    Certain services, such as `inbox`, `download`, and `auth`, are configured to expect an ingress. [Ingress](https://kubernetes.io/docs/concepts/services-networking/ingress/) provides external access to these services, allowing external clients to communicate with them. The following services specifically expect an ingress:
+
+    - inbox
+    - download
+    - auth
+
+    In addition, Kubernetes allows you to define [Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) to control the communication between Pods. Network Policies are crucial for enforcing security measures within your cluster. They enable you to specify which Pods can communicate with each other and define rules for ingress and egress traffic.
+    Here are two recommended basic examples of a Network Policy for namespace isolation and allowing traffic to inbox ingress, a similar policies needs to be in place for `download` and `auth` service:
+
+    ```yaml
+    apiVersion: networking.k8s.io/v1
+    kind: NetworkPolicy
+    metadata:
+      name: namespace-isolation
+    spec:
+      podSelector: {}
+      policyTypes:
+      - Egress
+      - Ingress
+      egress:
+      - to:
+        - podSelector: {}
+      - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+          podSelector:
+            matchLabels:
+              k8s-app: kube-dns
+        ports:
+          - port: 53
+            protocol: UDP
+          - port: 53
+            protocol: TCP
+      ingress:
+        - from:
+          - podSelector: {}
+    ```
+    ```yaml
+    apiVersion: networking.k8s.io/v1
+    kind: NetworkPolicy
+    metadata:
+      name: inbox-ingress-with-ingress-controller
+    spec:
+      podSelector: 
+          matchLabels:
+          app: sda-svc-inbox
+      ingress:
+      - from:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/component: controller
+          namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: ingress-nginx
+      - from:
+        - podSelector:
+            matchLabels:
+              app.kubernetes.io/component: controller
+          namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: ingress-nginx-direct
+      policyTypes:
+      - Ingress
+    ```
+    ```yaml
+    apiVersion: networking.k8s.io/v1
+    kind: NetworkPolicy
+    metadata:
+        name: inbox-ingress-with-nodeport
+    spec:
+        podSelector: 
+            matchLabels:
+            app: sda-svc-inbox
+        ingress:
+        - from:
+            - ipBlock:
+                cidr: 0.0.0.0/0
+        policyTypes:
+        - Ingress
+    ```
 
 ## Complementary services
 
