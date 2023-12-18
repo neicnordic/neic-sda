@@ -269,6 +269,37 @@ Below is a minimal list of variables that need to be configured in the [values.y
       name: namespace-isolation
     spec:
       podSelector: {}
+      policyTypes:
+      - Egress
+      - Ingress
+      egress:
+      - to:
+        - podSelector: {}
+      - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: kube-system
+          podSelector:
+            matchLabels:
+              k8s-app: kube-dns
+        ports:
+          - port: 53
+            protocol: UDP
+          - port: 53
+            protocol: TCP
+      ingress:
+        - from:
+          - podSelector: {}
+    ```
+    ```yaml
+    apiVersion: networking.k8s.io/v1
+    kind: NetworkPolicy
+    metadata:
+      name: inbox-ingress-with-ingress-controller
+    spec:
+      podSelector: 
+          matchLabels:
+          app: sda-svc-inbox
       ingress:
       - from:
         - podSelector:
@@ -287,12 +318,11 @@ Below is a minimal list of variables that need to be configured in the [values.y
       policyTypes:
       - Ingress
     ```
-
     ```yaml
     apiVersion: networking.k8s.io/v1
     kind: NetworkPolicy
     metadata:
-        name: allow-inbox-ingress-outside-cluster
+        name: inbox-ingress-with-nodeport
     spec:
         podSelector: 
             matchLabels:
