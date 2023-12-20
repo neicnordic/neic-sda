@@ -27,7 +27,7 @@ Next step is to make sure that the remote connections (`CentralEGA` RabbitMQ) ar
 
 > NOTE: 
 > This guide assumes that there exists a test instance account with `CentralEGA`. Make sure that the account is approved and added to the submitters group.
-> The [local development and testing](guides/local-dev-and-testing.md) guide provides the scripts for testing different parts of the setup, that can be used
+> The [local development and testing](local-dev-and-testing.md) guide provides the scripts for testing different parts of the setup, that can be used
 > as a reference.
 
 ### Upload file(s)
