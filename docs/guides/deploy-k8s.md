@@ -67,7 +67,7 @@ The table below reflects the minimum required resources to run the services in t
 | sftpinbox  | 100m  | 128Mi  | -    |
 | doa        | 100m  | 128Mi  | -    |
 
-Here we provide minimal lists of variables that need to be configured, in addition to the defaults, in the respective `values.yml` file of each of the Helm charts for:
+Here, minimal lists of variables requiring configuration, in addition to the defaults, are provided in the respective `values.yml` file for each of the Helm charts.
 
 - [SDA services](#sda-services-chart)
 - [RabbitMQ](#rabbitmq-chart)
@@ -253,7 +253,7 @@ Certain services, such as `inbox`, `download`, and `auth`, are configured to exp
 - download
 - auth
 
-In addition, Kubernetes allows you to define [Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) to control the communication between Pods. Network Policies are crucial for enforcing security measures within your cluster. They enable you to specify which Pods can communicate with each other and define rules for ingress and egress traffic.
+In addition, Kubernetes allows to define [Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/) to control the communication between Pods. Network Policies are crucial for enforcing security measures within the cluster. These facilitate the specification of which Pods can communicate with each other and define rules for ingress and egress traffic.
 Here are two recommended basic examples of a Network Policy for namespace isolation and allowing traffic to inbox ingress, a similar policies needs to be in place for `download` and `auth` service:
 
 ```yaml

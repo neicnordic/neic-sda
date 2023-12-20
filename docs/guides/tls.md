@@ -5,6 +5,4 @@
 > If you have feedback to give on the content, please contact us on
 > [github](https://github.com/neicnordic/neic-sda)!
 
-If you have spent time on the internet you have used tls encryption,
-which is the encryption used for https requests.
-Setting up TLS for a system can be a little bit tricky though.
+Those who have navigated the online realm have undoubtedly encountered TLS encryption, the cryptographic protocol employed for securing HTTPS requests. However, configuring TLS for a system can prove to be somewhat intricate.
