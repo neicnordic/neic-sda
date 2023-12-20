@@ -6,7 +6,7 @@ This guide provides a brief introduction on how to locally install and run the S
 
 This guide should get one started by setting up one's environment to build and deploy the services of SDA, run all tests in the code base, and run several development related "shortcut" actions from the commandline using custom development helper scripts. 
 
-In addition the guide includes a few tips and tricks on how to explore the services running locally after one've deployed them, to learn more about how they operate together and find more documentation.
+In addition the guide includes a few tips and tricks on how to explore the services running locally after one have deployed them, to learn more about how they operate together and find more documentation.
 
 
 ## Local security / zone considerations
