@@ -1,8 +1,11 @@
 ---
 name: Bug Report
-about: Use this to report a new bug
+about: Use this to report a bug or content-related typo/mistake
 
 ---
+
+<!--- Provide a short summary of the issue in the Title above -->
+<!--- Fill in below the sections that are applicable to the issue -->
 
 ### Expected Behavior
 <!--- Tell us what should happen -->
@@ -14,15 +17,5 @@ about: Use this to report a new bug
 <!--- Not obligatory, but suggest a fix/reason for the bug, -->
 
 ### Steps to Reproduce
-<!--- Provide a link to a live example, or an unambiguous set of steps to -->
-<!--- reproduce this bug. Include code to reproduce, if relevant -->
-1.
-2.
-3.
-4.
-
-### Context (Environment)
-<!--- How has this issue affected you? What are you trying to accomplish? -->
-<!--- Providing context helps us come up with a solution that is most useful in the real world -->
-
-<!--- Provide a general summary of the issue in the Title above -->
+<!--- Provide a link to a live example, or an unambiguous set of (preferably) -->
+<!--- enumerated steps to reproduce this bug. Include code to reproduce, if relevant -->
