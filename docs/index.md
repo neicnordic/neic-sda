@@ -7,17 +7,17 @@ The NeIC Sensitive Data Archive (SDA) is an encrypted data archive, implemented 
 The modular architecture of SDA supports both stand alone deployment of an archive, and the use case of deploying a Federated node in the [Federated European Genome-phenome Archive network (FEGA)](https://ega-archive.org/about/projects-and-funders/federated-ega/), serving discoverable sensitive datasets in the main [EGA web portal](https://ega-archive.org).
 
 > NOTE:
-> Throughout this documentation, we can refer to [Central
-> EGA](https://ega-archive.org/) as `CEGA`, or `CentralEGA`, and *any*
-> `FederatedEGA` instance also know as: `FEGA`, `LEGA` or
-> `LocalEGA`. In the context of NeIC we will refer to the Federated EGA as the
-> `Sensitive Data Archive` or `SDA`.
+> Throughout this documentation, reference to [Central
+> EGA](https://ega-archive.org/) may be made as `CEGA` or `CentralEGA`, and *any*
+> `FederatedEGA` instance is alternatively known as `FEGA`, `LEGA`, or `LocalEGA`.
+> Within the context of NeIC, the Federated EGA is denoted as 
+> the `Sensitive Data Archive` or `SDA`.
 
 
 Organisation of the NeIC SDA Operations Handbook
 ------------------------------------------------
 
-This operations handbook is organized in four  main parts, that each has it's own main section in the left navigation menu. Here we provide a condensed summary, follow the links below or use the menu navigation to each section's own detailed introduction page: 
+This operations handbook is organized in four  main parts, that each has it's own main section in the left navigation menu. Here is a condensed summary, follow the links below or use the menu navigation to each section's own detailed introduction page: 
 
 1.  **Structure**: Provides overview material for how the services can be deployed in different constellations and highlights communication paths.
 

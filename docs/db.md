@@ -1,9 +1,7 @@
 Database Setup
 ==============
 
-We use a Postgres database (version 15+ ) to store intermediate data, in
-order to track progress in file ingestion. The `lega` database schema is
-documented below.
+A Postgres database (version 15+) is employed for storing intermediate data to track progress in file ingestion. The database schema, named lega, is documented below.
 
 > NOTE:
 > Source code repository for DB component is available at:
@@ -13,15 +11,15 @@ The database container will initialize and create the necessary database
 structure and functions if started with an empty area. Procedures for *backing up the database* are important, however considered out of scope for
 the secure data archive project.
 
-Look at [the SQL definitions](https://github.com/neicnordic/sensitive-data-archive/tree/main/postgresql/initdb.d)
-if you are also interested in the database triggers.
+Refer to [the SQL definitions](https://github.com/neicnordic/sensitive-data-archive/tree/main/postgresql/initdb.d)
+if an interest in the database triggers exists.
 
 Configuration
 -------------
 
 Security is hardened:
 
-- We do not use 'trust' even for local connections
+- The 'trust' authentication method is not utilized, even for local connections
 - Requiring password authentication for all
 - Enforcing TLS communication
 - Enforcing client-certificate verification
@@ -195,13 +193,9 @@ versions/migrations or none.
 > Any changes done to database schema initialization should be reflected
 > in a schema migration script.
 
-Whenever you need to change the database schema, we recommended changing
-both the database initialization scripts (and bumping the bootstrapped
-schema version) as well as creating the corresponding migration script
-to perform the changes on a database in use.
+For any required modifications to the database schema, it is advisable to update both the database initialization scripts (along with incrementing the bootstrapped schema version) and generate the corresponding migration script to execute the changes on a currently active database.
 
 Migration scripts should be placed in `/migratedb.d/` in the *sensitive-data-archive* repo
-(<https://github.com/neicnordic/sensitive-data-archive/tree/main/postgresql>). We recommend naming them
-corresponding to the schema version they provide migration to. There is
+(<https://github.com/neicnordic/sensitive-data-archive/tree/main/postgresql>). It is advised to name these scripts in alignment with the schema version to which they facilitate migration. There is
 an "empty" migration script (`01.sql`) that can be used as a
 template.

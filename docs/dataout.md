@@ -2,8 +2,7 @@ Data Retrieval API
 ==================
 
 > NOTE:
-> We maintain two Data Retrieval API solutions, for which REST APIs are the
-> same.
+> Two Data Retrieval API solutions are maintained, with identical REST APIs.
 
 SDA-DOA
 -------
@@ -88,8 +87,8 @@ Data Retrieval API can be run with connection to an AAI or without. If connectio
 set.
 
 > NOTE:
-> By default we use LifeScience AAI as JWT for authentication
-> `OPENID_CONFIGURATION_URL` is set to:
+> The default JWT for authentication is LifeScience AAI,
+> and the `OPENID_CONFIGURATION_URL` is set to:
 > <https://proxy.aai.lifescience-ri.eu/.well-known/openid-configuration>
 
 If connected to an AAI provider the current implementation is based on

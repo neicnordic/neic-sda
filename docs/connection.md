@@ -10,8 +10,7 @@ The RabbitMQ message brokers of each SDA instance are the **only**
 components with the necessary credentials to connect to `CentralEGA`
 message broker.
 
-We call `CEGAMQ` and `LocalMQ` (Local Message Broker, sometimes know as `sda-mq`), 
-the RabbitMQ message brokers of, respectively, `CentralEGA` and `SDA`/`FederatedEGA`.
+The message brokers for `CentralEGA` and `SDA/FederatedEGA` are denoted as `CEGAMQ` and `LocalMQ` (Local Message Broker, sometimes referred to as `sda-mq`), respectively.
 
 Local Message Broker
 --------------------
@@ -26,7 +25,7 @@ Local Message Broker
 The following environment variables can be used to configure the broker:
 
 > NOTE:
-> We use [RabbitMQ](https://hub.docker.com/_/rabbitmq) >= `3.8.16` including
+> The version of [RabbitMQ](https://hub.docker.com/_/rabbitmq) utilized is >= `3.8.16`, including
 > the management plugins.
 
 | Variable           | Description                                                                                                                       |
@@ -107,8 +106,7 @@ Service will wait for messages to arrive.
 `CEGAMQ` receives notifications from `LocalMQ` using a *shovel*.
 Everything that is published to its `to_cega` exchange gets forwarded to
 CentralEGA (using the routing key based on the name
-`files.<internal_queue_name>`). We propagate the different status of the
-workflow to CentralEGA, using the following routing keys:
+`files.<internal_queue_name>`). The various workflow statuses are transmitted to CentralEGA via the following routing keys:
 
 | Name            | Purpose                                    |
 |-----------------|:-------------------------------------------|
@@ -117,8 +115,8 @@ workflow to CentralEGA, using the following routing keys:
 | files.inbox     | For inbox file operations                  |
 | files.verified  | For files ready to request accessionID     |
 
-Note that we do not need at the moment a queue to store the completed
-message, nor the errors, as we forward them to `CentralEGA`.
+Note that currently there is no necessity for a queue to store completed
+messages or errors, as they are promptly forwarded to `CentralEGA`.
 
 ![RabbitMQ setup](./static/CEGA-LEGA.png)
 
@@ -272,7 +270,7 @@ when the `accession ID` has been set (in case of Federated EGA this also means b
 }
 ```
 
-The message sent from the `finalize` service to the `completed` queue.
+The message is sent from the `finalize` service to the `completed` queue.
 
 ```javascript
 {

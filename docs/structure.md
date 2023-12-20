@@ -91,7 +91,7 @@ The NeIC SDA is targeting both types of setup but also to allow for the possibil
 
 ### Container deployment options
 
-The components of SDA are all container based using Docker standards for building container images. They can be deployed in a range of different ways depending on your local needs. The SDA developers are currently aware of the following alternatives in use:
+The components of SDA are all container based using Docker standards for building container images. Deployment options can vary based on local requirements and can be adapted to suit different needs. The SDA developers are currently aware of the following alternatives in use:
 
 1. Kubernetes (OpenShift)
 2. Docker Swarm

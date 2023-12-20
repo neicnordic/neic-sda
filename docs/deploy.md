@@ -1,10 +1,8 @@
 Deployments and Local Bootstrap
 ===============================
 
-We use different deployment strategies for environments like Docker
-Swarm, Kubernetes or a local-machine. The [local development and testing](guides/local-dev-and-testing.md) guide is
-recommended for local-machine, while
-[Kubernetes](https://kubernetes.io/) and [Docker Swarm](https://docs.docker.com/engine/swarm/) are recommended for production.
+There are different deployment strategies for environments like Docker Swarm, Kubernetes or a local-machine. The [local development and testing](guides/local-dev-and-testing.md) guide is
+recommended for local-machine, while [Kubernetes](https://kubernetes.io/) and [Docker Swarm](https://docs.docker.com/engine/swarm/) are recommended for production.
 
 The production deployment repositories are:
 
