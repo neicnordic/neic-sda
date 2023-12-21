@@ -130,32 +130,29 @@ completes and the checksum is valid, a message of completion is sent to
 > **Important**
 > If a file disappears or is overwritten in the inbox before ingestion is completed, ingestion may not be possible.
 
-If any of the above steps generates an error, we exit the workflow and
-log the error. In case the error is related to a misuse from the user,
-such as submitting the wrong checksum or tampering with the encrypted
-file, the error is forwarded to `CentralEGA` in order to be displayed in
-the Submission Interface.
+Should any of the aforementioned steps result in an error, the workflow is terminated, and the error is logged. If the error is attributed to user misuse, such as providing an incorrect checksum or tampering with the encrypted file, it is reported to `CentralEGA` for display in the Submission Interface.
+
 
 Submission Inbox
 ----------------
 
-`CentralEGA` contains a database of users, with IDs and passwords. We
-have developed several solutions allowing user authentication against
-CentralEGA user database:
+`CentralEGA` contains a database of users, with IDs and passwords. Multiple solutions
+have been developed to facilitate user authentication 
+against the CentralEGA user database.:
 
 - [Apache Mina Inbox](submission.md##sftp-inbox);
 - [S3 Proxy Inbox](submission.md#s3-proxy-inbox);
 - [TSD File API](submission.md#tsd-file-api).
 
-Each solution uses CentralEGA's user IDs, but will also be extended to
-use Elixir IDs (of which we strip the `@elixir-europe.org` suffix).
+Every solution utilizes CentralEGA's user IDs and is planned for
+extension to incorporate Elixir IDs, from which the `@elixir-europe.org` suffix is removed.
 
 The procedure is as follows: the inbox is started without any created
 user. When a user wants to log into the inbox (via `sftp`, `s3` or
 `https`), the inbox service looks up the username in a local queries the
-CentralEGA REST endpoint. Upon return, we store the user credentials in
-the local cache and create the user's home directory. The user now gets
-logged in if the password or public key authentication succeeds.
+CentralEGA REST endpoint. Upon the user's return, their credentials are 
+stored in the local cache, and a home directory for the user is created. 
+The user now gets logged in if the password or public key authentication succeeds.
 
 {%
    include-markdown "services/sftpinbox.md"

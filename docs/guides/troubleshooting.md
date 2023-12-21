@@ -1,6 +1,6 @@
 # Troubleshooting
 
-In this guide we aim to give some general tips on how to troubleshoot and restore services to working order.
+This guide aims to provide general tips on troubleshooting and restoring services to a functional state.
 
 ## After deployment checklist
 
@@ -58,4 +58,4 @@ Finally, when all files have been ingested, the submission portal should allow f
 - the dataset has the status `registered` in the `sda.dataset_event_log`
 - the dataset gets the status `released` in the `sda.dataset_event_log`, this might take a while depending on what date was chosen in the submitter portal.
 
-Once all the submission steps have been verified, we can assume that the pipeline part of the deployment is working properly.
+Upon the confirmation of all submission steps, it is reasonable to infer that the deployment's pipeline component is functioning correctly.

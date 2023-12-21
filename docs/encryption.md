@@ -46,8 +46,7 @@ The advantages of the format are, among others:
     segments surrounding the portion. The file itself is not decrypted
     and re-encrypted.
 
-In order to encrypt files using this standard we recommend the following
-tools:
+For encrypting files using this standard, the following tools are recommended:
 
 -   <https://github.com/samtools/htslib-crypt4gh/> - samtools extension
 -   <https://github.com/EGA-archive/crypt4gh> - python library
