@@ -22,7 +22,7 @@ jobs:
       - run: bash aggregate-repositories.sh ${{ inputs.repository }}
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v6
         with:
           delete-branch: true
           labels: "automated pr"
