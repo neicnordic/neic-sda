@@ -3,6 +3,7 @@
 ## Guide summary
 
 This guide explains how to deploy the Sensitive Data Archive (SDA) in kubernetes.
+
 - What it intends to cover
 - What to expect, scope, explain level of details
 - How self-contained the guide is
@@ -21,8 +22,6 @@ The services could be divided into two trust boundaries
 - The services in internal cluster are [Intercept](/docs/services/intercept.md), [Ingest](/docs/services/ingest.md), [Verify](/docs/services/verify.md), [Mapper](/docs/services/mapper.md), [Finalize](/docs/services/finalize.md), [Backup](/docs/services/backup.md) and [Data Retrieval API](/docs/dataout.md).
 
 The innermost trust zone contains the database and the archive, which be can accessed only from internal cluster.
-
-
 
 ## Charts overview
 
@@ -226,11 +225,6 @@ Below is a minimal list of variables that need to be configured in the [values.y
 - `global.postgresAdminPassword`: The password for the postgres admin user
 - `global.tls.clusterIssuer`: The cluster issuer for TLS
 - `global.tls.secretName`: The name by which the kubernetes secret for TLS is referenced in the Helm charts
-
-## Security issues
-
-- Enabling TLS example
-- Secret handling example
 
 ## Network policies
 
