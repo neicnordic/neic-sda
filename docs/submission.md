@@ -41,51 +41,59 @@ Structure of the message and its contents are described in
       deactivate Inbox
       Central EGA RabbitMQ-->>SDA RabbitMQ: federated msg: [from_cega][ingest type]
       SDA RabbitMQ-->>Intercept: Intercept reads message
+      Intercept -->> SDA RabbitMQ: Forwards ingest message <br/> to queue
+      alt Ingest is successful 
       Intercept->>Ingest: msg: [sda][ingest] begin ingestion
-      activate Ingest
+      activate Ingest 
       Ingest->>SDA Database: mark ingested
-      opt
+      Note over Ingest: store file in Archive
+      Ingest->>SDA Database: mark archived
+      Ingest-->>SDA RabbitMQ: msg [sda][archived]
+      else Error occurred in ingestion process
       Ingest-->>SDA RabbitMQ: msg: error
       SDA RabbitMQ-->>Central EGA RabbitMQ: shovel msg:[to_cega][files.error]
       end
-      Ingest->>SDA Database: mark archived
-      Ingest-->>SDA RabbitMQ: msg [sda][archived]
       deactivate Ingest
+      alt Verify is successful 
       activate Verify
       SDA RabbitMQ-->>Verify: msg [sda][archived] triggers verify
-      opt
+      Verify->>SDA Database: mark verified
+      Verify-->>SDA RabbitMQ: msg: [sda][verified]
+      else Error occurred in verify process
       Verify-->>SDA RabbitMQ: msg: error
       SDA RabbitMQ-->>Central EGA RabbitMQ: shovel msg:[to_cega][files.error]
       end
-      Verify->>SDA Database: mark verified
-      Verify-->>SDA RabbitMQ: msg: [sda][verified]
       deactivate Verify
       SDA RabbitMQ-->>Central EGA RabbitMQ: shovel msg:[to_cega][files.verified]
       Central EGA RabbitMQ-->>SDA RabbitMQ: federated msg: [from_cega][accession type]
       SDA RabbitMQ-->>Intercept: Intercept reads message
+      Intercept -->> SDA RabbitMQ: Forwards accession ID message <br/> to queue
       Intercept->>Finalize: msg: [sda][accession] map file to accession ID
+      alt Finalize is successful 
       activate Finalize
       note right of Finalize: Finalize makes the file backup
-      opt
+      Finalize->>SDA Database: mark completed
+      Finalize-->>SDA RabbitMQ: msg: [sda][completed]
+      else Error occurred in finalize process
       Finalize-->>SDA RabbitMQ: msg: error
       SDA RabbitMQ-->>Central EGA RabbitMQ: shovel msg:[to_cega][files.error]
       end
-      Finalize->>SDA Database: mark completed
-      Finalize-->>SDA RabbitMQ: msg: [sda][completed]
       deactivate Finalize
       SDA RabbitMQ-->>Central EGA RabbitMQ: shovel msg:[to_cega][files.completed]
       Central EGA RabbitMQ-->>SDA RabbitMQ: federated msg: [from_cega][mappings type]
       SDA RabbitMQ-->>Intercept: Intercept reads message
+      Intercept -->> SDA RabbitMQ: Forwards mapper message <br/> to queue
       Intercept->>Mapper: msg: [sda][mappings] begin ingestion
+      alt Mapper is successful 
       activate Mapper
-      opt
+      Mapper->>SDA Database: map file to dataset accession ID
+      Mapper->>Inbox: remove file from inbox
+      else Error occurred in mapper process
       Mapper-->>SDA RabbitMQ: msg: error
       SDA RabbitMQ-->>Central EGA RabbitMQ: shovel msg:[to_cega][files.error]
       end
-      Mapper->>SDA Database: map file to dataset accession ID
-      Mapper->>Inbox: remove file from inbox
       deactivate Mapper
-    
+
 ```
 
 > NOTE:
