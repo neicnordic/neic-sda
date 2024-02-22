@@ -18,6 +18,7 @@ The SDA submission pipeline has four main steps:
 There are also additional support services:
 
 1. [Intercept](intercept.md) relays messages from `CentralEGA` to the system.
-2. [s3inbox](s3inbox.md) proxies uploads to the an S3 compatible storage backend.
-3. [sync](sync.md) mirrors ingested data between sites in the [Bigpicture](https://bigpicture.eu/) project.
-4. [syncapi](syncapi.md) is used in the [Bigpicture](https://bigpicture.eu/) project for mirroring data between two installations of SDA.
+2. [ReEncrypt](reencrypt.md) reencrypts a given file header with a given public key.
+3. [s3inbox](s3inbox.md) proxies uploads to the an S3 compatible storage backend.
+4. [sync](sync.md) mirrors ingested data between sites in the [Bigpicture](https://bigpicture.eu/) project.
+5. [syncapi](syncapi.md) is used in the [Bigpicture](https://bigpicture.eu/) project for mirroring data between two installations of SDA.
