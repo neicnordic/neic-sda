@@ -157,7 +157,7 @@ At this stage, the associated decryption key is retrieved. If decryption
 completes and the checksum is valid, a message of completion is sent to
 `CentralEGA`: Ingestion completed.
 
-> **Important**
+> Important:
 > If a file disappears or is overwritten in the inbox before ingestion is completed, ingestion may not be possible.
 
 Should any of the aforementioned steps result in an error, the workflow is terminated, and the error is logged. If the error is attributed to user misuse, such as providing an incorrect checksum or tampering with the encrypted file, it is reported to `CentralEGA` for display in the Submission Interface.
