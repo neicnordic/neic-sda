@@ -43,7 +43,7 @@ Structure of the message and its contents are described in
       SDA RabbitMQ-->>Intercept: Intercept reads message
       Intercept -->> SDA RabbitMQ: Forwards ingest message <br/> to queue
       alt Ingest is successful 
-      Intercept->>Ingest: msg: [sda][ingest] begin ingestion
+      SDA RabbitMQ->>Ingest: msg: [sda][ingest] begin ingestion
       activate Ingest 
       Ingest->>SDA Database: mark ingested
       Note over Ingest: store file in Archive
@@ -68,7 +68,7 @@ Structure of the message and its contents are described in
       Central EGA RabbitMQ-->>SDA RabbitMQ: federated msg: [from_cega][accession type]
       SDA RabbitMQ-->>Intercept: Intercept reads message
       Intercept -->> SDA RabbitMQ: Forwards accession ID message <br/> to queue
-      Intercept->>Finalize: msg: [sda][accession] map file to accession ID
+      SDA RabbitMQ->>Finalize: msg: [sda][accession] map file to accession ID
       alt Finalize is successful 
       activate Finalize
       note right of Finalize: Finalize makes the file backup
@@ -82,12 +82,34 @@ Structure of the message and its contents are described in
       SDA RabbitMQ-->>Central EGA RabbitMQ: shovel msg:[to_cega][files.completed]
       Central EGA RabbitMQ-->>SDA RabbitMQ: federated msg: [from_cega][mappings type]
       SDA RabbitMQ-->>Intercept: Intercept reads message
-      Intercept -->> SDA RabbitMQ: Forwards mapper message <br/> to queue
-      Intercept->>Mapper: msg: [sda][mappings] begin ingestion
-      alt Mapper is successful 
+      Intercept -->> SDA RabbitMQ: Forwards mapper message of type mapping <br/> to queue
+      SDA RabbitMQ->>Mapper: msg: [sda][mappings] map dataset to file accession ID
+      alt Mapper Mapper creates dataset ID to file accession ID mapping 
       activate Mapper
       Mapper->>SDA Database: map file to dataset accession ID
       Mapper->>Inbox: remove file from inbox
+      else Error occurred in mapper process
+      Mapper-->>SDA RabbitMQ: msg: error
+      SDA RabbitMQ-->>Central EGA RabbitMQ: shovel msg:[to_cega][files.error]
+      end
+      Central EGA RabbitMQ-->>SDA RabbitMQ: federated msg: [from_cega][release type]
+      SDA RabbitMQ-->>Intercept: Intercept reads message
+      Intercept -->> SDA RabbitMQ: Forwards mapper message <br/> to queue
+      SDA RabbitMQ->>Mapper: msg: [sda][mappings] release dataset
+      alt Mapper flags dataset ready for release 
+      activate Mapper
+      Mapper->>SDA Database: flag dataset ready for release
+      else Error occurred in mapper process
+      Mapper-->>SDA RabbitMQ: msg: error
+      SDA RabbitMQ-->>Central EGA RabbitMQ: shovel msg:[to_cega][files.error]
+      end
+      Central EGA RabbitMQ-->>SDA RabbitMQ: federated msg: [from_cega][deprecate type]
+      SDA RabbitMQ-->>Intercept: Intercept reads message
+      Intercept -->> SDA RabbitMQ: Forwards mapper message  <br/> to queue
+      SDA RabbitMQ->>Mapper: msg: [sda][mappings] deprecate dataset
+      alt Mapper flags dataset as deprecated 
+      activate Mapper
+      Mapper->>SDA Database: flag dataset as deprecated
       else Error occurred in mapper process
       Mapper-->>SDA RabbitMQ: msg: error
       SDA RabbitMQ-->>Central EGA RabbitMQ: shovel msg:[to_cega][files.error]
