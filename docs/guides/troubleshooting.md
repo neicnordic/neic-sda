@@ -2,6 +2,10 @@
 
 This guide aims to provide general tips on troubleshooting and restoring services to a functional state.
 
+> NOTE: 
+> Please also check questions other users have faced: [sensitive-data-archive Discussion](https://github.com/neicnordic/sensitive-data-archive/discussions?discussions_q=)
+> We encourage starting a discussion there as it will help us improve current guides.
+
 ## After deployment checklist
 
 After having deployed the SDA services in a `FederatedEGA` setup, the following steps can be followed to ensure that everything is up and running correctly.
