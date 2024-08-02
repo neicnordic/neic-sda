@@ -23,25 +23,10 @@ The services could be divided into two trust boundaries
 
 The innermost trust zone contains the database and the archive, which be can accessed only from internal cluster.
 
-## Charts overview
-
-### sda-db - Database component for Sensitive Data Archive (SDA) installation
-
-This chart deploys a pre-configured database ([PostgreSQL](https://www.postgresql.org/)) instance for Sensitive Data Archive, the database schemas are designed to adhere to [European Genome-Phenome Archive](https://ega-archive.org/) federated archiving model.
-
-### sda-mq - RabbitMQ component for Sensitive Data Archive (SDA) installation
-
-This chart deploys a pre-configured message broker ([RabbitMQ](https://www.rabbitmq.com/)) designed to work [European Genome-Phenome Archive](https://ega-archive.org/) federated messaging interface between `CentralEGA` and Local/Federated EGAs.
-
-### sda-svc - Components for Sensitive Data Archive (SDA) installation
-
-This chart deploys the service components needed to operate the Sensitive Data Archive solution for running a Federated EGA node.
-The charts may include additional service components that might be beneficial for administrative operations or extending the Sensitive Data Archive solutions to facilitate other use cases.
-
-## System requirements
-
- - kubernetes minimal version required for running the helm charts is `>= 1.25`
- - helm minimal version required for running the charts is `>=3.5`
+{%
+  include-markdown "./charts-overview.md"
+  start="# Sensitive Data Archive Helm Charts"
+%}
 
 ### Resource estimation
 
@@ -66,13 +51,15 @@ The table below reflects the minimum required resources to run the services in t
 | sftpinbox  | 100m  | 128Mi  | -    |
 | doa        | 100m  | 128Mi  | -    |
 
-Here, minimal lists of variables requiring configuration, in addition to the defaults, are provided in the respective `values.yml` file for each of the Helm charts.
+## Chart configuration
+
+Here we provide minimal lists of variables that require configuration in addition to the defaults, so as to achieve a working deployment of the `sensitive data archive`. These variables can be set in the respective `values.yml` file for each of the Helm charts:
 
 - [SDA services](#sda-services-chart)
 - [RabbitMQ](#rabbitmq-chart)
 - [SDA Database](#database-chart)
 
-in order to achieve a working deployment of the `sensitive data archive`. In the following it is assumed that a *federated* setup is being deployed.
+In what follows it is assumed that a *federated* setup is being deployed.
 
 ### SDA services chart
 
