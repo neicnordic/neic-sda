@@ -10,6 +10,7 @@
         "sda/cmd/sync/sync.md": "docs/services/sync.md",
         "sda-sftp-inbox/README.md": "docs/services/sftpinbox.md",
         "./GETTINGSTARTED.md": "docs/guides/sda-dev-test-doc.md",
-        "sda/sda.md": "docs/services/sda.md"
+        "sda/sda.md": "docs/services/sda.md",
+        "charts/README.md": "docs/guides/charts-overview.md"
     }
 }
