@@ -59,7 +59,7 @@ Here we provide minimal lists of variables that require configuration in additio
 - [RabbitMQ](#rabbitmq-chart)
 - [SDA Database](#database-chart)
 
-In what follows it is assumed that a *federated* setup is being deployed.
+In what follows it is assumed that a [*federated*](/docs/structure.md#federated-vs-stand-alone) setup is being deployed.
 
 ### SDA services chart
 
