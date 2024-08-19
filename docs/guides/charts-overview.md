@@ -1,24 +1,27 @@
 # Sensitive Data Archive Helm Charts
 
+<!-- Developer Comment: please keep in mind that contents below will appear as inline markdown sections in the NeIC SDA Handbook guide [Deploying on Kubernetes](https://neic-sda.readthedocs.io/en/latest/guides/deploy-k8s/) page. -->
+
 ## Charts overview
 
 The `neicnordic` Helm repository contains the following charts (for configuration details click on the links below):
 
 - [sda-svc - SDA services](https://github.com/neicnordic/sensitive-data-archive/blob/main/charts/sda-svc/README.md)
 
-  This chart deploys the service components needed to operate the Sensitive Data Archive solution. The charts may include additional service components that might be beneficial for administrative operations or extending the Sensitive Data Archive solutions to facilitate different use cases.
+  This chart deploys the service components needed to operate the Sensitive Data Archive (SDA) solution. It may include additional service components that might be beneficial for administrative operations or extending the SDA solution to facilitate different use cases.
 
 - [sda-db - SDA database](https://github.com/neicnordic/sensitive-data-archive/blob/main/charts/sda-db/README.md)
 
   This chart deploys a pre-configured database ([PostgreSQL](https://www.postgresql.org/)) instance for Sensitive Data Archive, the database schemas are designed to adhere to [European Genome-Phenome Archive](https://ega-archive.org/) federated archiving model.
 
-- [sda-mq - SDA Message broker](https://github.com/neicnordic/sensitive-data-archive/blob/main/charts/sda-mq/README.md)
+- [sda-mq - SDA message broker](https://github.com/neicnordic/sensitive-data-archive/blob/main/charts/sda-mq/README.md)
 
   This chart deploys a pre-configured message broker ([RabbitMQ](https://www.rabbitmq.com/)) designed for [European Genome-Phenome Archive](https://ega-archive.org/) federated messaging between `CentralEGA` and Local/Federated EGAs but also configurable to support Standalone SDA deployments.
 
 - [sda-orch - SDA orchestrate service](https://github.com/neicnordic/sensitive-data-archive/blob/main/charts/sda-orch/README.md)
 
   This chart deploys an orchestration service for the Sensitive Data Archive solution. This is a helper service designed to curate the ingestion flow in an automated manner when the SDA solution is deployed and configured as standalone (non-federated).
+  **Note:** The `sda-orch` chart may be out of date and is thus not guaranteed to be functional.
 
 ## Usage
 
@@ -54,6 +57,8 @@ To configure a Helm chart with your own values, you can copy the default `values
 helm show values neicnordic/<chart-name> > <values-filename>.yaml
 ```
 
+**Note** that Kubernetes resources, such as secrets, may be required for a chart to function properly. All necessary resources should be created in the Kubernetes cluster before installing the chart.
+
 Then, you can install the chart with the following command:
 
 ```sh
@@ -62,9 +67,11 @@ helm install my-release -f <values-filename>.yaml neicnordic/<chart-name>
 
 Example:
 
+First create the secret containing the crypt4gh keypair and passphrase before the chart is deployed (see e.g. [here](https://github.com/neicnordic/sensitive-data-archive/blob/cc66756318bfac5fd92ef22f9763e69b42ed5c3c/.github/integration/scripts/charts/dependencies.sh#L17)). Then edit the `values.yaml` to your liking and install the chart:
+
 ```sh
 helm show values neicnordic/sda-svc > my-values.yaml
-vi my-values.yaml
+vi my-values.yaml # modify with your own settings
 helm install my-release neicnordic/sda-svc -f my-values.yaml
 ```
 
@@ -72,7 +79,7 @@ For quick reference to Helm's chart management capabilities see [here](https://h
 
 ## Uninstalling the Chart
 
-To uninstall/delete the `my-release` deployment:
+To uninstall the `my-release` deployment:
 
 ```sh
 helm delete my-release
