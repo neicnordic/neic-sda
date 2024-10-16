@@ -7,7 +7,7 @@ permissions:
 
 jobs:
   dependabot:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     if: ${{ github.head_ref == 'create-pull-request/patch' }}
     steps:
       - name: Wait other jobs are passed or failed
