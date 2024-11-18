@@ -1,4 +1,4 @@
 mkdocs==1.6.1
-mkdocs-include-markdown-plugin==7.0.0
+mkdocs-include-markdown-plugin==7.0.1
 markdown-callouts==0.4.0
 mkdocs-mermaid2-plugin==1.2.1
