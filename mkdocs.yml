@@ -27,6 +27,7 @@ nav:
       - "services/mapper.md"
       - "services/syncapi.md"
       - "services/sync.md"
+      - "services/api.md"
       - Data Retrieval API: "dataout.md"
   - "Guides":
       - Contributing: "CONTRIBUTING.md"
