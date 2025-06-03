@@ -47,6 +47,7 @@ accessionid
 accessionids
 accesskey
 accesstoken
+acecc
 ack'ed
 acked
 adminPassword
@@ -79,6 +80,7 @@ bmi
 bugfix
 buildvcs
 cacert
+cbb
 ccacd
 cega
 cegamq
