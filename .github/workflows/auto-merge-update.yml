@@ -11,7 +11,7 @@ jobs:
     if: ${{ github.head_ref == 'create-pull-request/patch' }}
     steps:
       - name: Wait other jobs are passed or failed
-        uses: kachick/wait-other-jobs@v3
+        uses: kachick/wait-other-jobs@v4
         timeout-minutes: 30
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
