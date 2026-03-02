@@ -308,6 +308,7 @@ roleBinding
 rolebinding
 rolename
 rootedfilesystem
+rotatekey
 routingError
 routingkey
 rsa
