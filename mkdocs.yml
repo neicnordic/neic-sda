@@ -24,6 +24,8 @@ nav:
       - "services/ingest.md"
       - "services/verify.md"
       - "services/finalize.md"
+      - "services/reencrypt.md"
+      - "services/rotatekey.md"
       - "services/mapper.md"
       - "services/syncapi.md"
       - "services/sync.md"

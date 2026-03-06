@@ -309,6 +309,7 @@ rolebinding
 rolename
 rootedfilesystem
 rotatekey
+rotatepubkeypath
 routingError
 routingkey
 rsa
