@@ -68,6 +68,7 @@ authURL
 automagically
 autonumber
 backend
+backends
 backupArchive
 backupRoutingKey
 backuppubkey
@@ -338,6 +339,7 @@ sslmode
 stableIDs
 startcoordinate
 storageType
+storages
 storeheader
 stringify
 submitters
