@@ -6,7 +6,7 @@ The NeIC Sensitive Data Archive (SDA) is an encrypted data archive, implemented 
 
 The modular architecture of SDA supports both stand alone deployment of an archive, and the use case of deploying a Federated node in the [Federated European Genome-phenome Archive network (FEGA)](https://ega-archive.org/about/projects-and-funders/federated-ega/), serving discoverable sensitive datasets in the main [EGA web portal](https://ega-archive.org).
 
-This handbook is applicable for version 3 NeIC Sensitive Data Archive, which is also the currently supported version. We are currently also incorporating security patches for version 1, though this documentation will be inacurate in places, the overall architecture is still the same.
+This handbook is applicable to version 3 of the NeIC Sensitive Data Archive, which is the currently supported version. We are also currently incorporating security patches for version 1. Although this documentation will be inaccurate in places for version 1, the overall architecture is still the same.
 
 > NOTE:
 > Throughout this documentation, reference to [Central
