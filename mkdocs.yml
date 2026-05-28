@@ -31,6 +31,7 @@ nav:
       - "services/sync.md"
       - "services/api.md"
       - Data Retrieval API: "dataout.md"
+      - Download <span class="nav-badge beta">Beta</span>: "services/download.md"
   - "Guides":
       - Contributing: "CONTRIBUTING.md"
       - Local dev and testing: "guides/local-dev-and-testing.md"
