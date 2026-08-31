@@ -21,8 +21,23 @@ Endpoints:
 
     It is possible to limit the returned results by supplying a base path prefix in the query. In this case only files that have a path that starts with `submission-1` will be returned.
 
+    The endpoint also supports keyset pagination using a `cursor` query parameter and an optional `limit`.
+
+    - `limit` (optional): maximum number of items per page. If omitted, the API defaults to `1000`. The value must be a positive integer, cannot exceed `10000`, and non-positive values such as `0` are rejected with `400 Bad Request`.
+    - `cursor` (optional): opaque cursor returned from a previous page. To fetch the first page omit this parameter.
+
+    The response will include an `X-Next-Cursor` header when there are more pages available. The cursor is opaque (base64-encoded) and should be passed unchanged to the next request. To fetch all matching files, request the first page and continue making follow-up requests with the returned cursor until no `X-Next-Cursor` header is present.
+
+    Example (first page, limit 100):
+
     ```bash
-    curl -H "Authorization: Bearer $token" -X GET https://HOSTNAME/files?path_prefix=submission-1
+    curl -H "Authorization: Bearer $token" -X GET "https://HOSTNAME/files?path_prefix=submission-1&limit=100"
+    ```
+
+    Example (follow-up page using `X-Next-Cursor`):
+
+    ```bash
+    curl -H "Authorization: Bearer $token" -X GET "https://HOSTNAME/files?path_prefix=submission-1&limit=100&cursor=$cursor"
     ```
 
   If the `token` is invalid, 401 is returned.
@@ -75,7 +90,7 @@ Admin endpoints are only available to a set of whitelisted users specified in th
 
 - `/file/accession`
   - accepts `POST` requests with either:
-    - A JSON playload: `{"accession_id": "<FILE_ACCESSION>", "filepath": "</PATH/TO/FILE/IN/INBOX>", "user": "<USERNAME>"}`
+    - A JSON payload: `{"accession_id": "<FILE_ACCESSION>", "filepath": "</PATH/TO/FILE/IN/INBOX>", "user": "<USERNAME>"}`
     - OR query parameters: `/file/accession?fileid=<FILE_UUID>&accessionid=<ACCESSION_ID>`
   - assigns accession ID to the file.
 
@@ -135,7 +150,7 @@ Admin endpoints are only available to a set of whitelisted users specified in th
     ```
 
 - `/dataset/create`
-  - accepts `POST` requests with JSON data with the format: `{"accession_ids": ["<FILE_ACCESSION_01>", "<FILE_ACCESSION_02>"], "dataset_id": "<DATASET_01>", "user": "<SUBMISSION_USER>"}`
+  - accepts `POST` requests with JSON data with the format: `{"accession_ids": ["<FILE_ACCESSION_01>", "<FILE_ACCESSION_02>"], "dataset_id": "<DATASET_01>"}`
   - creates a dataset from the list of accession IDs and the dataset ID.
 
 - Error codes
@@ -147,7 +162,7 @@ Admin endpoints are only available to a set of whitelisted users specified in th
     Example:
 
     ```bash
-    curl -H "Authorization: Bearer $token" -H "Content-Type: application/json" -X POST -d '{"accession_ids": ["my-id-01", "my-id-02"], "dataset_id": "my-dataset-01", "user": "user@example.org"}' https://HOSTNAME/dataset/create
+    curl -H "Authorization: Bearer $token" -H "Content-Type: application/json" -X POST -d '{"accession_ids": ["my-id-01", "my-id-02"], "dataset_id": "my-dataset-01"}' https://HOSTNAME/dataset/create
     ```
 
 - `/dataset/release/*dataset`
@@ -265,18 +280,29 @@ Admin endpoints are only available to a set of whitelisted users specified in th
 
 - `/users/:username/files`
   - accepts `GET` requests
-  - Returns all files (that are not part of a dataset) for a user with active uploads as a JSON array
+  - Returns files (that are not part of a dataset) for a user with active uploads as a JSON array, paginated using a keyset cursor.
 
-    Example:
+    Example (first page):
 
     ```bash
     curl -H "Authorization: Bearer $token" -X GET  https://HOSTNAME/users/submitter@example.org/files
     ```
 
-    It is possible to limit the returned results by supplying a base path prefix in the query. In this case only files that have a path that starts with `submission-1` will be returned.
+    The endpoint supports the same pagination as `/files`:
 
-      ```bash
-    curl -H "Authorization: Bearer $token" -X GET https://HOSTNAME/users/submitter@example.org/files?path_prefix=submission-1
+    - `limit` (optional): maximum number of items to return.
+    - `cursor` (optional): an opaque cursor returned in `X-Next-Cursor` from a previous page.
+
+    Example (page with limit):
+
+    ```bash
+    curl -H "Authorization: Bearer $token" -X GET "https://HOSTNAME/users/submitter@example.org/files?path_prefix=submission-1&limit=50"
+    ```
+
+    Example (follow-up page):
+
+    ```bash
+    curl -H "Authorization: Bearer $token" -X GET "https://HOSTNAME/users/submitter@example.org/files?path_prefix=submission-1&limit=50&cursor=$cursor"
     ```
 
   - Error codes
@@ -326,13 +352,13 @@ The path to the JSON file containing the RBAC policies needs to be passed throug
 
 The `policy` section will configure access to the defined endpoints. Unless specific rules are set, an endpoint will not be accessible.
 
-- `action`: can be single string value i,e `GET` or a regex string with `|` as separator i.e. `(GET)|(POST)|(PUT)`. In the later case all actions in the list are allowed.
+- `action`: can be single string value i.e. `GET` or a regex string with `|` as separator i.e. `(GET)|(POST)|(PUT)`. In the latter case all actions in the list are allowed.
 - `path`: the endpoint. Should be a string value with two different wildcard notations: `*`, matches any value and `:` that matches a specific named value
 - `role`: the role that will be able to access the path, `"*"` will match any role or user.
 
 The `roles` section defines the available roles
 
-- `role`: rolename or username from the accesstoken
+- `role`: rolename or username from the access token
 - `roleBinding`: maps a user/role to another role, this makes roles work as groups which simplifies the policy definitions.
 
 ```json

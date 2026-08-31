@@ -209,6 +209,7 @@ jwts
 jwttoken
 keyfile
 keypair
+keyset
 keystore
 kube
 kubernetes
