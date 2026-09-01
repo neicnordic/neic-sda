@@ -3,3 +3,20 @@
 }
 
 .wy-nav-content {max-width: 1000px !important;}
+
+/* Base styles for all sidebar navigation badges */
+.nav-badge {
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-left: 6px;
+    vertical-align: middle;
+    text-transform: uppercase;
+}
+
+/* Color theme for Beta badge */
+.nav-badge.beta {
+    background-color: #e6f4ea;
+    color: #137333;
+}

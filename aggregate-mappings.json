@@ -12,6 +12,7 @@
         "sda/cmd/rotatekey/rotatekey.md": "docs/services/rotatekey.md",
         "sda/cmd/auth/auth.md": "docs/services/auth.md",
         "sda/cmd/api/api.md": "docs/services/api.md",
+        "sda/cmd/download/download.md": "docs/services/download.md",
         "sda-sftp-inbox/README.md": "docs/services/sftpinbox.md",
         "./GETTINGSTARTED.md": "docs/guides/sda-dev-test-doc.md",
         "sda/sda.md": "docs/services/sda.md",
