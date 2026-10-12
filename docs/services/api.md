@@ -88,9 +88,37 @@ Admin endpoints are only available to a set of whitelisted users specified in th
     ```bash
     curl -H "Authorization: Bearer $token" -X POST "https://HOSTNAME/file/ingest?fileid=<FILE_UUID>"
 
+- `/file/cancel`
+  - accepts `POST` requests with either:
+    - A JSON payload: `{"filepath": "</PATH/TO/FILE/IN/INBOX>", "user": "<USERNAME>"}`
+    - OR a `fileid` query parameter: `/file/cancel?fileid=<FILE_UUID>`
+  - triggers the cancellation of the file, thus removing it from the archive and marking it as `disabled`. Only files that have not yet been linked to a dataset can be cancelled. If the file is already added to the archive it will be removed.
+
+  - If both a JSON payload and a `fileid` query parameter are provided in the same request, a `400 Bad Request` is returned.
+
+  - Error codes
+    - `200` Query executed successfully.
+    - `400` Bad request (e.g. wrong `user` + `filepath` combination, both payload and fileid provided, invalid fileid, or invalid JSON).
+    - `401` Token user is not in the list of admins.
+    - `404` File id is not found, file is not in archive, or file is already disabled.
+    - `409` File has already been linked to a dataset.
+    - `500` Internal error due to DB or MQ failures.
+
+    Example (JSON payload):
+
+    ```bash
+    curl -H "Authorization: Bearer $token" -H "Content-Type: application/json" -X POST -d '{"filepath": "/uploads/file.c4gh", "user": "testuser"}' https://HOSTNAME/file/cancel
+    ```
+
+    Example (fileid query parameter):
+
+    ```bash
+    curl -H "Authorization: Bearer $token" -X POST "https://HOSTNAME/file/cancel?fileid=<FILE_UUID>"
+    ```
+
 - `/file/accession`
   - accepts `POST` requests with either:
-    - A JSON playload: `{"accession_id": "<FILE_ACCESSION>", "filepath": "</PATH/TO/FILE/IN/INBOX>", "user": "<USERNAME>"}`
+    - A JSON payload: `{"accession_id": "<FILE_ACCESSION>", "filepath": "</PATH/TO/FILE/IN/INBOX>", "user": "<USERNAME>"}`
     - OR query parameters: `/file/accession?fileid=<FILE_UUID>&accessionid=<ACCESSION_ID>`
   - assigns accession ID to the file.
 
@@ -150,7 +178,7 @@ Admin endpoints are only available to a set of whitelisted users specified in th
     ```
 
 - `/dataset/create`
-  - accepts `POST` requests with JSON data with the format: `{"accession_ids": ["<FILE_ACCESSION_01>", "<FILE_ACCESSION_02>"], "dataset_id": "<DATASET_01>", "user": "<SUBMISSION_USER>"}`
+  - accepts `POST` requests with JSON data with the format: `{"accession_ids": ["<FILE_ACCESSION_01>", "<FILE_ACCESSION_02>"], "dataset_id": "<DATASET_01>"}`
   - creates a dataset from the list of accession IDs and the dataset ID.
 
 - Error codes
@@ -162,7 +190,7 @@ Admin endpoints are only available to a set of whitelisted users specified in th
     Example:
 
     ```bash
-    curl -H "Authorization: Bearer $token" -H "Content-Type: application/json" -X POST -d '{"accession_ids": ["my-id-01", "my-id-02"], "dataset_id": "my-dataset-01", "user": "user@example.org"}' https://HOSTNAME/dataset/create
+    curl -H "Authorization: Bearer $token" -H "Content-Type: application/json" -X POST -d '{"accession_ids": ["my-id-01", "my-id-02"], "dataset_id": "my-dataset-01"}' https://HOSTNAME/dataset/create
     ```
 
 - `/dataset/release/*dataset`
@@ -352,13 +380,13 @@ The path to the JSON file containing the RBAC policies needs to be passed throug
 
 The `policy` section will configure access to the defined endpoints. Unless specific rules are set, an endpoint will not be accessible.
 
-- `action`: can be single string value i,e `GET` or a regex string with `|` as separator i.e. `(GET)|(POST)|(PUT)`. In the later case all actions in the list are allowed.
+- `action`: can be single string value i.e. `GET` or a regex string with `|` as separator i.e. `(GET)|(POST)|(PUT)`. In the latter case all actions in the list are allowed.
 - `path`: the endpoint. Should be a string value with two different wildcard notations: `*`, matches any value and `:` that matches a specific named value
 - `role`: the role that will be able to access the path, `"*"` will match any role or user.
 
 The `roles` section defines the available roles
 
-- `role`: rolename or username from the accesstoken
+- `role`: rolename or username from the access token
 - `roleBinding`: maps a user/role to another role, this makes roles work as groups which simplifies the policy definitions.
 
 ```json
@@ -372,6 +400,11 @@ The `roles` section defines the available roles
       {
          "role": "submission",
          "path": "/file/ingest",
+         "action": "POST"
+      },
+      {
+         "role": "admin",
+         "path": "/file/cancel",
          "action": "POST"
       },
       {
@@ -421,3 +454,7 @@ storage:
     ${STORAGE_IMPLEMENTATION}:
 ```
 For more details on available configuration see [storage/v2 README.md](../../internal/storage/v2/README.md)
+
+## Observability
+The API service initializes the observability package, for configuration options and additional details see
+[Observability README.md](../../pkg/observability/README.md).
